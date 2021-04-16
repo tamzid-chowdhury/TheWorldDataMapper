@@ -1,4 +1,8 @@
-const userResolvers = require('./user-resolvers');
-const todolistResolvers = require('./todolist-resolvers');
+const rootResolvers = {
+    Query: {
+        hello: () => "hello"
+    }
+    
+}
 
-module.exports = [userResolvers, todolistResolvers];
+module.exports = [rootResolvers];

@@ -6,15 +6,7 @@ const userSchema = new Schema(
 			type: ObjectId,
 			required: true
 		},
-		firstName: {
-			type: String,
-			required: true
-		},
-		lastName: {
-			type: String,
-			required: true
-		},
-		initials: {
+		name: {
 			type: String,
 			required: true
 		},
@@ -31,4 +23,4 @@ const userSchema = new Schema(
 );
 
 const User = model('User', userSchema);
-module.exports = User;
+module.exports = User
