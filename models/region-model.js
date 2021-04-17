@@ -1,4 +1,4 @@
-const { model, Schema, ObjectId } = require('mongoose');
+const { model, Schema, ObjectId, Mongoose } = require('mongoose');
 
 const regionSchema = new Schema(
 	{
@@ -22,40 +22,17 @@ const regionSchema = new Schema(
             type: String, 
             required: true
         }, 
-        landmarks: 
-            [
-                { 
-                    type: Schema.Types.ObjectId, 
-                    ref: 'Landmarks' 
-                }
-            ],
-        regionList: 
-            [
-                { 
-                    type: Schema.Types.ObjectId, 
-                    ref: 'Region' 
-                }]
+        landmarks:{
+            type: [String]
+        },
+        parentRegion: {
+            type: Schema.Types.ObjectId,
+            ref: 'Region'
+        }
         
 	},
 	{ timestamps: true }
 );
 
-const landmarkSchema = new Schema( 
-{
-    _id: {
-        type: ObjectId, 
-        required: true
-    },
-    name: {
-        type: String, 
-        required: true 
-    },
-    region: {
-        type: Schema.Types.ObjectId,
-        ref: 'Region'
-    }
-
-}); 
-
 const Region = model('Region', regionSchema);
-module.exports = User
+module.exports = Region

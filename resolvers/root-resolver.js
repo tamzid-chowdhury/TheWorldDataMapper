@@ -1,8 +1,4 @@
-const rootResolvers = {
-    Query: {
-        hello: () => "hello"
-    }
-    
-}
+const userResolvers = require('./user-resolvers');
+const regionResolvers = require('./region-resolvers');
 
-module.exports = [rootResolvers];
+module.exports = [userResolvers, regionResolvers];

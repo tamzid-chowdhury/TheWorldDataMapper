@@ -1,12 +1,18 @@
 const { gql } = require('apollo-server');
+const userDef = require('./user-def').typeDefs;
+const regionDef = require('./region-def').typeDefs;
 
 
 const rootDef = gql`
 	type Query {
-		hello: String!
+		_empty: String
+	}
+
+	type Mutation {
+		_empty: String
 	}
 `;
 
 module.exports = {
-	typeDefs: [rootDef] 
+	typeDefs: [rootDef, userDef, regionDef] 
 }; 
