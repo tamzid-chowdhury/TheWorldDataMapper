@@ -1,0 +1,43 @@
+@use 'node_modules/wt-frontend/build/global/theme' with (
+    $primary-color: #ffc800,
+    $background-color: 	#272424, //#d9d6cc,
+    $navbar-background-color: black,//rgb(64, 69, 78),
+    $text-color: #e9edf0,
+    $modal-background: rgb(64, 69, 78),
+    $modal-section-padding: 24px,
+    $modal-radius: 4px,
+    $modal-border: 1px solid rgb(87, 93, 105),
+    $modal-button-color: rgba(255,255,255, 0.7),
+    $modal-button-hover: #e9edf0,
+    $button-text-color: black,
+    // other variable changes here
+);
+
+@use 'node_modules/wt-frontend/build/global/wolfie' as *;
+@use 'node_modules/wt-frontend/build/global/components';
+
+html, body {
+    margin: 0;
+    font-family: 'Consolas';
+    background-color: $background-color;
+}
+
+.navbar {
+    background-color: $navbar-background-color; 
+    border-bottom: 1px solid; 
+}
+
+.logo {
+	color: #bb461b;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bolder;
+    
+} 
+
+.homescreenLogo {
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 45px;
+}
