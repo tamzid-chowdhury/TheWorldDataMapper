@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import {WNavbar,WNavItem} 	from 'wt-frontend';
 import {WLayout, WLHeader, WLMain} from 'wt-frontend';
-import {WRpw, WColumn} from 'wt-frontend';
+import {WRpw, WColumn, WButton} from 'wt-frontend';
 import Logo from '../navbar/Logo'
 import WRow from 'wt-frontend/build/components/wgrid/WRow';
 import WCol from 'wt-frontend/build/components/wgrid/WCol';
@@ -15,11 +15,23 @@ const Homescreen = (props) => {
 
 			<WLHeader color="colored">
 				<WNavbar className="navbar">
-					<WRow>
-						<WCol size="1.5">
-							<Logo /> 
-						</WCol> 
-					</WRow>
+					<ul>
+						<WNavItem>
+							<Logo />
+						</WNavItem>
+					</ul>
+					<ul>
+						<WNavItem hoverAnimation="lighten">
+							<WButton className="create-account-button" wType="texted">
+                    			Create Account
+                			</WButton>
+						</WNavItem>
+						<WNavItem hoverAnimation="lighten">
+							<WButton className="login-button" wType="texted">
+                    			Login
+                			</WButton>
+						</WNavItem>
+					</ul>
 				</WNavbar>
 			</WLHeader>
 
