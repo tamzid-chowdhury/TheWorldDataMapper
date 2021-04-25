@@ -13,8 +13,8 @@ const CreateAccount = (props) => {
 
 
 	return (
-		<WModal className="signup-modal"  cover="true" visible="true">
-			<WMHeader  className="modal-header" onClose={() => props.setShowLogin(false)}>
+		<WModal className="signup-modal"  cover="true" visible="true" animation="fade-in">
+			<WMHeader  className="modal-header" onClose={() => props.setShowHomescreenLogo()}>
 				Create a New Account
 			</WMHeader>
 			<WMMain className="modal-main">
@@ -44,12 +44,13 @@ const CreateAccount = (props) => {
 			<WMFooter className='modal-footer'>
                 <WRow className='modal-col-gap'>
                     <WCol size="6">
-                        <WButton className="modal-button" span hoverAnimation="darken" clickAnimation="ripple-light" color="colored">
+                        <WButton wType="ghost" className="modal-button" span hoverAnimation="fill" clickAnimation="ripple-dark" color="colored" raised="true">
                             Create Account
                         </WButton>
                     </WCol>
                     <WCol size="6">
-                        <WButton className="modal-button" span hoverAnimation="darken" clickAnimation="ripple-light" color="colored">
+                        <WButton wType ="ghost" className="modal-button" span hoverAnimation="fill" 
+                        clickAnimation="ripple-dark" color="colored" raised="true" onClick={() => props.setShowHomescreenLogo()}>
                             Cancel
                         </WButton>
                     </WCol>
