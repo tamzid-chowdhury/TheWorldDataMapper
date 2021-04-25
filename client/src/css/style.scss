@@ -1,20 +1,49 @@
 @use 'node_modules/wt-frontend/build/global/theme' with (
-    $primary-color: #ffc800,
     $background-color: 	#272424, //#d9d6cc,
     $navbar-background-color: black,//rgb(64, 69, 78),
-    $text-color: #e9edf0,
-    $modal-background: rgb(64, 69, 78),
+    $text-color: black,
+    $modal-background: black,
     $modal-section-padding: 24px,
     $modal-radius: 4px,
-    $modal-border: 1px solid rgb(87, 93, 105),
-    $modal-button-color: rgba(255,255,255, 0.7),
-    $modal-button-hover: #e9edf0,
+    $modal-border: 3px solid white,
+    $button-background-color: white, 
     $button-text-color: black,
+    $highlight-color: red
     // other variable changes here
 );
 
 @use 'node_modules/wt-frontend/build/global/wolfie' as *;
 @use 'node_modules/wt-frontend/build/global/components';
+
+:root {
+    --warm-white: #f9f7f1;
+    --warm-white-transparent: #f9f7f111;
+    --warning-color: #f13564;
+    --warmer-white: #f9f7dd;
+    --blue-slate: #2c3437;
+    --blue-slate-darker: #161a1b;
+    --light-green: #99cc7d;
+    --lighter-green: #bdfc9b;
+    --light-orange: #f5bc75;
+    --light-blue: #8ed4f8;
+    --light-purple: #dbbdf9;
+    --light-pink: #fbb4d2;
+    --light-yellow: #e6db74;
+    --light-beige: #d9d6cc;
+    --light-gray: #e9edf0;
+	--bright-orange: #fca234;
+	--yellow-orange: #ffc800;
+    --hover-light: rgba(255,255,255, 0.7);
+    --deep-blue:  rgb(64, 69, 78);
+    --deep-blue-lighter:  rgb(87, 93, 105);
+    /* --deep-blue:  #282c34; */
+    --button-transparent:  rgba(255,255,255, 0);
+    --deep-blue-darker:  #353a44;
+	/* --deep-blue-darker:  #282c34; */
+	--blue-gray: #7e8084;
+	--darkblue-gray: #2b2e36;
+    --warm-black: #322d2d;
+}
 
 html, body {
     margin: 0;
@@ -28,7 +57,7 @@ html, body {
 }
 
 .logo {
-	color: #bb461b;
+	color: red;
     font-size: 24px;
     text-align: center;
     font-weight: bolder;
@@ -43,7 +72,7 @@ html, body {
 }
 
 .create-account-button {
-    color: rgb(221, 101, 215); 
+    color: red;
     font-size: 18px; 
 }
 
@@ -51,3 +80,21 @@ html, body {
     color: white; 
     font-size: 18px;
 }
+
+.modal-header {
+    background-color: red;
+    font-size: 24px;
+}
+
+.modal-main {
+    background-color: black;
+}
+
+.modal-input {
+    background-color: white;
+}
+
+.modal-footer{
+    background-color: black; 
+}
+

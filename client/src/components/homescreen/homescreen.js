@@ -6,7 +6,9 @@ import {WRpw, WColumn, WButton} from 'wt-frontend';
 import Logo from '../navbar/Logo'
 import WRow from 'wt-frontend/build/components/wgrid/WRow';
 import WCol from 'wt-frontend/build/components/wgrid/WCol';
-import redGlobe from '../../assets/redglobe.jpg';
+import HomescreenLogo from "../homescreen/HomescreenLogo"
+import CreateAccount from '../modals/CreateAccount';
+import Login from '../modals/Login';
 
 const Homescreen = (props) => {
     return(
@@ -37,7 +39,7 @@ const Homescreen = (props) => {
 
 			<WLMain>
 				<div className="homescreenLogo">
-					<HomescreenLogo/>
+					<CreateAccount />
 				</div>
 			</WLMain>
 
@@ -46,15 +48,6 @@ const Homescreen = (props) => {
 	);
 
 }
-
-const HomescreenLogo = (props) => {
-	return(
-		<div>
-			<img src={redGlobe} alt="Red Globe" width="650" height="650"></img>
-			<p>Welcome to The World Data Mapper</p> 
-		</div>
-	);
-};
 
 export default Homescreen;
 
