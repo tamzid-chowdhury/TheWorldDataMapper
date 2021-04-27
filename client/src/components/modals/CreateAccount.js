@@ -1,8 +1,12 @@
 import React, { useState } 	from 'react';
+import { REGISTER }			from '../../cache/mutations';
+import { useMutation }    	from '@apollo/client';
+
 import { WModal, WMHeader, WMMain, WMFooter, WButton, WInput, WRow, WCol } from 'wt-frontend';
 
 const CreateAccount = (props) => {
 	const [input, setInput] = useState({ email: '', password: '', name: ''});
+	const [Register] = useMutation(REGISTER);
 
 	
 	const updateInput = (e) => {
@@ -11,6 +15,26 @@ const CreateAccount = (props) => {
 		setInput(updated);
 	};
 
+	const handleCreateAccount = async (e) => {
+		for (let field in input) {
+			if (!input[field]) {
+				alert('All fields must be filled out to register');
+				return;
+			}
+		}
+		const { loading, error, data } = await Register({ variables: { ...input } });
+		if (loading) {console.log("loading")};
+		if (error) { return `Error: ${error.message}` };
+		if (data) {
+			if(data.register.email === 'already exists') {
+				alert('User with that email already registered');
+			}
+			else {
+				props.setShowHomescreenLogo();
+			}
+
+		};
+	};
 
 	return (
 		<WModal className="signup-modal"  cover="true" visible="true" animation="fade-in">
@@ -44,7 +68,8 @@ const CreateAccount = (props) => {
 			<WMFooter className='modal-footer'>
                 <WRow className='modal-col-gap'>
                     <WCol size="6">
-                        <WButton wType="ghost" className="modal-button" span hoverAnimation="fill" clickAnimation="ripple-dark" color="colored" raised="true">
+                        <WButton wType="ghost" className="modal-button" span hoverAnimation="fill" clickAnimation="ripple-dark" color="colored" raised="true"
+						onClick={handleCreateAccount}>
                             Create Account
                         </WButton>
                     </WCol>

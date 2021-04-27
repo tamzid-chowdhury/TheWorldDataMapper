@@ -2,10 +2,8 @@ import React, {useState} from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import {WNavbar,WNavItem} 	from 'wt-frontend';
 import {WLayout, WLHeader, WLMain} from 'wt-frontend';
-import {WRpw, WColumn, WButton} from 'wt-frontend';
+import {WButton} from 'wt-frontend';
 import Logo from '../navbar/Logo'
-import WRow from 'wt-frontend/build/components/wgrid/WRow';
-import WCol from 'wt-frontend/build/components/wgrid/WCol';
 import HomescreenLogo from "../homescreen/HomescreenLogo"
 import CreateAccount from '../modals/CreateAccount';
 import Login from '../modals/Login';
@@ -35,43 +33,53 @@ const Homescreen = (props) => {
 
     return(
 		<WLayout WLayout="header"> 
-
-
 			<WLHeader color="colored">
+
 				<WNavbar className="navbar">
+
 					<ul>
 						<WNavItem>
 							<Logo />
 						</WNavItem>
 					</ul>
+
 					<ul>
 						<WNavItem hoverAnimation="lighten">
+
 							<WButton className="create-account-button" wType="texted" onClick={setShowCreate}>
                     			Create Account
                 			</WButton>
+
 						</WNavItem>
+
 						<WNavItem hoverAnimation="lighten">
+
 							<WButton className="login-button" wType="texted" onClick={setShowLogin}>
                     			Login
                 			</WButton>
+
 						</WNavItem>
+						
 					</ul>
+
 				</WNavbar>
+
 			</WLHeader>
 
 			<WLMain>
-				<div className="homescreenLogo">
-				{
-				showHomescreenLogo && (<HomescreenLogo/>)
-			}
+				<div className="homescreenMain">
 
-			{
-				showCreate && (<CreateAccount  setShowHomescreenLogo={setShowHomescreenLogo} />)
-			}
+					{
+						showHomescreenLogo && (<HomescreenLogo/>)
+					}
 
-			{
-				showLogin && (<Login setShowHomescreenLogo={setShowHomescreenLogo} />)
-			}
+					{
+						showCreate && (<CreateAccount  setShowHomescreenLogo={setShowHomescreenLogo} />)
+					}
+
+					{
+						showLogin && (<Login setShowHomescreenLogo={setShowHomescreenLogo} />)
+					}
 
 				</div>
 			</WLMain>

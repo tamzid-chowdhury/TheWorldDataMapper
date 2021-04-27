@@ -39,16 +39,14 @@ const server = new ApolloServer({
 // works as well
 server.applyMiddleware({ app , cors: false});
 
-app.listen({ port: BACKEND_PORT }, CLIENT_LOCAL_ORIGIN, () => {
-    console.log(`Server ready at ${SERVER_LOCAL_DOMAIN}:${BACKEND_PORT}`);
-})
 
-// mongoose.connect(MONGO_URI, {useNewUrlParser: true , useUnifiedTopology: true})
-//         .then(() => {
-//             app.listen({ port: BACKEND_PORT }, CLIENT_LOCAL_ORIGIN, () => {
-//                 console.log(`Server ready at ${SERVER_LOCAL_DOMAIN}:${BACKEND_PORT}`);
-//             })
-//         })
-//         .catch(error => {
-//             console.log(error)
-//         });
+
+mongoose.connect(MONGO_URI, {useNewUrlParser: true , useUnifiedTopology: true})
+        .then(() => {
+            app.listen({ port: BACKEND_PORT }, CLIENT_LOCAL_ORIGIN, () => {
+                console.log(`Server ready at ${SERVER_LOCAL_DOMAIN}:${BACKEND_PORT}`);
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        });
