@@ -75,6 +75,14 @@ module.exports = {
 	
 			const current = await User.findOne(_id);
 			const alreadyRegistered = await User.findOne({email: email});
+			// if(current.email == email && current.password == password && current.name == name){
+			// 	console.log("Nothing was updated. Try again.")
+			// 	return(new User({
+			// 		_id: '',
+			// 		name: '',
+			// 		email: 'nothing updated', 
+			// 		password: ''}));
+			// }
 			if(alreadyRegistered && alreadyRegistered.email != current.email) {
 				console.log('User with that email already registered.');
 				return(new User({

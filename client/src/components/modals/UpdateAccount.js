@@ -30,6 +30,9 @@ const UpdateAccount = (props) => {
 			if(data.update.email === 'already exists') {
 				alert('User with that email already registered');
 			}
+			// else if(data.update.email === 'nothing updated') {
+			// 	alert('No fields were updated. Try again.')
+			// }
 			else {
                 props.fetchUser()
                 props.setShowUpdate()
