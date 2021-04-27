@@ -1,7 +1,7 @@
 import React, { useState } 	from 'react';
 import { useMutation }    	from '@apollo/client';
 import { LOGIN }			from '../../cache/mutations';
-
+import { Redirect } from 'react-router-dom';
 import { WModal, WMHeader, WMMain, WMFooter, WButton, WInput, WRow, WCol } from 'wt-frontend';
 
 const Login = (props) => {
@@ -25,8 +25,10 @@ const Login = (props) => {
 			return;
 		}
 		if (data) {
+			await props.fetchUser();
 			displayErrorMsg(false);
-			console.log(data);
+			return <Redirect to="/welcome"/>;
+			
 		};
 	};
 

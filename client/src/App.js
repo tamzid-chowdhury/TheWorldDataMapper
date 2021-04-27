@@ -1,5 +1,6 @@
 import React 			from 'react';
-import Homescreen 		from './components/homescreen/Homescreen';
+import Homescreen 		from './components/homescreen/homescreen';
+import Mapscreen 		from './components/mapscreen/mapscreen';
 import { useQuery } 	from '@apollo/client';
 import * as queries 	from './cache/queries';
 import { jsTPS } 		from './utils/jsTPS';
@@ -21,17 +22,26 @@ const App = () => {
 
 	return(
 		<BrowserRouter>
-			<Switch>
-				<Redirect exact from="/" to={ {pathname: "/home"} } />
+			{
+				user === null ? 
+				<Redirect exact from="/" to={ {pathname: "/homescreen"} } /> :
+				<Redirect exact from="/" to={ {pathname: "/mapscreen"} } /> 
+			}
+				
+
 				<Route 
-					path="/home" 
-					name="home" 
+					exact path="/homescreen" 
 					render={() => 
-						<Homescreen tps={transactionStack} user={user} />
+						<Homescreen fetchUser={refetch}/>
 					} 
 				/>
-				<Route/>
-			</Switch>
+
+				<Route
+					path="/mapscreen"
+					render={() =>
+						<Mapscreen tps={transactionStack} user={user} fetchUser={refetch}/> 
+					}
+				/>
 		</BrowserRouter>
 	);
 }

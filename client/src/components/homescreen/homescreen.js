@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import {WNavbar,WNavItem} 	from 'wt-frontend';
 import {WLayout, WLHeader, WLMain} from 'wt-frontend';
 import {WButton} from 'wt-frontend';
@@ -78,7 +77,7 @@ const Homescreen = (props) => {
 					}
 
 					{
-						showLogin && (<Login setShowHomescreenLogo={setShowHomescreenLogo} />)
+						showLogin && (<Login setShowHomescreenLogo={setShowHomescreenLogo} fetchUser={props.fetchUser}/>)
 					}
 
 				</div>
