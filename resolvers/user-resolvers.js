@@ -63,6 +63,15 @@ module.exports = {
 			})
             const saved = await user.save();
 			return user;
+		},
+		/** 
+		@param 	 {object} res - response object containing the current access/refresh tokens  
+		@returns {boolean} true 
+		**/
+		logout:(_, __, { res }) => {
+			res.clearCookie('refresh-token');
+			res.clearCookie('access-token');
+			return true;
 		}
 	}
 }

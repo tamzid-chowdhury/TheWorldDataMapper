@@ -27,7 +27,6 @@ const Login = (props) => {
 		if (data) {
 			await props.fetchUser();
 			displayErrorMsg(false);
-			return <Redirect to="/welcome"/>;
 			
 		};
 	};

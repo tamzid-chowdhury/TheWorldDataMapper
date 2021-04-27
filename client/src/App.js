@@ -8,6 +8,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
  
 const App = () => {
 	let user = null;
+	let username = null; 
     let transactionStack = new jsTPS();
 	
     const { loading, error, data, refetch } = useQuery(queries.GET_DB_USER);
@@ -16,7 +17,10 @@ const App = () => {
 	if(loading) { console.log(loading); }
 	if(data) { 
 		let { getCurrentUser } = data;
-		if(getCurrentUser !== null) { user = getCurrentUser; }
+		if(getCurrentUser !== null) { 
+			user = getCurrentUser; 
+			username  = getCurrentUser.name; 
+		}
 	}
 
 
@@ -28,6 +32,7 @@ const App = () => {
 				<Redirect exact from="/" to={ {pathname: "/mapscreen"} } /> 
 			}
 				
+			<Switch>
 
 				<Route 
 					exact path="/homescreen" 
@@ -39,9 +44,12 @@ const App = () => {
 				<Route
 					path="/mapscreen"
 					render={() =>
-						<Mapscreen tps={transactionStack} user={user} fetchUser={refetch}/> 
+						<Mapscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
 					}
 				/>
+
+			</Switch>	
+
 		</BrowserRouter>
 	);
 }
