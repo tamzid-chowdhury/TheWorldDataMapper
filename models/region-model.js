@@ -21,7 +21,10 @@ const regionSchema = new Schema(
         }, 
         landmarks:{
             type: [String]
-        },
+		},
+		owner: {
+			type: String
+		},
         parentRegion: {
             type: ObjectId,
             ref: 'Region'

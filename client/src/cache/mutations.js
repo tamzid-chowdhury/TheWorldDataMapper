@@ -37,3 +37,13 @@ export const UPDATE = gql`
 	}
 `;
 
+export const CREATE_NEW_MAP = gql`
+	mutation CreateNewMap($name: String!){
+		addRootRegion(name: $name) {
+			_id
+			name
+			owner
+		}
+	}
+`;
+

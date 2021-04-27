@@ -78,7 +78,7 @@ const Mapscreen = (props) => {
 
 
 					{	
-						showSelectScreen && (<MapSelectScreen/>)
+						showSelectScreen && (<MapSelectScreen user={props.user} fetchUser={props.fetchUser} />)
 					}
 
 

@@ -1,13 +1,34 @@
 const { gql } = require('apollo-server');
 
 const typeDefs = gql `
-type Query {
-    _empty: String
-}
+    type Region {
+        _id: String
+        name: String
+        capital: String
+        leader: String
+        landmarks: [String]
+        owner: String
+        parentRegion: String
+    }
 
-type Mutation {
-    _empty: String
-}
+    extend type Query {
+        getRootRegions: [Region]
+    }
+
+    extend type Mutation { 
+        addRootRegion(name: String!): Region
+    }
+
+    input RegionInput {
+		_id: String
+		name: String
+        capital: String
+        leader: String
+        landmarks: [String]
+        owner: String
+        parentRegion: String
+	}
+
 `;
 
 module.exports = { typeDefs: typeDefs }

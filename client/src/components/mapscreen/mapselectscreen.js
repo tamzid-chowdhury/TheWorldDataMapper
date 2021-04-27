@@ -6,6 +6,17 @@ import { useMutation, useApolloClient }     from '@apollo/client';
 import redGlobe from '../../assets/redglobe.jpg';
 
 const MapSelectScreen = (props) => {
+    const [CreateNewMap] = useMutation(mutations.CREATE_NEW_MAP);
+
+    const handleAddRootMap = async () => {
+        let name = "Africa";
+        const { loading, error, data } = await CreateNewMap({ variables: { name } });
+        if (loading) {};
+		if (data) {
+			console.log(data);			
+		};
+    }
+
 	return(
 		<div className = "map-select-container">
 			<WLayout wLayout="header-lside-footer">
@@ -17,7 +28,7 @@ const MapSelectScreen = (props) => {
                 </WLHeader>
 
                 <WLSide className="map-select-side">
-
+                    
                 </WLSide>
 
                 <WLMain className="map-select-main">
@@ -26,7 +37,7 @@ const MapSelectScreen = (props) => {
                     </WRow>
                     <WRow>
                         <WCol size ="12">
-                            <WButton wType="default" className="create-map-button" clickAnimation="ripple-dark"> 
+                            <WButton wType="default" className="create-map-button" clickAnimation="ripple-dark" onClick={handleAddRootMap}> 
                                Create A New Map
                             </WButton>
                         </WCol>
