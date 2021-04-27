@@ -2,20 +2,46 @@ import React, {useState} from 'react';
 import {WLayout, WLHeader, WLMain, WNavItem, WButton} from 'wt-frontend';
 import {WLSide, WSidebar, WCol, WRow} from 'wt-frontend';
 import * as mutations from '../../cache/mutations';
-import { useMutation, useApolloClient }     from '@apollo/client';
+import * as queries from '../../cache/queries';
+import { useMutation, useApolloClient , useQuery}     from '@apollo/client';
 import redGlobe from '../../assets/redglobe.jpg';
+import MapList from '../mapscreen/maplist'
+import AddMap from '../modals/AddMap'
+
 
 const MapSelectScreen = (props) => {
+    let rootRegions = []
+
     const [CreateNewMap] = useMutation(mutations.CREATE_NEW_MAP);
 
-    const handleAddRootMap = async () => {
-        let name = "Africa";
-        const { loading, error, data } = await CreateNewMap({ variables: { name } });
+    const [showAddModal, toggleShowAddModal] = useState(false);
+
+    const setShowAddModal = () => {
+		toggleShowAddModal(!showAddModal);
+    };
+
+   
+    const { loading, error, data, refetch } = useQuery(queries.GET_USER_MAPS);
+    
+    if (loading) {return <div></div>};
+    if (error) {console.log(error)}
+	if (data) {
+        rootRegions = data.getRootRegions;	
+        console.log(rootRegions)		
+    };
+
+
+    const handleAddRootMap = async (newMap) => {
+        let name = newMap;
+        const { loading, error, data } = await CreateNewMap({ variables: {name:name}  });
         if (loading) {};
+        if (error) {console.log(error)}
 		if (data) {
-			console.log(data);			
+			refetch()		
 		};
     }
+
+
 
 	return(
 		<div className = "map-select-container">
@@ -28,7 +54,7 @@ const MapSelectScreen = (props) => {
                 </WLHeader>
 
                 <WLSide className="map-select-side">
-                    
+                        <MapList rootRegions={rootRegions}/>
                 </WLSide>
 
                 <WLMain className="map-select-main">
@@ -37,7 +63,7 @@ const MapSelectScreen = (props) => {
                     </WRow>
                     <WRow>
                         <WCol size ="12">
-                            <WButton wType="default" className="create-map-button" clickAnimation="ripple-dark" onClick={handleAddRootMap}> 
+                            <WButton wType="default" className="create-map-button" clickAnimation="ripple-dark" onClick={setShowAddModal}> 
                                Create A New Map
                             </WButton>
                         </WCol>
@@ -45,6 +71,10 @@ const MapSelectScreen = (props) => {
                 </WLMain>
 
             </WLayout>
+
+            {	
+				showAddModal && (<AddMap setShowAddModal={setShowAddModal} handleAddRootMap={handleAddRootMap}/>)
+			}
 		</div>
 	);
 };

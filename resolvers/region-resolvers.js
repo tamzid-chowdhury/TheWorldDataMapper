@@ -22,7 +22,7 @@ module.exports = {
 		 	@param 	 {object} args - an empty region object 
 			@returns {string}
 		**/
-		addRootRegion: async (_,{args},{req}) => {
+		addRootRegion: async (_,args,{req}) => {
             const {name} = args
             owner = new ObjectId(req.userId);
             

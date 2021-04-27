@@ -35,7 +35,7 @@ const UpdateAccount = (props) => {
 			// }
 			else {
                 props.fetchUser()
-                props.setShowUpdate()
+                props.setShowSelectScreen()
 			}
 
         };

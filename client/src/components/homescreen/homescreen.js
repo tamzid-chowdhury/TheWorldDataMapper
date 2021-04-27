@@ -31,7 +31,7 @@ const Homescreen = (props) => {
 	};
 
     return(
-		<WLayout WLayout="header"> 
+		<WLayout wlayout="header"> 
 			<WLHeader color="colored">
 
 				<WNavbar className="navbar">
