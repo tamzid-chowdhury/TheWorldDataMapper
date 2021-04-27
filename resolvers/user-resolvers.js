@@ -10,11 +10,33 @@ module.exports = {
 			@returns {object} the user object on success and an empty object on failure 
 		**/
 		getCurrentUser: async (_, __, { req }) => {
-            const found = await User.find();
+			const _id = new ObjectId(req.userId);
+			if(!_id) { return({}) }
+			const found = await User.findOne(_id);
 			if(found) return found;
-		}
+		},
 	},
 	Mutation: {
+		/** 
+			@param 	 {object} args - login info
+			@param 	 {object} res - response object containing the current access/refresh tokens  
+			@returns {object} the user object or an object with an error message
+		**/
+		login: async (_, args, { res }) => {	
+			const { email, password } = args;
+
+			const user = await User.findOne({email: email});
+			if(!user) return({});
+
+			const valid = await bcrypt.compare(password, user.password);
+			if(!valid) return({});
+			// Set tokens if login info was valid
+			const accessToken = tokens.generateAccessToken(user);
+			const refreshToken = tokens.generateRefreshToken(user);
+			res.cookie('refresh-token', refreshToken, { httpOnly: true , sameSite: 'None', secure: true}); 
+			res.cookie('access-token', accessToken, { httpOnly: true , sameSite: 'None', secure: true}); 
+			return user;
+		},
 		/** 
 			@param 	 {object} args - registration info
 			@param 	 {object} res - response object containing the current access/refresh tokens  

@@ -9,14 +9,15 @@ const App = () => {
 	let user = null;
     let transactionStack = new jsTPS();
 	
-    // const { loading, error, data, refetch } = useQuery(queries.GET_DB_USER);
+    const { loading, error, data, refetch } = useQuery(queries.GET_DB_USER);
 
-    // if(error) { console.log(error); }
-	// if(loading) { console.log(loading); }
-	// if(data) { 
-	// 	let { getCurrentUser } = data;
-	// 	if(getCurrentUser !== null) { user = getCurrentUser; }
-    // }
+    if(error) { console.log(error); }
+	if(loading) { console.log(loading); }
+	if(data) { 
+		let { getCurrentUser } = data;
+		if(getCurrentUser !== null) { user = getCurrentUser; }
+	}
+
 
 	return(
 		<BrowserRouter>
