@@ -11,22 +11,19 @@ const regionSchema = new Schema(
 			required: true
 		},
 		capital: {
-			type: String,
-			required: true
+			type: String
 		},
 		leader: {
-			type: String,
-			required: true
+			type: String
         },
         flag: {
-            type: String, 
-            required: true
+            type: String
         }, 
         landmarks:{
             type: [String]
         },
         parentRegion: {
-            type: Schema.Types.ObjectId,
+            type: ObjectId,
             ref: 'Region'
         }
         

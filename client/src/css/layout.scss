@@ -39,12 +39,39 @@
     height: 24px;
     align-items: center;
     padding-top: 15px;
+    padding-left: 160px;
 
 }
 
 .main-login-modal {
     padding: 24px 24px 0px 24px;
 }
+
+.map-select-container {
+    position: absolute; 
+    left: 400px;
+    top: 250px; 
+    right: 400px;
+    
+}
+
+.map-select-side{
+    width: 574px;  
+}
+
+.map-select-main{
+    width: 450px;
+    left: 300px;
+    position: relative;
+}
+
+.create-map-button{
+    width: 450px
+}
+
+
+
+
 
 
 

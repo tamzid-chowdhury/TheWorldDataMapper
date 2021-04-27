@@ -103,3 +103,35 @@ html, body {
     color: white;
     font-size: 14px;
 }
+
+
+.map-select-header {
+    background-color: black;
+    color: white; 
+    font-size: 20px;
+    text-align: center;
+    font-weight: bolder;
+    line-height: 10px;
+}
+
+.map-select-red-top {
+    background-color: red;
+}
+
+.map-select-side {
+    background-color: pink;
+}
+
+.map-select-footer {
+    background-color: red;
+}
+
+.create-map-button {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+.create-map-button :hover{
+    background-color: rgb(212, 81, 81);
+}

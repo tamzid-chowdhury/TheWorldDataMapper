@@ -7,15 +7,23 @@ import Logo from '../navbar/Logo'
 import * as mutations from '../../cache/mutations';
 import { useMutation, useApolloClient }     from '@apollo/client';
 import UpdateAccount from '../modals/UpdateAccount';
+import MapSelectScreen from '../mapscreen/mapselectscreen'
 
 const Mapscreen = (props) => {
     const client = useApolloClient();
 	const [Logout] = useMutation(mutations.LOGOUT);
 
 	const [showUpdate, toggleShowUpdate] 	= useState(false);
+	const [showSelectScreen, toggleShowSelectScreen] 	= useState(true);
 
 	const setShowUpdate = () => {
 		toggleShowUpdate(!showUpdate);
+		toggleShowSelectScreen(false);
+	};
+
+	const setShowSelectScreen = () => {
+		toggleShowUpdate(false);
+		toggleShowSelectScreen(!showSelectScreen);
 	};
     
 
@@ -65,8 +73,14 @@ const Mapscreen = (props) => {
 			<WLMain>
 
 					{
-						showUpdate && (<UpdateAccount setShowUpdate={setShowUpdate} user={props.user} fetchUser={props.fetchUser}/>)
+						showUpdate && (<UpdateAccount setShowSelectScreen={setShowSelectScreen} user={props.user} fetchUser={props.fetchUser}/>)
 					}
+
+
+					{	
+						showSelectScreen && (<MapSelectScreen/>)
+					}
+
 
 			</WLMain>
 

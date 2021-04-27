@@ -5,7 +5,7 @@ import { useMutation }    	from '@apollo/client';
 import { WModal, WMHeader, WMMain, WMFooter, WButton, WInput, WRow, WCol } from 'wt-frontend';
 
 const UpdateAccount = (props) => {
-	const [input, setInput] = useState({ email: '', password: '', name: ''});
+	const [input, setInput] = useState({ email: props.user.email, password: '', name: props.user.name});
     const [Update] = useMutation(UPDATE);
 
 	
@@ -45,7 +45,7 @@ const UpdateAccount = (props) => {
 
 	return (
 		<WModal className="signup-modal"  cover="true" visible="true" animation="fade-in">
-			<WMHeader  className="modal-header" onClose={() => props.setShowUpdate()}>
+			<WMHeader  className="modal-header" onClose={() => props.setShowSelectScreen()}>
 				Update Account Information
 			</WMHeader>
 			<WMMain className="modal-main">
@@ -83,7 +83,7 @@ const UpdateAccount = (props) => {
                     </WCol>
                     <WCol size="6">
                         <WButton wType ="ghost" className="modal-button" span hoverAnimation="fill" 
-                        clickAnimation="ripple-dark" color="colored" raised="true" onClick={() => props.setShowUpdate()}>
+                        clickAnimation="ripple-dark" color="colored" raised="true" onClick={() => props.setShowSelectScreen()}>
                             Cancel
                         </WButton>
                     </WCol>
