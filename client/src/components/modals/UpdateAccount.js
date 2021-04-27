@@ -22,19 +22,22 @@ const UpdateAccount = (props) => {
 				return;
 			}
         }
-        console.log(input)
-		// const { loading, error, data } = await Update({ variables: { ...input } });
-		// if (loading) {console.log("loading")};
-		// if (error) { return `Error: ${error.message}` };
-		// if (data) {
-		// 	if(data.register.email === 'already exists') {
-		// 		alert('User with that email already registered');
-		// 	}
-		// 	else {
-		// 		props.setShowHomescreenLogo();
-		// 	}
+        const id = props.user._id; 
+		const { loading, error, data } = await Update({ variables: { ...input, id } });
+		if (loading) {console.log("loading")};
+		if (error) { return `Error: ${error.message}` };
+		if (data) {
+			if(data.update.email === 'already exists') {
+				alert('User with that email already registered');
+			}
+			else {
+                props.fetchUser()
+                props.setShowUpdate()
+			}
 
-		};
+        };
+        
+    }
 
 
 	return (
@@ -46,7 +49,7 @@ const UpdateAccount = (props) => {
 
 				<WInput 
 					className="modal-input" onBlur={updateInput} name="name" labelAnimation="up" 
-					barAnimation="solid" labelText="Name" wType="outlined" inputType="text"
+					barAnimation="solid" labelText="Name" wType="outlined" inputType="text" defaultValue={props.user.name}
 				/>
 
 
@@ -54,7 +57,8 @@ const UpdateAccount = (props) => {
 
 				<WInput 
 					className="modal-input" onBlur={updateInput} name="email" labelAnimation="up" 
-					barAnimation="solid" labelText="Email Address" wType="outlined" inputType="text" 
+                    barAnimation="solid" labelText="Email Address" wType="outlined" inputType="text" 
+                    defaultValue={props.user.email}
 				/>
 							
                 <div className="modal-spacer">&nbsp;</div>

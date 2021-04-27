@@ -64,6 +64,35 @@ module.exports = {
             const saved = await user.save();
 			return user;
 		},
+				/** 
+			@param 	 {object} args - updated info
+			@param 	 {object} res - response object containing the current access/refresh tokens  
+			@returns {object} the user object or an object with an error message
+		**/
+		update: async (_, args, { req, res }) => {
+			const {email, password, name} = args;
+			const _id = new ObjectId(req.userId);
+	
+			const current = await User.findOne(_id);
+			const alreadyRegistered = await User.findOne({email: email});
+			if(alreadyRegistered && alreadyRegistered.email != current.email) {
+				console.log('User with that email already registered.');
+				return(new User({
+					_id: '',
+					name: '',
+					email: 'already exists', 
+					password: ''}));
+			}
+			const hashed = await bcrypt.hash(password, 10);
+			const user = new User({
+				_id: _id,
+				name: name,
+				email: email, 
+				password: hashed
+			})
+			const updated = await User.updateOne({_id:_id}, user)
+			return user;
+		},
 		/** 
 		@param 	 {object} res - response object containing the current access/refresh tokens  
 		@returns {boolean} true 

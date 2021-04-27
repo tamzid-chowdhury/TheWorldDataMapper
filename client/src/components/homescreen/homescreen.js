@@ -66,10 +66,9 @@ const Homescreen = (props) => {
 			</WLHeader>
 
 			<WLMain>
-				<div className="homescreenMain">
 
 					{
-						showHomescreenLogo && (<HomescreenLogo/>)
+						showHomescreenLogo && ( <div className="homescreenMain"> <HomescreenLogo/> 	</div>)
 					}
 
 					{
@@ -80,7 +79,7 @@ const Homescreen = (props) => {
 						showLogin && (<Login setShowHomescreenLogo={setShowHomescreenLogo} fetchUser={props.fetchUser}/>)
 					}
 
-				</div>
+
 			</WLMain>
 
 			

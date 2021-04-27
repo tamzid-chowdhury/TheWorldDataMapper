@@ -65,9 +65,8 @@ const Mapscreen = (props) => {
 			<WLMain>
 
 					{
-						showUpdate && (<UpdateAccount setShowUpdate={setShowUpdate} user={props.user}/>)
+						showUpdate && (<UpdateAccount setShowUpdate={setShowUpdate} user={props.user} fetchUser={props.fetchUser}/>)
 					}
-
 
 			</WLMain>
 
