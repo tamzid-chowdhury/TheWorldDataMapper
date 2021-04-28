@@ -7,6 +7,9 @@ import { WModal, WMHeader, WMMain, WMFooter, WButton, WInput, WRow, WCol } from 
 const Login = (props) => {
 	const [input, setInput] = useState({ email: '', password: '' });
 	const [showErr, displayErrorMsg] = useState(false);
+
+	const [loggedIn, toggleLoggedIn] = useState(false);
+
 	const errorMsg = "Email/Password not found";
 	const [Login] = useMutation(LOGIN);
 
@@ -27,11 +30,14 @@ const Login = (props) => {
 		if (data) {
 			await props.fetchUser();
 			displayErrorMsg(false);
+			toggleLoggedIn(true);
+			// return <Redirect exact from="/mapscreen" to={ {pathname: "/homescreen"} } /> 
 			
 		};
 	};
 
 	return (
+		loggedIn === false ? 
 		<WModal className="login-modal"  cover="true" visible="true" animation="fade-in">
 			<WMHeader  className="modal-header" onClose={() => props.setShowHomescreenLogo()}>
 				Login to Your Account
@@ -83,7 +89,7 @@ const Login = (props) => {
 
 			</WMFooter>
 			
-		</WModal>
+		</WModal> : <Redirect exact from="/homescreen" to={ {pathname: "/mapscreen"} } /> 
 	);
 }
 

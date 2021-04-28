@@ -54,7 +54,7 @@ const MapEntry = (props) => {
         <div>
         <WRow>
             <WCol size = "10" className="map-entries">
-                <WButton className="map-entries-button"  wType="transparent" hoverAnimation="darken" clickAnimation="ripple-dark" onClick={props.setActiveRegionID(props._id)}>
+                <WButton className="map-entries-button"  wType="transparent" hoverAnimation="darken" clickAnimation="ripple-dark">
                     {props.region.name}
                 </WButton>
             </WCol>

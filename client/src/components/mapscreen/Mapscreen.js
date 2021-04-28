@@ -14,17 +14,8 @@ import MapSelectScreen from '../mapscreen/mapselectscreen'
 const Mapscreen = (props) => {
     const client = useApolloClient();
 	const [Logout] = useMutation(mutations.LOGOUT);
+	const [loggedOut, toggleLoggedOut] = useState(false);
 
-	useEffect(() => {
-        props.fetchUser()
-    },[props, mutations, queries]);
-
-	const [activeRegionID, setActiveRegion_ID] = useState(null);
-
-	const setActiveRegionID = (_id) => {
-		setActiveRegion_ID(_id)
-		console.log(_id)
-	}
 	
 	const [showUpdate, toggleShowUpdate] 	= useState(false);
 	const [showSelectScreen, toggleShowSelectScreen] 	= useState(true);
@@ -44,61 +35,64 @@ const Mapscreen = (props) => {
 		Logout();
 		await client.clearStore();
 		await props.fetchUser();
+		toggleLoggedOut(true)
+		// return <Redirect exact from="/mapscreen" to={ {pathname: "/homescreen"} } /> 
     };
 
 
 
     return(
-		<WLayout WLayout="header"> 
-			<WLHeader color="colored">
+		loggedOut === false ?
+			<WLayout WLayout="header"> 
+				<WLHeader color="colored">
 
-				<WNavbar className="navbar">
+					<WNavbar className="navbar">
 
-					<ul>
-						<WNavItem>
-							<Logo />
-						</WNavItem>
-					</ul>
+						<ul>
+							<WNavItem>
+								<Logo />
+							</WNavItem>
+						</ul>
 
-					<ul>
-						<WNavItem hoverAnimation="lighten">
+						<ul>
+							<WNavItem hoverAnimation="lighten">
 
-							<WButton className="create-account-button" wType="texted" onClick={setShowUpdate}>
-                    		    {props.username}
-                			</WButton>
+								<WButton className="create-account-button" wType="texted" onClick={setShowUpdate}>
+									{props.username}
+								</WButton>
 
-						</WNavItem>
+							</WNavItem>
 
-						<WNavItem hoverAnimation="lighten">
+							<WNavItem hoverAnimation="lighten">
 
-							<WButton className="login-button" wType="texted" onClick={handleLogout}>
-                                Logout
-                			</WButton>
+								<WButton className="login-button" wType="texted" onClick={handleLogout}>
+									Logout
+								</WButton>
 
-						</WNavItem>
-						
-					</ul>
+							</WNavItem>
+							
+						</ul>
 
-				</WNavbar>
+					</WNavbar>
 
-			</WLHeader>
+				</WLHeader>
 
-			<WLMain>
+				<WLMain>
 
-					{
-						showUpdate && (<UpdateAccount setShowSelectScreen={setShowSelectScreen} user={props.user} fetchUser={props.fetchUser}/>)
-					}
-
-
-					{	
-						showSelectScreen && (<MapSelectScreen user={props.user} fetchUser={props.fetchUser} setActiveRegionID={setActiveRegionID}/>)
-					}
+						{
+							showUpdate && (<UpdateAccount setShowSelectScreen={setShowSelectScreen} user={props.user} fetchUser={props.fetchUser}/>)
+						}
 
 
-			</WLMain>
+						{	
+							showSelectScreen && (<MapSelectScreen user={props.user} fetchUser={props.fetchUser}/>)
+						}
 
-			
-		</WLayout>
+
+				</WLMain>
+
+				
+			</WLayout> : <Redirect exact from="/mapscreen" to={ {pathname: "/homescreen"} } /> 
 	);
 
 }

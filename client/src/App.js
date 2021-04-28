@@ -26,28 +26,21 @@ const App = () => {
 
 
 	return(
-		<BrowserRouter>
-			{
-				user === null ? 
-				<Redirect exact from="/" to={ {pathname: "/homescreen"} } /> :
-				<Redirect exact from="/" to={ {pathname: "/mapscreen"} } /> 
-			}
-				
+		<BrowserRouter>				
 			<Switch>
 
-				<Route 
-					exact path="/homescreen" 
-					render={() => 
-						<Homescreen fetchUser={refetch}/>
-					} 
-				/>
+				<Redirect exact from="/" to={ {pathname: "/homescreen"} } /> 
 
-				<Route
-					path="/mapscreen"
-					render={() =>
-						<Mapscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
-					}
-				/>
+				<Route exact path="/homescreen">
+					<Homescreen fetchUser={refetch}/> 
+				</Route>
+
+				<Route path="/mapscreen">
+					<Mapscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
+				</Route>
+				
+				
+			
 
 			</Switch>	
 

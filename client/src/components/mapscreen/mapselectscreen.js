@@ -56,7 +56,7 @@ const MapSelectScreen = (props) => {
                 </WLHeader>
 
                 <WLSide className="map-select-side">
-                        <MapList rootRegions={rootRegions} refetchUserMaps={refetch} setActiveRegionID={props.setActiveRegionID}/>
+                        <MapList rootRegions={rootRegions} refetchUserMaps={refetch}/>
                 </WLSide>
 
                 <WLMain className="map-select-main">
