@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {WLayout, WLHeader, WLMain, WNavItem, WButton} from 'wt-frontend';
-import {WLSide, WSidebar, WCol, WRow} from 'wt-frontend';
+import {WLSide, WSidebar, WCol, WRow, WLFooter} from 'wt-frontend';
 import * as mutations from '../../cache/mutations';
 import * as queries from '../../cache/queries';
 import { useMutation, useApolloClient , useQuery}     from '@apollo/client';
@@ -43,6 +43,8 @@ const MapSelectScreen = (props) => {
 
 
 
+
+
 	return(
 		<div className = "map-select-container">
 			<WLayout wLayout="header-lside-footer">
@@ -54,7 +56,7 @@ const MapSelectScreen = (props) => {
                 </WLHeader>
 
                 <WLSide className="map-select-side">
-                        <MapList rootRegions={rootRegions} refetchUserMaps={refetch}/>
+                        <MapList rootRegions={rootRegions} refetchUserMaps={refetch} setActiveRegionID={props.setActiveRegionID}/>
                 </WLSide>
 
                 <WLMain className="map-select-main">
@@ -63,12 +65,17 @@ const MapSelectScreen = (props) => {
                     </WRow>
                     <WRow>
                         <WCol size ="12">
-                            <WButton wType="default" className="create-map-button" clickAnimation="ripple-dark" onClick={setShowAddModal}> 
-                               Create A New Map
+                            <WButton wType="ghost" className="create-map-button" hoverAnimation="lighten" 
+                            clickAnimation="ripple-light" onClick={setShowAddModal} style={{ justifyContent:"center"}}> 
+                               Click Here to Create a New Map
                             </WButton>
                         </WCol>
                     </WRow>
                 </WLMain>
+
+                <WLFooter style={{ backgroundColor: "red",height:"24px"}}>
+                    <div></div>
+                </WLFooter>
 
             </WLayout>
 

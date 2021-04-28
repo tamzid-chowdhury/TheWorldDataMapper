@@ -9,7 +9,8 @@ const MapList = (props) => {
         {
             props.rootRegions && props.rootRegions.map(region => ( 
 
-                    <MapEntry key={region._id} region={region} refetchUserMaps={props.refetchUserMaps}/>
+                    <MapEntry key={region._id} _id={region._id} region={region} 
+                    refetchUserMaps={props.refetchUserMaps} setActiveRegionID={props.setActiveRegionID}/>
 
             ))
         }

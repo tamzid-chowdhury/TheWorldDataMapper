@@ -17,7 +17,7 @@ const Login = (props) => {
 	}
 
 	const handleLogin = async (e) => {
-
+	
 		const { loading, error, data } = await Login({ variables: { ...input } });
 		if (loading) {};
 		if (data.login._id === null) {
@@ -42,13 +42,15 @@ const Login = (props) => {
 				<WInput 
 					className="modal-input" onBlur={updateInput} name="email" labelAnimation="up" 
 					barAnimation="solid" labelText="Email Address" wType="outlined" inputType="text" 
+					onKeyDown={(e)=> updateInput} 
 				/>
 							
                 <div className="modal-spacer">&nbsp;</div>
 
 				<WInput 
 					className="modal-input" onBlur={updateInput} name="password" labelAnimation="up" 
-					barAnimation="solid" labelText="Password" wType="outlined" inputType="password" 
+					barAnimation="solid" labelText="Password" wType="outlined" inputType="password"
+					onKeyDown={(e)=> e.keyCode == 13 ? handleLogin() : ""} onKeyDown={(e)=> updateInput} 
 				/>
 
 				{

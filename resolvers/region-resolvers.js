@@ -37,7 +37,28 @@ module.exports = {
 				console.log(newRegion)
 				return newRegion;
 			}
-		}
+		},
+		/** 
+		@param 	 {object} args - a region objectID 
+		@returns {boolean} true on successful delete, false on failure
+		**/
+		deleteRootRegion: async (_, args) => {
+			const { _id } = args;
+			const objectId = new ObjectId(_id);
+			const deleted = await Region.deleteOne({_id: objectId});
+			if(deleted) return true;
+			else return false;
+		},
+
+		editMapName: async (_, args) => {
+			const {_id, name} = args;
+			const objectId = new ObjectId(_id);
+			const updatedRegion = await Region.findOne({_id: objectId});
+			updatedRegion.name = name; 
+			updatedRegion.save()
+			return updatedRegion;
+		},
 		
 	}
+
 }
