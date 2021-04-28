@@ -12,7 +12,7 @@ import MapSelectScreen from '../mapscreen/mapselectscreen'
 const Mapscreen = (props) => {
     const client = useApolloClient();
 	const [Logout] = useMutation(mutations.LOGOUT);
-
+	
 	const [showUpdate, toggleShowUpdate] 	= useState(false);
 	const [showSelectScreen, toggleShowSelectScreen] 	= useState(true);
 
@@ -29,7 +29,6 @@ const Mapscreen = (props) => {
 
     const handleLogout = async (e) => {
 		Logout();
-		await client.resetStore();
         await props.fetchUser();
     };
 

@@ -15,9 +15,10 @@ const MapSelectScreen = (props) => {
     const [CreateNewMap] = useMutation(mutations.CREATE_NEW_MAP);
 
     const [showAddModal, toggleShowAddModal] = useState(false);
+    
 
     const setShowAddModal = () => {
-		toggleShowAddModal(!showAddModal);
+        toggleShowAddModal(!showAddModal);
     };
 
    
@@ -26,8 +27,7 @@ const MapSelectScreen = (props) => {
     if (loading) {return <div></div>};
     if (error) {console.log(error)}
 	if (data) {
-        rootRegions = data.getRootRegions;	
-        console.log(rootRegions)		
+        rootRegions = data.getRootRegions;		
     };
 
 
@@ -54,7 +54,7 @@ const MapSelectScreen = (props) => {
                 </WLHeader>
 
                 <WLSide className="map-select-side">
-                        <MapList rootRegions={rootRegions}/>
+                        <MapList rootRegions={rootRegions} refetchUserMaps={refetch}/>
                 </WLSide>
 
                 <WLMain className="map-select-main">
@@ -73,8 +73,11 @@ const MapSelectScreen = (props) => {
             </WLayout>
 
             {	
-				showAddModal && (<AddMap setShowAddModal={setShowAddModal} handleAddRootMap={handleAddRootMap}/>)
+                showAddModal && (<AddMap setShowAddModal={setShowAddModal} handleAddRootMap={handleAddRootMap}/>)
+                
 			}
+
+
 		</div>
 	);
 };

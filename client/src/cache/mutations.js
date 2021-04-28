@@ -47,3 +47,9 @@ export const CREATE_NEW_MAP = gql`
 	}
 `;
 
+export const DELETE_MAP = gql`
+	mutation DeleteMap($_id: String!){
+		deleteRootRegion(_id: $_id)
+	}
+`;
+
