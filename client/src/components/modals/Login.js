@@ -28,16 +28,16 @@ const Login = (props) => {
 			return;
 		}
 		if (data) {
-			await props.fetchUser();
 			displayErrorMsg(false);
-			toggleLoggedIn(true);
-			// return <Redirect exact from="/mapscreen" to={ {pathname: "/homescreen"} } /> 
-			
+			toggleLoggedIn(true);			
 		};
 	};
 
+	if(loggedIn == true){
+        return <Redirect to={ {pathname: "/mapscreen"}}/>
+    }
+
 	return (
-		loggedIn === false ? 
 		<WModal className="login-modal"  cover="true" visible="true" animation="fade-in">
 			<WMHeader  className="modal-header" onClose={() => props.setShowHomescreenLogo()}>
 				Login to Your Account
@@ -89,7 +89,7 @@ const Login = (props) => {
 
 			</WMFooter>
 			
-		</WModal> : <Redirect exact from="/homescreen" to={ {pathname: "/mapscreen"} } /> 
+		</WModal>
 	);
 }
 

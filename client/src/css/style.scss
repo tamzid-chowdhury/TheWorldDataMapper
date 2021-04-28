@@ -137,3 +137,7 @@ html, body {
     background-color: rgb(212, 81, 81);
 }
 
+.region-logo :hover {
+    color: lighten($color:red, $amount: 20)
+}
+

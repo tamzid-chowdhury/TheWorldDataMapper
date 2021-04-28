@@ -5,6 +5,7 @@ import { useQuery } 	from '@apollo/client';
 import * as queries 	from './cache/queries';
 import { jsTPS } 		from './utils/jsTPS';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import Regionscreen from './components/region/regionscreen';
 
  
 const App = () => {
@@ -29,16 +30,19 @@ const App = () => {
 		<BrowserRouter>				
 			<Switch>
 
-				<Redirect exact from="/" to={ {pathname: "/homescreen"} } /> 
+				<Redirect exact from="/" to={ {pathname: "/regionscreen/3024920"} } /> 
 
 				<Route exact path="/homescreen">
 					<Homescreen fetchUser={refetch}/> 
 				</Route>
 
-				<Route path="/mapscreen">
-					<Mapscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
+				<Route exact path="/mapscreen">
+					<Mapscreen user={user} username={username} fetchUser={refetch}/> 
 				</Route>
 				
+				<Route path="/regionscreen/:regionID">
+					<Regionscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
+				</Route>
 				
 			
 
