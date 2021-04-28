@@ -53,3 +53,12 @@ export const DELETE_MAP = gql`
 	}
 `;
 
+export const EDIT_MAP_NAME = gql`
+	mutation EditMapName($_id: String!, $name: String!){
+		editMapName(_id: $_id, name: $name) {
+			_id
+			name
+			owner
+		}
+	}
+`;
