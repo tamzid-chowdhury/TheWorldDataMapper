@@ -50,7 +50,7 @@ const MapSelectScreen = (props) => {
                     <WRow className="map-select-red-top">
                         &nbsp;
                     </WRow>
-                    Your Maps
+                    Map Selection
                 </WLHeader>
 
                 <WLSide className="map-select-side">
