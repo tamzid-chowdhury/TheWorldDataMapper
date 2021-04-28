@@ -7,11 +7,14 @@ import DeleteMap from '../modals/DeleteMap';
 import EditMapName from '../modals/EditMapName';
 import { useMutation }    	from '@apollo/client';
 import * as mutations from '../../cache/mutations';
+import { Redirect } from 'react-router-dom';
 
 
 const MapEntry = (props) => {
     const [showDeleteModal, toggleShowDeleteModal] = useState(false);
     const [showEditNameModal, toggleShowEditNameModal] = useState(false);
+
+    const [mapSelected, toggleMapSelected] = useState(false);
 
     const [DeleteRootMap] = useMutation(mutations.DELETE_MAP);
     const [EditRootMapName] = useMutation(mutations.EDIT_MAP_NAME);
@@ -48,13 +51,23 @@ const MapEntry = (props) => {
 		};
     }
 
+    const setMapSelected = () => {
+        toggleMapSelected(true)
+    }
+
+    if(mapSelected == true){
+        let _id = props.region._id; 
+        return <Redirect to={ {pathname: '/regionscreen/' + _id}}/>
+    }
+
  
     
     return (
         <div>
         <WRow>
             <WCol size = "10" className="map-entries">
-                <WButton className="map-entries-button"  wType="transparent" hoverAnimation="darken" clickAnimation="ripple-dark">
+                <WButton className="map-entries-button"  wType="transparent" hoverAnimation="darken" 
+                clickAnimation="ripple-dark" onClick={setMapSelected}>
                     {props.region.name}
                 </WButton>
             </WCol>

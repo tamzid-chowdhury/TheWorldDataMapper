@@ -34,7 +34,7 @@ const Login = (props) => {
 	};
 
 	if(loggedIn == true){
-        return <Redirect to={ {pathname: "/mapscreen"}}/>
+        return <Redirect to={ {pathname: "/mapscreen/" + props.user._id}}/>
     }
 
 	return (
@@ -46,17 +46,16 @@ const Login = (props) => {
 
 
 				<WInput 
-					className="modal-input" onBlur={updateInput} name="email" labelAnimation="up" 
+					className="modal-input" onChange={updateInput} name="email" labelAnimation="up" 
 					barAnimation="solid" labelText="Email Address" wType="outlined" inputType="text" 
-					onKeyDown={(e)=> updateInput} 
 				/>
 							
                 <div className="modal-spacer">&nbsp;</div>
 
 				<WInput 
-					className="modal-input" onBlur={updateInput} name="password" labelAnimation="up" 
+					className="modal-input" onChange={updateInput} name="password" labelAnimation="up" 
 					barAnimation="solid" labelText="Password" wType="outlined" inputType="password"
-					onKeyDown={(e)=> e.keyCode == 13 ? handleLogin() : ""} onKeyDown={(e)=> updateInput} 
+					onKeyDown={(e)=> e.keyCode == 13 ? handleLogin() : ""} 
 				/>
 
 				{

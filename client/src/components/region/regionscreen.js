@@ -78,9 +78,11 @@ const Regionscreen = (props) => {
 
                 <WLMain>
                         {
-                            //bad coding here bc routes werent configured properly initially setShowSelectScreen={setShowUpdate} 
+                            //bad coding here bc routes werent configured properly initially (setShowSelectScreen={setShowUpdate} really means setShowSelectScreen={setShowSelectionScreen}) 
                             showUpdate && (<UpdateAccount setShowSelectScreen={setShowUpdate} user={props.user} fetchUser={props.fetchUser}/>)
                         }
+
+                        
 
                 </WLMain>
 

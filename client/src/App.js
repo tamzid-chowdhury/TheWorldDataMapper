@@ -29,18 +29,20 @@ const App = () => {
 	return(
 		<BrowserRouter>				
 			<Switch>
-
-				<Redirect exact from="/" to={ {pathname: "/regionscreen/3024920"} } /> 
-
+			{
+				user === null ? 
+				<Redirect exact from="/" to={ {pathname: "/homescreen"} } /> :
+				<Redirect exact from="/" to={ {pathname: "/mapscreen/" + user._id} } /> 
+			}
 				<Route exact path="/homescreen">
-					<Homescreen fetchUser={refetch}/> 
+					<Homescreen fetchUser={refetch} user={user}/> 
 				</Route>
 
-				<Route exact path="/mapscreen">
+				<Route path="/mapscreen">
 					<Mapscreen user={user} username={username} fetchUser={refetch}/> 
 				</Route>
 				
-				<Route path="/regionscreen/:regionID">
+				<Route path="/regionscreen">
 					<Regionscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
 				</Route>
 				

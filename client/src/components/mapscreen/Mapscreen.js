@@ -37,12 +37,15 @@ const Mapscreen = (props) => {
 		await props.fetchUser();
 		toggleLoggedOut(true)
 		// return <Redirect exact from="/mapscreen" to={ {pathname: "/homescreen"} } /> 
-    };
+	};
+	
+	if(loggedOut == true){
+		return <Redirect exact from="/mapscreen" to={ {pathname: "/homescreen"} } />
+	}
 
 
 
     return(
-		loggedOut === false ?
 			<WLayout WLayout="header"> 
 				<WLHeader color="colored">
 
@@ -92,7 +95,7 @@ const Mapscreen = (props) => {
 				</WLMain>
 
 				
-			</WLayout> : <Redirect exact from="/mapscreen" to={ {pathname: "/homescreen"} } /> 
+			</WLayout> 
 	);
 
 }

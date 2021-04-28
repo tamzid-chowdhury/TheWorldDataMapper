@@ -76,7 +76,7 @@ const Homescreen = (props) => {
 					}
 
 					{
-						showLogin && (<Login setShowHomescreenLogo={setShowHomescreenLogo} fetchUser={props.fetchUser}/>)
+						showLogin && (<Login setShowHomescreenLogo={setShowHomescreenLogo} fetchUser={props.fetchUser} user={props.user}/>)
 					}
 
 
