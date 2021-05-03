@@ -100,14 +100,14 @@
     height: 800px;
     width: 1600px;
     left: 112px;
-    bottom: 1px;
-    position: absolute;
+    margin: auto;
+    margin-top: 50px; 
 }
 
 .spreadsheet-info-header{
     height:5%;
     display: grid;
-    grid-template-columns: 5% 10% auto;
+    grid-template-columns: 5% 33% 130px auto;
     color:white
 }
 
@@ -131,10 +131,7 @@
     align-self: center;
 }
 
-.region-name {
-    align-self: center;
-    text-align: center;
-}
+
 
 
 

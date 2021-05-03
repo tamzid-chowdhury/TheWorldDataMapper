@@ -5,20 +5,28 @@ import {WLayout, WLHeader, WLMain} from 'wt-frontend';
 import {WButton} from 'wt-frontend';
 import Logo from '../navbar/Logo'
 import * as mutations from '../../cache/mutations';
-import { useMutation, useApolloClient }     from '@apollo/client';
+import * as queries from '../../cache/queries';
+import { useMutation, useApolloClient, useQuery }     from '@apollo/client';
 import UpdateAccount from '../modals/UpdateAccount';
 import RegionSpreadsheet from './regionspreadsheet';
 
 
 const Regionscreen = (props) => {
-    let regionID = useParams();
-  
+    let _id = useParams();  //regionID
+    let region = null; 
     const client = useApolloClient();
     const [Logout] = useMutation(mutations.LOGOUT);
     const [loggedOut, toggleLoggedOut] = useState(false);
     const [returnHome, toggleReturnHome] = useState(false);
-	
-	const [showUpdate, toggleShowUpdate] 	= useState(false);
+    const [showUpdate, toggleShowUpdate] 	= useState(false);
+    
+    const { loading, error, data, refetch } = useQuery(queries.GET_REGION_BY_ID, { variables: _id });
+
+    if(error) { console.log(error); }
+	if(loading) { return <div></div> }
+	if(data) { 
+            region = data.getRegionById;
+	}
 
 	const setShowUpdate = () => {
 		toggleShowUpdate(!showUpdate);
@@ -86,7 +94,7 @@ const Regionscreen = (props) => {
                             showUpdate && (<UpdateAccount setShowSelectScreen={setShowUpdate} user={props.user} fetchUser={props.fetchUser}/>)
                         }
 
-                        <RegionSpreadsheet tps={props.transactionStack} user={props.user} regionID={regionID}/>
+                        <RegionSpreadsheet tps={props.transactionStack} user={props.user} region={region}/>
 
                         
 

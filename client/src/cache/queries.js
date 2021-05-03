@@ -21,3 +21,17 @@ export const GET_USER_MAPS = gql`
 		}
 	}
 `;
+
+export const GET_REGION_BY_ID = gql`
+	query GetRegionById($id: String!) {
+		getRegionById(_id: $id) {
+			_id
+			name
+			capital
+			leader
+			landmarks
+			owner
+			parentRegion
+		}
+	}
+`;

@@ -15,6 +15,12 @@ module.exports = {
 			} 
 
 		},
+
+		getRegionById: async (_,args) => {
+			const {_id} = args;
+			const region = await Region.findById(_id);
+			return region; 
+		}
     },
     
 	Mutation: {
