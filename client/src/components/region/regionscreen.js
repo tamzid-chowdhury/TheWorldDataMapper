@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import {WNavbar,WNavItem} 	from 'wt-frontend';
 import {WLayout, WLHeader, WLMain} from 'wt-frontend';
 import {WButton} from 'wt-frontend';
@@ -7,9 +7,12 @@ import Logo from '../navbar/Logo'
 import * as mutations from '../../cache/mutations';
 import { useMutation, useApolloClient }     from '@apollo/client';
 import UpdateAccount from '../modals/UpdateAccount';
+import RegionSpreadsheet from './regionspreadsheet';
 
 
 const Regionscreen = (props) => {
+    let regionID = useParams();
+  
     const client = useApolloClient();
     const [Logout] = useMutation(mutations.LOGOUT);
     const [loggedOut, toggleLoggedOut] = useState(false);
@@ -77,10 +80,13 @@ const Regionscreen = (props) => {
                 </WLHeader>
 
                 <WLMain>
+
                         {
                             //bad coding here bc routes werent configured properly initially (setShowSelectScreen={setShowUpdate} really means setShowSelectScreen={setShowSelectionScreen}) 
                             showUpdate && (<UpdateAccount setShowSelectScreen={setShowUpdate} user={props.user} fetchUser={props.fetchUser}/>)
                         }
+
+                        <RegionSpreadsheet tps={props.transactionStack} user={props.user} regionID={regionID}/>
 
                         
 

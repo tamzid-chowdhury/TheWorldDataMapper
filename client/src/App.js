@@ -38,11 +38,11 @@ const App = () => {
 					<Homescreen fetchUser={refetch} user={user}/> 
 				</Route>
 
-				<Route path="/mapscreen">
+				<Route path="/mapscreen/:id">
 					<Mapscreen user={user} username={username} fetchUser={refetch}/> 
 				</Route>
 				
-				<Route path="/regionscreen">
+				<Route path="/regionscreen/:id">
 					<Regionscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
 				</Route>
 				

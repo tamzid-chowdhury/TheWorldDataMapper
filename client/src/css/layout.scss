@@ -96,7 +96,45 @@
     color: white
 }
 
+.spreadsheet-container {
+    height: 800px;
+    width: 1600px;
+    left: 112px;
+    bottom: 1px;
+    position: absolute;
+}
 
+.spreadsheet-info-header{
+    height:5%;
+    display: grid;
+    grid-template-columns: 5% 10% auto;
+    color:white
+}
+
+.spreadsheet-table-header{
+    height: 5%;
+    display: grid;
+    grid-template-columns: 18% 18% 18% 18% auto;
+}
+
+.spreadsheet-table-header-item {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.region-add-icon {
+    color: green;
+    align-self: end;
+}
+
+.region-undo-redo-icons {
+    align-self: center;
+}
+
+.region-name {
+    align-self: center;
+    text-align: center;
+}
 
 
 

@@ -141,3 +141,14 @@ html, body {
     color: lighten($color:red, $amount: 20)
 }
 
+.spreadsheet-table-header{
+    background: red;
+    color: white;
+    border-bottom: 5px white solid;
+}
+
+.spreadsheet-table-header :hover{
+    background-color: lighten($color:red, $amount: 20)
+}
+
+
