@@ -28,8 +28,9 @@ const Login = (props) => {
 			return;
 		}
 		if (data) {
+			await props.fetchUser();
 			displayErrorMsg(false);
-			toggleLoggedIn(true);			
+			toggleLoggedIn(true);	
 		};
 	};
 

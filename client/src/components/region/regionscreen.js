@@ -34,7 +34,7 @@ const Regionscreen = (props) => {
     };
 
     if(returnHome == true){
-        return <Redirect to={ {pathname: "/mapscreen"}}/>
+        return <Redirect to={ {pathname: "/mapscreen/" + props.user._id}}/>
     }
 
     if(loggedOut == true){
