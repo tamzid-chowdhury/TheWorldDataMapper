@@ -20,7 +20,7 @@ const RegionSpreadsheetHeader = (props) => {
                 Flag
             </div>
             <div className="spreadsheet-table-header-item">
-                Landmark
+                Landmarks
             </div>
         </div>
 

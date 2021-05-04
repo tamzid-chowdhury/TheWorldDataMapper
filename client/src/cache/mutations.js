@@ -62,3 +62,9 @@ export const EDIT_MAP_NAME = gql`
 		}
 	}
 `;
+
+export const ADD_NEW_SUBREGION = gql`
+	mutation AddNewSubregion($_id: String!){
+		addNewSubregion(_id: $_id)
+	}
+`;

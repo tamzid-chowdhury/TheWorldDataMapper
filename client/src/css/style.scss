@@ -151,6 +151,14 @@ html, body {
     background-color: lighten($color:red, $amount: 20)
 }
 
+.spreadsheet-table-end{
+    background: grey;
+    color: white;
+    border-bottom: 3px black solid;
+}
+
+
+
 .region-name-text {
     align-self: center;
     font-size: 20px; 

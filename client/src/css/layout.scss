@@ -107,7 +107,7 @@
 .spreadsheet-info-header{
     height:5%;
     display: grid;
-    grid-template-columns: 5% 33% 130px auto;
+    grid-template-columns: 5% 35% 130px auto;
     color:white
 }
 
@@ -122,9 +122,28 @@
     padding-top: 10px;
 }
 
+.spreadsheet-table-end{
+    height: 4%;
+    display: grid;
+    grid-template-columns: 18% 18% 18% 18% auto;
+}
+
+.spreadsheet-table-end-item {
+    text-align: center;
+    padding-top: 5px;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    border-right: black solid 1px;
+}
+
 .region-add-icon {
     color: green;
     align-self: end;
+}
+
+.region-add-icon:hover {
+    color: lighten($color:green, $amount: 20)
 }
 
 .region-undo-redo-icons {

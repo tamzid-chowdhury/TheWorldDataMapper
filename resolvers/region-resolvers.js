@@ -3,9 +3,7 @@ const Region = require('../models/region-model')
 
 module.exports = {
 	Query: {
-		/** 
-		 	@param 	 {object} req - the request object containing a user id
-		**/
+
 		getRootRegions: async (_, __, { req }) => {
 			const _id = new ObjectId(req.userId);
 			if(!_id) { return([])};
@@ -24,10 +22,7 @@ module.exports = {
     },
     
 	Mutation: {
-		/** 
-		 	@param 	 {object} args - an empty region object 
-			@returns {string}
-		**/
+
 		addRootRegion: async (_,args,{req}) => {
             const {name} = args
             owner = new ObjectId(req.userId);
@@ -44,10 +39,7 @@ module.exports = {
 				return newRegion;
 			}
 		},
-		/** 
-		@param 	 {object} args - a region objectID 
-		@returns {boolean} true on successful delete, false on failure
-		**/
+
 		deleteRootRegion: async (_, args) => {
 			const { _id } = args;
 			const objectId = new ObjectId(_id);
@@ -63,6 +55,28 @@ module.exports = {
 			updatedRegion.name = name; 
 			updatedRegion.save()
 			return updatedRegion;
+		},
+
+		addNewSubregion: async (_,args) => {
+			const {_id} = args
+			
+			parentRegion = new ObjectId(_id);
+			
+			const newRegion = new Region({
+				_id: new ObjectId(),
+				name: "Untited Region",
+				capital: "None",
+				leader: "None",
+				landmarks: [],
+				parentRegion: parentRegion
+            });
+            
+			const create = await newRegion.save();
+
+			if(create) {
+				console.log(newRegion)
+				return true;
+			}
 		},
 		
 	}
