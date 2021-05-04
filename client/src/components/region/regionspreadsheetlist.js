@@ -6,26 +6,42 @@ import { useMutation, useQuery, useApolloClient } from '@apollo/client';
 
 const RegionSpreadsheetList = (props) => {
     return (
-        <div className="spreadsheet-table-list">
+        <>
+        {
+            props.subregions.map(subregion => (
+                <RegionSpreadsheetEntry key={subregion._id} subregion={subregion}/> 
+            ))
+        }
+        </>
+    );
+};
+
+const RegionSpreadsheetEntry = (props) => {
+    return (
+        <div className="spreadsheet-table-entry">
+
+            <div className="spreadsheet-table-entry-name">
+                {props.subregion.name}
+            </div>
+
+            <div className="spreadsheet-table-entry-item">
+                {props.subregion.capital}
+            </div>
+
+            <div className="spreadsheet-table-entry-item">
+                {props.subregion.leader}
+            </div>
+
+            <div className="spreadsheet-table-entry-item">
+                {props.subregion.flag}
+            </div>
+
+            <div className="spreadsheet-table-entry-item">
+                {props.subregion.landmarks}
+            </div>
 
         </div>
-
-
-
-    );
-
-    // return (
-    //     <>
-    //     {
-    //         props.rootRegions && props.rootRegions.map(region => ( 
-
-    //                 <MapEntry key={region._id} _id={region._id} region={region} 
-    //                 refetchUserMaps={props.refetchUserMaps}/>
-
-    //         ))
-    //     }
-    //     </>
-    // );
-};
+    )
+}
 
 export default RegionSpreadsheetList;

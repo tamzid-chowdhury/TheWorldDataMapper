@@ -157,7 +157,11 @@ html, body {
     border-bottom: 3px black solid;
 }
 
-
+.spreadsheet-table-entry {
+    background: grey;
+    color: white;
+    border-bottom: 3px black solid;
+}
 
 .region-name-text {
     align-self: center;
@@ -170,4 +174,22 @@ html, body {
     font-size: 22px;
     font-weight: bolder;
     color: skyblue;
+}
+
+.spreadsheet-table-entry-item {
+    text-align: center;
+    padding-top: 8px;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    border-right: black solid 3px;
+}
+
+.spreadsheet-table-entry-name {
+    text-align: center;
+    padding-top: 8px;
+    color: skyblue;
+    font-weight: bolder;
+    font-size: 20px;
+    border-right: black solid 3px;
 }

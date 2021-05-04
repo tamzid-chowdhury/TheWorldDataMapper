@@ -47,7 +47,7 @@ const RegionSpreadsheet = (props) => {
 
                 <RegionSpreadsheetHeader/> 
 
-                <RegionSpreadsheetList region={props.region}/>
+                <RegionSpreadsheetList region={props.region} subregions={subregions}/>
 
                 <RegionSpreadsheetEnd/>
         </div>
