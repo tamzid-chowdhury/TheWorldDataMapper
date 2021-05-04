@@ -18,14 +18,23 @@ const RegionSpreadsheetList = (props) => {
 
 const RegionSpreadsheetEntry = (props) => {
     const [subregionSelected, toggleSubregionSelected] = useState(false);
+    const [landmarkSelected, toggleLandmarkSelected] = useState(false);
 
     const handleNavigateToSubregion = async () => {
         toggleSubregionSelected(true);
         
     }
 
+    const handleNavigateToLandmarkscreen = async () => {
+        toggleLandmarkSelected(true);
+    }
+
     if(subregionSelected){
         return <Redirect to={ {pathname: '/regionscreen/' + props.subregion._id}}/>
+    }
+
+    if(landmarkSelected){
+        return <Redirect to={ {pathname: '/landmarkscreen/' + props.subregion._id}}/>
     }
 
     return (
@@ -49,7 +58,7 @@ const RegionSpreadsheetEntry = (props) => {
                 {props.subregion.flag}
             </div>
 
-            <div className="spreadsheet-table-entry-landmarks">
+            <div className="spreadsheet-table-entry-landmarks" onClick={handleNavigateToLandmarkscreen}>
                 {props.subregion.landmarks[0] ? props.subregion.landmarks[0] + ", ..." : "No Landmarks"}
             </div>
 

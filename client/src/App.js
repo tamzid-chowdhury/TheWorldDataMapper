@@ -6,7 +6,7 @@ import * as queries 	from './cache/queries';
 import { jsTPS } 		from './utils/jsTPS';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Regionscreen from './components/region/regionscreen';
-
+import Landmarkscreen from './components/region/landmarkscreen';
  
 const App = () => {
 	let user = null;
@@ -46,6 +46,9 @@ const App = () => {
 					<Regionscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
 				</Route>
 				
+				<Route path="/landmarkscreen/:id">
+					<Landmarkscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/>
+				</Route>
 			
 
 			</Switch>	
