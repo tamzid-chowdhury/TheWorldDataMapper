@@ -74,6 +74,7 @@ module.exports = {
 				name: "Untited Region",
 				capital: "None",
 				leader: "None",
+				flag: "None",
 				landmarks: [],
 				parentRegion: parentRegion
             });

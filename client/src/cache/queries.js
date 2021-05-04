@@ -43,6 +43,7 @@ export const GET_ALL_SUBREGIONS = gql`
 			name
 			capital
 			leader
+			flag
 			landmarks
 		}
 	}

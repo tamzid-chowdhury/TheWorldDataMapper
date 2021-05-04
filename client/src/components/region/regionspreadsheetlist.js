@@ -5,6 +5,7 @@ import * as queries from '../../cache/queries';
 import { useMutation, useQuery, useApolloClient } from '@apollo/client';
 
 const RegionSpreadsheetList = (props) => {
+    console.log(props.subregion)
     return (
         <>
         {
@@ -36,7 +37,7 @@ const RegionSpreadsheetEntry = (props) => {
                 {props.subregion.flag}
             </div>
 
-            <div className="spreadsheet-table-entry-item">
+            <div className="spreadsheet-table-entry-landmarks">
                 {props.subregion.landmarks}
             </div>
 

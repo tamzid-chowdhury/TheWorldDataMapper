@@ -6,6 +6,7 @@ const typeDefs = gql `
         name: String
         capital: String
         leader: String
+        flag: String
         landmarks: [String]
         owner: String
         parentRegion: String
@@ -29,6 +30,7 @@ const typeDefs = gql `
 		name: String
         capital: String
         leader: String
+        flag: String
         landmarks: [String]
         owner: String
         parentRegion: String
