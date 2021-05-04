@@ -5,7 +5,6 @@ import * as queries from '../../cache/queries';
 import { useMutation, useQuery, useApolloClient } from '@apollo/client';
 
 const RegionSpreadsheetList = (props) => {
-    console.log(props.subregion)
     return (
         <>
         {
@@ -18,11 +17,24 @@ const RegionSpreadsheetList = (props) => {
 };
 
 const RegionSpreadsheetEntry = (props) => {
+    const [subregionSelected, toggleSubregionSelected] = useState(false);
+
+    const handleNavigateToSubregion = async () => {
+        toggleSubregionSelected(true);
+        
+    }
+
+    if(subregionSelected){
+        return <Redirect to={ {pathname: '/regionscreen/' + props.subregion._id}}/>
+    }
+
     return (
         <div className="spreadsheet-table-entry">
 
-            <div className="spreadsheet-table-entry-name">
-                {props.subregion.name}
+            <div className="spreadsheet-table-entry-item">
+                <div className ="table-entry-name" onClick={handleNavigateToSubregion}>
+                    {props.subregion.name}
+                </div>
             </div>
 
             <div className="spreadsheet-table-entry-item">
@@ -38,7 +50,7 @@ const RegionSpreadsheetEntry = (props) => {
             </div>
 
             <div className="spreadsheet-table-entry-landmarks">
-                {props.subregion.landmarks}
+                {props.subregion.landmarks[0] ? props.subregion.landmarks[0] + ", ..." : "No Landmarks"}
             </div>
 
         </div>

@@ -98,7 +98,7 @@ const RegionSpreadsheetEnd = (props) => {
             <div className="spreadsheet-table-end-item">
                 .....
             </div>
-            <div className="spreadsheet-table-entry-landmarks">
+            <div className="spreadsheet-table-end-item" style={{ border:0}}>
                 .....
             </div>
         </div>

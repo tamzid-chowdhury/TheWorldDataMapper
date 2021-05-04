@@ -185,19 +185,23 @@ html, body {
     border-right: black solid 3px;
 }
 
-.spreadsheet-table-entry-name {
+
+.spreadsheet-table-entry-landmarks {
     text-align: center;
     padding-top: 8px;
     color: skyblue;
     font-weight: bolder;
     font-size: 20px;
-    border-right: black solid 3px;
 }
 
-.spreadsheet-table-entry-landmarks {
-    text-align: center;
-    padding-top: 8px;
-    color: black;
-    font-weight: bolder;
-    font-size: 20px;
+.table-entry-name { 
+    color: skyblue;
+}
+
+.table-entry-name:hover { 
+    color: darken($color:skyblue, $amount: 20)
+}
+
+.spreadsheet-table-entry-landmarks:hover {
+    color: darken($color:skyblue, $amount: 20)
 }
