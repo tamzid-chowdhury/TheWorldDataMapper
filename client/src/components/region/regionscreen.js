@@ -15,6 +15,8 @@ import RegionNavigator from './regionnavigator.js';
 const Regionscreen = (props) => {
     let _id = useParams();  //regionID
     let region = null; 
+    let ancestorRegions = [];
+
     const client = useApolloClient();
     const [Logout] = useMutation(mutations.LOGOUT);
     const [loggedOut, toggleLoggedOut] = useState(false);
@@ -23,12 +25,20 @@ const Regionscreen = (props) => {
     const [showMain, toggleShowMain] = useState(true);
     
     const { loading, error, data, refetch } = useQuery(queries.GET_REGION_BY_ID, { variables: _id });
+    const { loading:loading1, error:error1, data:data1 } = useQuery(queries.GET_ANCESTOR_REGIONS, { variables: _id });
 
     if(error) { console.log(error); }
 	if(loading) { return <div></div> }
 	if(data) { 
             region = data.getRegionById;
-	}
+    }
+    
+
+    if(error1) {console.log(error1)}
+    if(loading1) {}
+    if(data1){
+            ancestorRegions = data1.getAncestorRegions;
+    }
 
 	const setShowUpdate = () => {
         toggleShowUpdate(!showUpdate);
@@ -69,8 +79,8 @@ const Regionscreen = (props) => {
                             </WNavItem>
                         </ul>
 
-                        <ul style={{paddingRight:'45%'}}>
-                            <RegionNavigator region={region} /> 
+                        <ul style={{paddingRight:'10%'}}>
+                            <RegionNavigator region={region} ancestorRegions={ancestorRegions} /> 
                         </ul>
 
                         <ul>

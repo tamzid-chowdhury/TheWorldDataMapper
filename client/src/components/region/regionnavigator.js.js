@@ -11,8 +11,35 @@ import { useMutation, useApolloClient, useQuery }     from '@apollo/client';
 const RegionNavigator = (props) => {
 
     return (
-        <div className="region-navigator"> United States -- New York </div>
+        <>
+            {
+                props.ancestorRegions.map(region => (
+                    <RegionNavigationEntry region={region}/>
+                ))
+            }
+        </>
     );
+}
+
+const RegionNavigationEntry = (props) => { 
+    const [ancestorSelected, toggleAncestorSelected] = useState(false);
+
+    const handleNavigateToAncestor = () => { 
+        toggleAncestorSelected(true);
+    }
+
+
+    if (ancestorSelected){
+        return <Redirect to={ {pathname: '/regionscreen/' + props.region._id}}/>
+    }
+
+ 
+    return (
+        <>
+            <div className="region-navigator" onClick={handleNavigateToAncestor}>{props.region.name} </div>
+            <div> &nbsp; &gt; &nbsp;  </div>
+        </>
+    )
 }
 
 export default RegionNavigator; 

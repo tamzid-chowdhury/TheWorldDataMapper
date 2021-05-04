@@ -16,6 +16,7 @@ const typeDefs = gql `
         getRootRegions: [Region]
         getRegionById(_id: String!): Region
         getAllSubregions(_id: String!): [Region]
+        getAncestorRegions(_id: String!): [Region]
     }
 
     extend type Mutation { 

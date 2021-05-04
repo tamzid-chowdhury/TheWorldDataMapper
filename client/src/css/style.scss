@@ -205,3 +205,7 @@ html, body {
 .spreadsheet-table-entry-landmarks:hover {
     color: darken($color:skyblue, $amount: 20)
 }
+
+.region-navigator:hover{ 
+    color: darken($color:white, $amount: 20)
+}

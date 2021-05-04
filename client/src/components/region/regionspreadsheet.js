@@ -15,11 +15,10 @@ const RegionSpreadsheet = (props) => {
     const [AddNewSubregion] = useMutation(mutations.ADD_NEW_SUBREGION);
 
     const { loading, error, data, refetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: regionID} });
-	if(loading) { console.log(loading, 'loading'); }
+	if(loading) {}
 	if(error) { console.log(error, 'error'); }
 	if(data) { 
         subregions = data.getAllSubregions; 
-        console.log(subregions);
     }
 
     const handleAddChildRegion = async () => {

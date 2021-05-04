@@ -25,6 +25,30 @@ module.exports = {
 			const parentRegion = new ObjectId(_id);
 			const regions = await Region.find({parentRegion:parentRegion}).sort({updatedAt: 'descending'});
 			return regions; 
+		},
+
+		getAncestorRegions: async (_,args) => {
+			const {_id} = args;
+
+			let regions = [];
+
+			const region = await Region.findById(_id); //current region -> we want to find its ancestorregions 
+			let nextAncestorRegion = await Region.findById(region.parentRegion);
+
+			if(nextAncestorRegion != null){
+				regions.push(nextAncestorRegion);
+			}
+
+			while(nextAncestorRegion != null){
+				nextAncestorRegion = await Region.findById(nextAncestorRegion.parentRegion);
+				if(nextAncestorRegion != null){
+					regions.push(nextAncestorRegion);
+				}
+			}
+			
+			regions = regions.reverse()
+			
+			return regions; 
 		}
     },
     
