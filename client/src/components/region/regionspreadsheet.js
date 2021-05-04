@@ -3,27 +3,36 @@ import { Redirect } from 'react-router-dom';
 import * as mutations from '../../cache/mutations';
 import * as queries from '../../cache/queries';
 import { useMutation, useQuery, useApolloClient } from '@apollo/client';
-import RegionSpreadsheetHeader from './regionspreadsheetheader'
 import RegionSpreadsheetList from './regionspreadsheetlist'
-import RegionSpreadsheetEnd from './regionspreadsheetend'
 import AddIcon from '@material-ui/icons/Add';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 
 const RegionSpreadsheet = (props) => {
+    let subregions = []; 
+    let regionID = props.region._id; //regionid
+
     const [AddNewSubregion] = useMutation(mutations.ADD_NEW_SUBREGION);
+
+    const { loading, error, data, refetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: regionID} });
+	if(loading) { console.log(loading, 'loading'); }
+	if(error) { console.log(error, 'error'); }
+	if(data) { 
+        subregions = data.getAllSubregions; 
+        console.log(subregions);
+    }
 
     const handleAddChildRegion = async () => {
         let _id = props.region._id;
-        console.log(_id)
         const { loading, error, data } = await AddNewSubregion({ variables: {_id}  });
         if (loading) {};
         if (error) {console.log(error)}
 		if (data) {
-			console.log(data);	
+			refetch();	
 		};
 
     }
+
 
 
     return (
@@ -41,6 +50,57 @@ const RegionSpreadsheet = (props) => {
                 <RegionSpreadsheetList region={props.region}/>
 
                 <RegionSpreadsheetEnd/>
+        </div>
+
+
+
+    );
+};
+
+const RegionSpreadsheetHeader = (props) => {
+    return (
+        <div className="spreadsheet-table-header">
+            <div className="spreadsheet-table-header-item">
+                Name
+            </div>
+            <div className="spreadsheet-table-header-item">
+                Capital
+            </div>
+            <div className="spreadsheet-table-header-item">
+                Leader
+            </div>
+            <div className="spreadsheet-table-header-item">
+                Flag
+            </div>
+            <div className="spreadsheet-table-header-item">
+                Landmarks
+            </div>
+        </div>
+
+
+
+    );
+};
+
+
+const RegionSpreadsheetEnd = (props) => {
+    return (
+        <div className="spreadsheet-table-end">
+            <div className="spreadsheet-table-end-item">
+                .....
+            </div>
+            <div className="spreadsheet-table-end-item">
+                .....
+            </div>
+            <div className="spreadsheet-table-end-item">
+                .....
+            </div>
+            <div className="spreadsheet-table-end-item">
+                .....
+            </div>
+            <div className="spreadsheet-table-end-item">
+                .....
+            </div>
         </div>
 
 

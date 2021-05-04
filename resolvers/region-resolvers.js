@@ -18,6 +18,13 @@ module.exports = {
 			const {_id} = args;
 			const region = await Region.findById(_id);
 			return region; 
+		},
+
+		getAllSubregions: async (_,args) => {
+			const {_id} = args;
+			const parentRegion = new ObjectId(_id);
+			const regions = await Region.find({parentRegion:parentRegion}).sort({updatedAt: 'descending'});
+			return regions; 
 		}
     },
     

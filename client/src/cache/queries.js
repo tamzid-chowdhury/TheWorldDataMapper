@@ -35,3 +35,15 @@ export const GET_REGION_BY_ID = gql`
 		}
 	}
 `;
+
+export const GET_ALL_SUBREGIONS = gql`
+	query GetAllSubregions($id: String!) {
+		getAllSubregions(_id: $id) {
+			_id
+			name
+			capital
+			leader
+			landmarks
+		}
+	}
+`;
