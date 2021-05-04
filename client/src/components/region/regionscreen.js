@@ -9,6 +9,7 @@ import * as queries from '../../cache/queries';
 import { useMutation, useApolloClient, useQuery }     from '@apollo/client';
 import UpdateAccount from '../modals/UpdateAccount';
 import RegionSpreadsheet from './regionspreadsheet';
+import RegionNavigator from './regionnavigator.js';
 
 
 const Regionscreen = (props) => {
@@ -19,6 +20,7 @@ const Regionscreen = (props) => {
     const [loggedOut, toggleLoggedOut] = useState(false);
     const [returnHome, toggleReturnHome] = useState(false);
     const [showUpdate, toggleShowUpdate] 	= useState(false);
+    const [showMain, toggleShowMain] = useState(true);
     
     const { loading, error, data, refetch } = useQuery(queries.GET_REGION_BY_ID, { variables: _id });
 
@@ -29,7 +31,8 @@ const Regionscreen = (props) => {
 	}
 
 	const setShowUpdate = () => {
-		toggleShowUpdate(!showUpdate);
+        toggleShowUpdate(!showUpdate);
+        toggleShowMain(!showMain)
     };
     
     const setReturnHome = () => {
@@ -66,6 +69,10 @@ const Regionscreen = (props) => {
                             </WNavItem>
                         </ul>
 
+                        <ul style={{paddingRight:'45%'}}>
+                            <RegionNavigator region={region} /> 
+                        </ul>
+
                         <ul>
                             <WNavItem hoverAnimation="lighten">
 
@@ -94,7 +101,9 @@ const Regionscreen = (props) => {
                             showUpdate && (<UpdateAccount setShowSelectScreen={setShowUpdate} user={props.user} fetchUser={props.fetchUser}/>)
                         }
 
-                        <RegionSpreadsheet tps={props.transactionStack} user={props.user} region={region}/>
+                        {
+                            showMain && (<RegionSpreadsheet tps={props.transactionStack} user={props.user} region={region}/>)
+                        }
 
                         
 
