@@ -141,7 +141,18 @@
 .spreadsheet-table-entry {
     height: 4.5%;
     display: grid;
-    grid-template-columns: 18% 18% 18% 18% auto;
+    grid-template-columns: 2% 16% 18% 18% 18% auto;
+}
+
+.spreadsheet-table-delete{
+    padding-left: 5px;
+    padding-top: 5px; 
+    color: white;
+}
+
+.spreadsheet-table-delete:hover{
+    padding-left: 10px;
+    color: red;
 }
 
 
@@ -151,7 +162,7 @@
 }
 
 .region-add-icon:hover {
-    color: lighten($color:green, $amount: 20)
+    color: lighten($color:green, $amount: 20);
 }
 
 .region-undo-redo-icons {

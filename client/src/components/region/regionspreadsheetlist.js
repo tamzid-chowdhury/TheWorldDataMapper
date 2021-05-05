@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import * as mutations from '../../cache/mutations';
 import * as queries from '../../cache/queries';
 import { useMutation, useQuery, useApolloClient } from '@apollo/client';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const RegionSpreadsheetList = (props) => {
     return (
@@ -39,6 +40,10 @@ const RegionSpreadsheetEntry = (props) => {
 
     return (
         <div className="spreadsheet-table-entry">
+
+            <div className="spreadsheet-table-delete">
+             <DeleteIcon />
+            </div>
 
             <div className="spreadsheet-table-entry-item">
                 <div className ="table-entry-name" onClick={handleNavigateToSubregion}>
