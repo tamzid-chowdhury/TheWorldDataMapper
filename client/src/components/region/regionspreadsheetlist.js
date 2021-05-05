@@ -6,11 +6,17 @@ import { useMutation, useQuery, useApolloClient } from '@apollo/client';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const RegionSpreadsheetList = (props) => {
+
+    const handleSubregionDeletion = (_id) => {
+        props.handleDeleteChildRegion(_id);
+    }
+
+
     return (
         <>
         {
             props.subregions.map(subregion => (
-                <RegionSpreadsheetEntry key={subregion._id} subregion={subregion}/> 
+                <RegionSpreadsheetEntry key={subregion._id} subregion={subregion} handleSubregionDeletion={handleSubregionDeletion}/> 
             ))
         }
         </>
@@ -30,6 +36,10 @@ const RegionSpreadsheetEntry = (props) => {
         toggleLandmarkSelected(true);
     }
 
+    const handleSubregionDeletion = async () => {
+        props.handleSubregionDeletion(props.subregion._id)
+    }
+
     if(subregionSelected){
         return <Redirect to={ {pathname: '/regionscreen/' + props.subregion._id}}/>
     }
@@ -42,7 +52,7 @@ const RegionSpreadsheetEntry = (props) => {
         <div className="spreadsheet-table-entry">
 
             <div className="spreadsheet-table-delete">
-             <DeleteIcon />
+             <DeleteIcon onClick={handleSubregionDeletion}/>
             </div>
 
             <div className="spreadsheet-table-entry-item">

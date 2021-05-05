@@ -13,6 +13,7 @@ const RegionSpreadsheet = (props) => {
     let regionID = props.region._id; //regionid
 
     const [AddNewSubregion] = useMutation(mutations.ADD_NEW_SUBREGION);
+    const [DeleteSubregion] = useMutation(mutations.DELETE_SUBREGION);
 
     const { loading, error, data, refetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: regionID} });
 	if(loading) {}
@@ -32,6 +33,15 @@ const RegionSpreadsheet = (props) => {
 
     }
 
+    const handleDeleteChildRegion = async (_id) => {
+        const { loading, error, data } = await DeleteSubregion({ variables: {_id}  });
+        if (loading) {};
+        if (error) {console.log(error)}
+		if (data) {
+			refetch();	
+		};
+    }
+
 
 
     return (
@@ -46,7 +56,7 @@ const RegionSpreadsheet = (props) => {
 
                 <RegionSpreadsheetHeader/> 
 
-                <RegionSpreadsheetList region={props.region} subregions={subregions}/>
+                <RegionSpreadsheetList region={props.region} subregions={subregions} handleDeleteChildRegion={handleDeleteChildRegion}/>
 
                 <RegionSpreadsheetEnd/>
         </div>
