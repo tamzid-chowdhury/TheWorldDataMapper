@@ -168,7 +168,62 @@
     font-size: 23px;
 }
 
+.region-viewer-landmarks{
+    position: absolute;
+    top: 150px; 
+    left: 1100px; 
+}
 
+.landmarks-list-title{
+    position: absolute;
+    left: 195px;
+    top: -28px;
+    font-size: 24px;
+    font-weight: bolder;
+}
 
+.region-viewer-picture{
+    position: absolute;
+    top: 150px; 
+    left: 100px; 
+    width: 600px;
+    height: 350px;
 
+}
 
+.region-viewer-undo{
+    position: absolute; 
+    top: -40px; 
+    color: white; 
+}
+
+.region-viewer-redo{
+    position: absolute; 
+    top: -40px; 
+    left: 50px; 
+    color: white; 
+}
+
+.region-viewer-info{
+    position: absolute;
+    top: 550px; 
+    left: 100px; 
+    width: 600px;
+    height: 350px;
+}
+
+.region-viewer-info-entry{
+    font-size: 26px; 
+    font-weight: bolder;
+    color: white; 
+    margin-bottom: 40px;
+}
+
+.region-viewer-info-parentregion{
+    font-size: 26px; 
+    font-weight: bolder;
+    color: white; 
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 30% 60% 10%;
+}

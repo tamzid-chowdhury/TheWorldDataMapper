@@ -196,6 +196,7 @@ html, body {
 
 .table-entry-name { 
     color: skyblue;
+    display: inline-block;
 }
 
 .table-entry-name:hover { 
@@ -208,4 +209,12 @@ html, body {
 
 .region-navigator:hover{ 
     color: darken($color:white, $amount: 20)
+}
+
+.parent-region-navigator{
+    color: skyblue;
+}
+
+.parent-region-navigator:hover{
+    color: darken($color:skyblue, $amount: 35)
 }

@@ -10,6 +10,7 @@ import { useMutation, useApolloClient, useQuery }     from '@apollo/client';
 import UpdateAccount from '../modals/UpdateAccount';
 import RegionSpreadsheet from './regionspreadsheet';
 import RegionNavigator from './regionnavigator.js';
+import RegionViewer from './regionviewer';
 
 
 const Landmarkscreen = (props) => {
@@ -112,7 +113,7 @@ const Landmarkscreen = (props) => {
                         }
 
                         {
-                            showMain 
+                            showMain && (<RegionViewer tps={props.transactionStack} user={props.user} region={region}/>)
                         }
 
                         
