@@ -11,18 +11,29 @@ import UpdateAccount from '../modals/UpdateAccount';
 import earth from '../../assets/earth.jpg';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
+import LandmarkList from './landmarklist'
 
 const RegionViewer = (props) => {
     let parentRegion = null; 
+    let subregions = [];
+    let numOfSubregions = 0; 
 
     const [parentRegionSelected, toggleParentRegionSelected] = useState(false);
     
     const { loading, error, data, refetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
+    const {loading:loading1, error:error1, data:data1} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id} });
 
     if(error) { console.log(error); }
 	if(loading) { return <div></div> }
 	if(data) { 
             parentRegion = data.getRegionById; 
+    }
+
+    if(error1) {console.log(error1)}
+    if(loading1) {}
+    if(data1){
+            subregions = data1.getAllSubregions; 
+            numOfSubregions = subregions.length;
     }
 
     const handleNavigateToParentRegion = () => {
@@ -55,7 +66,7 @@ const RegionViewer = (props) => {
         </div>
         <div className="region-viewer-info-entry">Region Leader:&nbsp;&nbsp;&nbsp;{props.region.leader}
         </div>
-        <div className="region-viewer-info-entry">Number of Sub Regions:
+        <div className="region-viewer-info-entry">Number of Sub Regions:&nbsp;&nbsp;&nbsp;{numOfSubregions}
         </div>
     </div>
 
@@ -63,6 +74,7 @@ const RegionViewer = (props) => {
         <WCContent style={{ backgroundColor: "black", color:"white"}}>
             <div className="landmarks-list-title">
                 Region Landmarks:
+                <LandmarkList subregions={subregions} /> 
             </div>
         </WCContent>
         <WCFooter style={{ backgroundColor: "lightgrey" }}>

@@ -16,6 +16,7 @@ const Regionscreen = (props) => {
     let _id = useParams();  //regionID
     let region = null; 
     let ancestorRegions = [];
+    
 
     const client = useApolloClient();
     const [Logout] = useMutation(mutations.LOGOUT);
