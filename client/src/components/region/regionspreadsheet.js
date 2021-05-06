@@ -7,10 +7,13 @@ import RegionSpreadsheetList from './regionspreadsheetlist'
 import AddIcon from '@material-ui/icons/Add';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
+import DeleteSubregionModal from '../modals/DeleteSubregion'
 
 const RegionSpreadsheet = (props) => {
     let subregions = []; 
     let regionID = props.region._id; //regionid
+
+    const [regionToDelete, setRegionToDelete] = useState(null);
 
     const [AddNewSubregion] = useMutation(mutations.ADD_NEW_SUBREGION);
     const [DeleteSubregion] = useMutation(mutations.DELETE_SUBREGION);
@@ -42,6 +45,10 @@ const RegionSpreadsheet = (props) => {
 		};
     }
 
+    const handleRegionToDelete = (region) => {
+        setRegionToDelete(region);
+    }
+
 
 
     return (
@@ -56,9 +63,14 @@ const RegionSpreadsheet = (props) => {
 
                 <RegionSpreadsheetHeader/> 
 
-                <RegionSpreadsheetList region={props.region} subregions={subregions} handleDeleteChildRegion={handleDeleteChildRegion}/>
+                <RegionSpreadsheetList region={props.region} subregions={subregions} handleDeleteChildRegion={handleRegionToDelete}/>
 
                 <RegionSpreadsheetEnd/>
+
+                {
+                    regionToDelete && <DeleteSubregionModal regionToDelete={regionToDelete} 
+                    handleRegionToDelete={handleRegionToDelete} handleDeleteChildRegion={handleDeleteChildRegion}/>
+                }
         </div>
 
 
@@ -85,7 +97,6 @@ const RegionSpreadsheetHeader = (props) => {
                 Landmarks
             </div>
         </div>
-
 
 
     );

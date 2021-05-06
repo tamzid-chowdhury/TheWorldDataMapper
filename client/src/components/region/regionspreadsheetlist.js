@@ -7,8 +7,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const RegionSpreadsheetList = (props) => {
 
-    const handleSubregionDeletion = (_id) => {
-        props.handleDeleteChildRegion(_id);
+    const handleSubregionDeletion = (subregion) => {
+        props.handleDeleteChildRegion(subregion);
     }
 
 
@@ -37,7 +37,7 @@ const RegionSpreadsheetEntry = (props) => {
     }
 
     const handleSubregionDeletion = async () => {
-        props.handleSubregionDeletion(props.subregion._id)
+        props.handleSubregionDeletion(props.subregion)
     }
 
     if(subregionSelected){
