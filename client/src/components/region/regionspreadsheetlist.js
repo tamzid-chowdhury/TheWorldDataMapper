@@ -17,7 +17,8 @@ const RegionSpreadsheetList = (props) => {
         <>
         {
             props.subregions.map(subregion => (
-                <RegionSpreadsheetEntry key={subregion._id} subregion={subregion} handleSubregionDeletion={handleSubregionDeletion} tps={props.tps}/> 
+                <RegionSpreadsheetEntry key={subregion._id} subregion={subregion} handleSubregionDeletion={handleSubregionDeletion} 
+                tps={props.tps} editRegionField={props.editRegionField}/> 
             ))
         }
         </>
@@ -57,6 +58,38 @@ const RegionSpreadsheetEntry = (props) => {
         props.handleSubregionDeletion(props.subregion)
     }
 
+    const handleNameEdit = async (e) => {
+        setNameEdit();
+        const newName = e.target.value ? e.target.value : 'Untitled';
+        const prevName = props.subregion.name;
+        if(newName !== prevName){
+            props.editRegionField(props.subregion._id, 'name', newName, prevName);
+        }
+    }
+
+    const handleCapitalEdit = async (e) => {
+        setCapitalEdit();
+        const newCapital = e.target.value ? e.target.value : 'None';
+        const prevCapital = props.subregion.capital;
+        if(newCapital !== prevCapital){
+            props.editRegionField(props.subregion._id, 'capital', newCapital, prevCapital);
+        }
+    }
+
+    const handleLeaderEdit = async (e) => {
+        setLeaderEdit();
+        const newLeader = e.target.value ? e.target.value : 'None';
+        const prevLeader = props.subregion.leader;
+        if(newLeader !== prevLeader){
+            props.editRegionField(props.subregion._id, 'leader', newLeader, prevLeader);
+        }
+    }
+
+    // const newDate = e.target.value ? e.target.value : 'No Date';
+    // const prevDate = due_date;
+    // if(newDate !== prevDate) {
+    //     props.editItem(data._id, 'due_date', newDate, prevDate);
+
     if(subregionSelected){
         props.tps.clearAllTransactions();
         return <Redirect to={ {pathname: '/regionscreen/' + props.subregion._id}}/>
@@ -77,7 +110,7 @@ const RegionSpreadsheetEntry = (props) => {
             {
                 editingName ? 
                 <input
-                className='spreadsheet-table-entry-item-input' onBlur={setNameEdit}
+                className='spreadsheet-table-entry-item-input' onBlur={handleNameEdit}
                 autoFocus={true} defaultValue={props.subregion.name} type='text'
                 />
                 : 
@@ -92,7 +125,7 @@ const RegionSpreadsheetEntry = (props) => {
             {
                 editingCapital ? 
                 <input
-                className='spreadsheet-table-entry-item-input' onBlur={setCapitalEdit}
+                className='spreadsheet-table-entry-item-input' onBlur={handleCapitalEdit}
                 autoFocus={true} defaultValue={props.subregion.capital} type='text'
                 />
                 : 
@@ -105,7 +138,7 @@ const RegionSpreadsheetEntry = (props) => {
             {
                 editingLeader ? 
                 <input
-                className='spreadsheet-table-entry-item-input' onBlur={setLeaderEdit}
+                className='spreadsheet-table-entry-item-input' onBlur={handleLeaderEdit}
                 autoFocus={true} defaultValue={props.subregion.leader} type='text'
                 />
                 : 

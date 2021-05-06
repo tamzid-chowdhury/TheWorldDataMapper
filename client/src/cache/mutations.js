@@ -99,3 +99,9 @@ export const ADD_SUBREGION = gql`
 		}
 	}
 `;
+
+export const EDIT_SUBREGION = gql`
+	mutation EditSubregion($regionID: String!, $field: String!, $newValue: String!) {
+		editSubregion(regionID: $regionID, field: $field, newValue: $newValue)
+	}
+`;

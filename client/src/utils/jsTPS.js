@@ -63,6 +63,33 @@ export class DeleteSubregion_Transaction extends jsTPS_Transaction {
 
 }
 
+export class EditSubregion_Transaction extends jsTPS_Transaction {
+
+    constructor(regionID, field, newValue, prevValue, updateFunc, refetch) {
+        super();
+        this.regionID = regionID;
+        this.field = field; 
+        this.newValue = newValue;
+        this.prevValue = prevValue;  
+        this.updateFunction = updateFunc;
+        this.refetch = refetch; 
+    }
+
+    async doTransaction() {
+        const {data} = await this.updateFunction({variables: {regionID: this.regionID, field: this.field, newValue: this.newValue}})
+        this.refetch();
+        return data; 
+
+    }
+    // Since delete/add are opposites, flip matching opcode
+    async undoTransaction() {
+        const {data} = await this.updateFunction({variables: {regionID: this.regionID, field: this.field, newValue: this.prevValue}})
+        this.refetch();
+        return data; 
+    }
+
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

@@ -137,6 +137,17 @@ module.exports = {
 			const create = await newRegion.save();
 
 			return create; 
+		},
+
+		editSubregion: async (_,args) => {
+			const {regionID, field, newValue} = args;
+
+			const _id = new ObjectId(regionID);
+			const updated = await Region.updateOne({_id: _id}, {[field]: newValue});
+
+			if(updated){
+				return true; 
+			}
 		}
 		
 	}

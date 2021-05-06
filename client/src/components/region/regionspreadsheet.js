@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import DeleteSubregionModal from '../modals/DeleteSubregion'
-import {AddNewSubregion_Transaction, DeleteSubregion_Transaction} from '../../utils/jsTPS'
+import {AddNewSubregion_Transaction, DeleteSubregion_Transaction, EditSubregion_Transaction} from '../../utils/jsTPS'
 const RegionSpreadsheet = (props) => {
     let subregions = []; 
     let regionID = props.region._id; //regionid
@@ -20,6 +20,7 @@ const RegionSpreadsheet = (props) => {
     const [AddNewSubregion] = useMutation(mutations.ADD_NEW_SUBREGION);
     const [AddSubregion] = useMutation(mutations.ADD_SUBREGION)
     const [DeleteSubregion] = useMutation(mutations.DELETE_SUBREGION);
+    const [EditSubregion] = useMutation(mutations.EDIT_SUBREGION)
 
 
     const clickDisabled = () => { };
@@ -67,6 +68,12 @@ const RegionSpreadsheet = (props) => {
         setRegionToDelete(region);
     }
 
+    const editRegionField = (regionID, name, newValue, prevValue) => {
+        let transaction = new EditSubregion_Transaction(regionID, name, newValue, prevValue, EditSubregion, refetch);
+        props.tps.addTransaction(transaction);
+        tpsRedo();
+    }
+
     const undoOptions = {
         className: !canUndo ? ' undo-button-disabled ' : 'undo-button',
         onClick: !canUndo  ? clickDisabled : tpsUndo
@@ -91,7 +98,8 @@ const RegionSpreadsheet = (props) => {
 
                 <RegionSpreadsheetHeader/> 
 
-                <RegionSpreadsheetList region={props.region} subregions={subregions} handleDeleteChildRegion={handleRegionToDelete} tps={props.tps}/>
+                <RegionSpreadsheetList region={props.region} subregions={subregions} handleDeleteChildRegion={handleRegionToDelete} 
+                tps={props.tps} editRegionField={editRegionField}/>
 
                 <RegionSpreadsheetEnd/>
 
