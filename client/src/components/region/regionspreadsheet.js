@@ -114,7 +114,7 @@ const RegionSpreadsheet = (props) => {
                 <RegionSpreadsheetHeader/> 
 
                 <RegionSpreadsheetList region={props.region} subregions={subregions} handleDeleteChildRegion={handleRegionToDelete} 
-                tps={props.tps} editRegionField={editRegionField}/>
+                tps={props.tps} editRegionField={editRegionField} images={props.images}/>
 
                 <RegionSpreadsheetEnd/>
 

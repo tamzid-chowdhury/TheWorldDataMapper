@@ -26,13 +26,19 @@ const client = new ApolloClient({
 });
 
 
-
+function importAll(r) {
+	let images = {};
+	r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+	return images;
+  }
+  
+const images = importAll(require.context('./assets/The World', false, /\.(png|jpe?g|svg)$/));
 
 
 ReactDOM.render(
 	<React.StrictMode>
 		<ApolloProvider client={client}>
-	    	<App />
+	    	<App images={images}/>
 		</ApolloProvider>
   	</React.StrictMode>,
   	document.getElementById('root')

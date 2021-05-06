@@ -8,7 +8,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Regionscreen from './components/region/regionscreen';
 import Landmarkscreen from './components/region/landmarkscreen';
  
-const App = () => {
+const App = (props) => {
 	let user = null;
 	let username = null; 
     let transactionStack = new jsTPS();
@@ -43,7 +43,7 @@ const App = () => {
 				</Route>
 				
 				<Route path="/regionscreen/:id">
-					<Regionscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/> 
+					<Regionscreen tps={transactionStack} user={user} username={username} fetchUser={refetch} images={props.images}/> 
 				</Route>
 				
 				<Route path="/landmarkscreen/:id">

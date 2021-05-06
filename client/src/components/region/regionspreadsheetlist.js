@@ -18,7 +18,7 @@ const RegionSpreadsheetList = (props) => {
         {
             props.subregions.map(subregion => (
                 <RegionSpreadsheetEntry key={subregion._id} subregion={subregion} handleSubregionDeletion={handleSubregionDeletion} 
-                tps={props.tps} editRegionField={props.editRegionField}/> 
+                tps={props.tps} editRegionField={props.editRegionField} images={props.images}/> 
             ))
         }
         </>
@@ -26,6 +26,10 @@ const RegionSpreadsheetList = (props) => {
 };
 
 const RegionSpreadsheetEntry = (props) => {
+    
+    let flagName = props.subregion.name + " Flag.png"
+    let flagSource = props.images[flagName]
+    console.log(flagName)
     const [subregionSelected, toggleSubregionSelected] = useState(false);
     const [landmarkSelected, toggleLandmarkSelected] = useState(false);
 
@@ -106,6 +110,8 @@ const RegionSpreadsheetEntry = (props) => {
         return <Redirect to={ {pathname: '/landmarkscreen/' + props.subregion._id}}/>
     }
 
+    
+
     return (
         <div className="spreadsheet-table-entry">
 
@@ -158,7 +164,7 @@ const RegionSpreadsheetEntry = (props) => {
         
 
             <div className="spreadsheet-table-entry-item-flag">
-                {props.subregion.flag}
+                <img src={flagSource} height="25px" width="50px"/>
             </div>
 
             <div className="spreadsheet-table-entry-landmarks" onClick={handleNavigateToLandmarkscreen}>

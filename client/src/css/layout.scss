@@ -116,7 +116,7 @@
 .spreadsheet-table-header{
     height: 5%;
     display: grid;
-    grid-template-columns: 18% 18% 18% 18% auto;
+    grid-template-columns: 20% 20% 20% 12% auto;
 }
 
 .spreadsheet-table-header-item {
@@ -127,7 +127,7 @@
 .spreadsheet-table-end{
     height: 4%;
     display: grid;
-    grid-template-columns: 18% 18% 18% 18% auto;
+    grid-template-columns: 20% 20% 20% 12% auto;
 }
 
 .spreadsheet-table-end-item {
@@ -142,7 +142,7 @@
 .spreadsheet-table-entry {
     height: 4.5%;
     display: grid;
-    grid-template-columns: 2% 16% 18% 18% 18% auto;
+    grid-template-columns: 2% 18% 20% 20% 12% auto;
 }
 
 .spreadsheet-table-delete{
