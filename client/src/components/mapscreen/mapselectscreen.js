@@ -73,7 +73,7 @@ const MapSelectScreen = (props) => {
                     </WRow>
                 </WLMain>
 
-                <WLFooter style={{ backgroundColor: "red",height:"24px"}}>
+                <WLFooter className="map-select-footer" style={{ backgroundColor: "red",height:"24px"}}>
                     <div></div>
                 </WLFooter>
 

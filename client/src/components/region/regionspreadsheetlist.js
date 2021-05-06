@@ -71,27 +71,27 @@ const RegionSpreadsheetEntry = (props) => {
 
     const handleNameEdit = async (e) => {
         setNameEdit();
-        const newName = e.target.value ? e.target.value : 'Untitled';
+        const newName = e.target.value
         const prevName = props.subregion.name;
-        if(newName !== prevName){
+        if(newName !== prevName && newName !== ""){
             props.editRegionField(props.subregion._id, 'name', newName, prevName);
         }
     }
 
     const handleCapitalEdit = async (e) => {
         setCapitalEdit();
-        const newCapital = e.target.value ? e.target.value : 'None';
+        const newCapital = e.target.value
         const prevCapital = props.subregion.capital;
-        if(newCapital !== prevCapital){
+        if(newCapital !== prevCapital && newCapital !== ""){
             props.editRegionField(props.subregion._id, 'capital', newCapital, prevCapital);
         }
     }
 
     const handleLeaderEdit = async (e) => {
         setLeaderEdit();
-        const newLeader = e.target.value ? e.target.value : 'None';
+        const newLeader = e.target.value
         const prevLeader = props.subregion.leader;
-        if(newLeader !== prevLeader){
+        if(newLeader !== prevLeader && newLeader !== ""){
             props.editRegionField(props.subregion._id, 'leader', newLeader, prevLeader);
         }
     }
@@ -124,7 +124,7 @@ const RegionSpreadsheetEntry = (props) => {
                 editingName ? 
                 <input
                 className='spreadsheet-table-entry-item-input' onBlur={handleNameEdit}
-                autoFocus={true} defaultValue={props.subregion.name} type='text' onKeyDown={(e) => {if(e.keyCode === 39) setCapitalEdit()}}
+                autoFocus={true} type='text' onKeyDown={(e) => {if(e.keyCode === 39) setCapitalEdit()}}
                 />
                 : 
                 <div className="spreadsheet-table-entry-item" onClick={setNameEdit}>
@@ -140,7 +140,7 @@ const RegionSpreadsheetEntry = (props) => {
                 <input
                 className='spreadsheet-table-entry-item-input' onBlur={handleCapitalEdit} 
                 onKeyDown={(e) => {if(e.keyCode === 39) setLeaderEdit(); if(e.keyCode === 37) setNameEdit()}}
-                autoFocus={true} defaultValue={props.subregion.capital} type='text'
+                autoFocus={true} type='text'
                 />
                 : 
                 <div className="spreadsheet-table-entry-item" onClick={setCapitalEdit}>
@@ -153,7 +153,7 @@ const RegionSpreadsheetEntry = (props) => {
                 editingLeader ? 
                 <input
                 className='spreadsheet-table-entry-item-input' onBlur={handleLeaderEdit}
-                autoFocus={true} defaultValue={props.subregion.leader} type='text'
+                autoFocus={true}  type='text'
                 onKeyDown={(e) => {if(e.keyCode === 37) setCapitalEdit()}}
                 />
                 : 
