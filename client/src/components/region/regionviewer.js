@@ -14,6 +14,11 @@ import RedoIcon from '@material-ui/icons/Redo';
 import LandmarkList from './landmarklist'
 
 const RegionViewer = (props) => {
+
+    let flagName = props.region.name + " Flag.png"
+    let flagSource = props.images[flagName]
+
+    
     let parentRegion = null; 
     let subregions = [];
     let numOfSubregions = 0; 
@@ -50,7 +55,9 @@ const RegionViewer = (props) => {
     <div className="region-viewer-picture">
         <UndoIcon className="region-viewer-undo" fontSize="large"/> 
         <RedoIcon className="region-viewer-redo" fontSize="large"/> 
-        <img src={earth} width="600" height="350"></img>
+        {
+                    flagSource === undefined ? <img src={earth} width="600" height="350"></img>: <img src={flagSource} width="600" height="350"></img> 
+        }
     </div>
     
     <div className="region-viewer-info">

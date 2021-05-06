@@ -115,7 +115,7 @@ const Landmarkscreen = (props) => {
                         }
 
                         {
-                            showMain && (<RegionViewer tps={props.transactionStack} user={props.user} region={region}/>)
+                            showMain && (<RegionViewer tps={props.transactionStack} user={props.user} region={region} images={props.images}/>)
                         }
 
                         

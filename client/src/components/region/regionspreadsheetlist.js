@@ -5,6 +5,7 @@ import * as queries from '../../cache/queries';
 import { useMutation, useQuery, useApolloClient } from '@apollo/client';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {WInput} 	from 'wt-frontend';
+import earth from '../../assets/earth.jpg';
 
 const RegionSpreadsheetList = (props) => {
 
@@ -26,10 +27,10 @@ const RegionSpreadsheetList = (props) => {
 };
 
 const RegionSpreadsheetEntry = (props) => {
-    
+
     let flagName = props.subregion.name + " Flag.png"
     let flagSource = props.images[flagName]
-    console.log(flagName)
+
     const [subregionSelected, toggleSubregionSelected] = useState(false);
     const [landmarkSelected, toggleLandmarkSelected] = useState(false);
 
@@ -164,7 +165,9 @@ const RegionSpreadsheetEntry = (props) => {
         
 
             <div className="spreadsheet-table-entry-item-flag">
-                <img src={flagSource} height="25px" width="50px"/>
+                {
+                    flagSource === undefined ? <img src={earth} height="25px" width="50px"/> : <img src={flagSource} height="25px" width="50px"/> 
+                }
             </div>
 
             <div className="spreadsheet-table-entry-landmarks" onClick={handleNavigateToLandmarkscreen}>

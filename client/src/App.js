@@ -47,7 +47,7 @@ const App = (props) => {
 				</Route>
 				
 				<Route path="/landmarkscreen/:id">
-					<Landmarkscreen tps={transactionStack} user={user} username={username} fetchUser={refetch}/>
+					<Landmarkscreen tps={transactionStack} user={user} username={username} fetchUser={refetch} images={props.images}/>
 				</Route>
 			
 
