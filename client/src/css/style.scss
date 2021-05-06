@@ -188,6 +188,10 @@ html, body {
 .spreadsheet-table-entry-item-input {
     text-align: center;
     border-right: black solid 3px;
+    font-weight: bolder;
+    font-size: 20px;
+    background-color: transparent;
+    font-family: 'Consolas';
     width: 100%;
 }
 
@@ -196,8 +200,8 @@ html, body {
     text-align: center;
     padding-top: 8px;
     color: black;
-    font-weight: bolder;
     font-size: 20px;
+    font-weight: bolder;
     border-right: black solid 3px;
 }
 
@@ -218,7 +222,7 @@ html, body {
 .table-entry-name { 
     color: skyblue;
     display: inline-block;
-    padding-right: 30px;
+
 }
 
 .table-entry-name:hover { 

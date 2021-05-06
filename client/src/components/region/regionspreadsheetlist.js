@@ -36,6 +36,14 @@ const RegionSpreadsheetEntry = (props) => {
         toggleNameEdit(!editingName)
     }
 
+    const setCapitalEdit = () => {
+        toggleCapitalEdit(!editingCapital)
+    }
+
+    const setLeaderEdit = () => {
+        toggleLeaderEdit(!editingLeader)
+    }
+
     const handleNavigateToSubregion = async () => {
         toggleSubregionSelected(true);
         
@@ -68,10 +76,9 @@ const RegionSpreadsheetEntry = (props) => {
 
             {
                 editingName ? 
-                <WInput
+                <input
                 className='spreadsheet-table-entry-item-input' onBlur={setNameEdit}
                 autoFocus={true} defaultValue={props.subregion.name} type='text'
-                inputClass="table-input-class"
                 />
                 : 
                 <div className="spreadsheet-table-entry-item" onClick={setNameEdit}>
@@ -80,15 +87,34 @@ const RegionSpreadsheetEntry = (props) => {
                     </div>
                 </div>
 
-            }         
+            }     
 
-            <div className="spreadsheet-table-entry-item">
-                {props.subregion.capital}
-            </div>
+            {
+                editingCapital ? 
+                <input
+                className='spreadsheet-table-entry-item-input' onBlur={setCapitalEdit}
+                autoFocus={true} defaultValue={props.subregion.capital} type='text'
+                />
+                : 
+                <div className="spreadsheet-table-entry-item" onClick={setCapitalEdit}>
+                            {props.subregion.capital}
+                </div>
 
-            <div className="spreadsheet-table-entry-item">
-                {props.subregion.leader}
-            </div>
+            }      
+
+            {
+                editingLeader ? 
+                <input
+                className='spreadsheet-table-entry-item-input' onBlur={setLeaderEdit}
+                autoFocus={true} defaultValue={props.subregion.leader} type='text'
+                />
+                : 
+                <div className="spreadsheet-table-entry-item" onClick={setLeaderEdit}>
+                            {props.subregion.leader}
+                </div>
+
+            }  
+        
 
             <div className="spreadsheet-table-entry-item-flag">
                 {props.subregion.flag}
