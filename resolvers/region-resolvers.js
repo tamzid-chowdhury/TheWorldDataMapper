@@ -23,7 +23,7 @@ module.exports = {
 		getAllSubregions: async (_,args) => {
 			const {_id} = args;
 			const parentRegion = new ObjectId(_id);
-			const regions = await Region.find({parentRegion:parentRegion}).sort({updatedAt: 'descending'});
+			const regions = await Region.find({parentRegion:parentRegion}).sort({_id: 'descending'});
 			return regions; 
 		},
 
@@ -111,9 +111,11 @@ module.exports = {
 		deleteSubregion: async (_, args) => {
 			const { _id } = args;
 			const objectId = new ObjectId(_id);
+
+			const toDelete = await Region.findOne({_id: objectId});
 			const deleted = await Region.deleteOne({_id: objectId});
-			if(deleted) return true;
-			else return false;
+			
+			return toDelete; 
 		},
 		
 	}

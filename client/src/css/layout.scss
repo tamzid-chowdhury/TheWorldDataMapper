@@ -238,3 +238,20 @@
     display: grid;
     grid-template-columns: 30% 60% 10%;
 }
+
+.undo-button-disabled{
+    color: grey; 
+}
+
+.undo-button{
+    color: white; 
+    
+}
+
+.redo-button-disabled{
+    color: grey;
+}
+
+.redo-button{
+    color: white; 
+}

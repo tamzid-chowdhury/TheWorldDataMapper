@@ -74,6 +74,14 @@ export const ADD_NEW_SUBREGION = gql`
 
 export const DELETE_SUBREGION = gql`
 	mutation DeleteSubregion($_id: String!){
-		deleteSubregion(_id: $_id)
+		deleteSubregion(_id: $_id){
+			_id
+			name
+			capital
+			leader
+			landmarks
+			owner
+			parentRegion
+		}
 	}
 `;

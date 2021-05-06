@@ -59,10 +59,12 @@ const Landmarkscreen = (props) => {
     };
 
     if(returnHome == true){
+        props.tps.clearAllTransactions();
         return <Redirect to={ {pathname: "/mapscreen/" + props.user._id}}/>
     }
 
     if(loggedOut == true){
+        props.tps.clearAllTransactions();
         return <Redirect to={ {pathname: "/homescreen"}}/>
     }
 

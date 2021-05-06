@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import {WNavbar,WNavItem} 	from 'wt-frontend';
 import {WLayout, WLHeader, WLMain} from 'wt-frontend';
@@ -10,6 +10,7 @@ import { useMutation, useApolloClient, useQuery }     from '@apollo/client';
 import UpdateAccount from '../modals/UpdateAccount';
 import RegionSpreadsheet from './regionspreadsheet';
 import RegionNavigator from './regionnavigator.js';
+import { jsTPS } from '../../utils/jsTPS';
 
 
 const Regionscreen = (props) => {
@@ -17,7 +18,6 @@ const Regionscreen = (props) => {
     let region = null; 
     let ancestorRegions = [];
     
-
     const client = useApolloClient();
     const [Logout] = useMutation(mutations.LOGOUT);
     const [loggedOut, toggleLoggedOut] = useState(false);
@@ -59,10 +59,12 @@ const Regionscreen = (props) => {
     };
 
     if(returnHome == true){
+        props.tps.clearAllTransactions();
         return <Redirect to={ {pathname: "/mapscreen/" + props.user._id}}/>
     }
 
     if(loggedOut == true){
+        props.tps.clearAllTransactions();
         return <Redirect to={ {pathname: "/homescreen"}}/>
     }
 
@@ -81,7 +83,7 @@ const Regionscreen = (props) => {
                         </ul>
 
                         <ul style={{paddingRight:'10%'}}>
-                            <RegionNavigator region={region} ancestorRegions={ancestorRegions} /> 
+                            <RegionNavigator region={region} ancestorRegions={ancestorRegions} tps={props.tps}/> 
                         </ul>
 
                         <ul>

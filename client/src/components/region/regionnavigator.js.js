@@ -14,7 +14,7 @@ const RegionNavigator = (props) => {
         <>
             {
                 props.ancestorRegions.map(region => (
-                    <RegionNavigationEntry region={region}/>
+                    <RegionNavigationEntry region={region} tps={props.tps}/>
                 ))
             }
         </>
@@ -30,6 +30,7 @@ const RegionNavigationEntry = (props) => {
 
 
     if (ancestorSelected){
+        props.tps.clearAllTransactions(); //TODO
         return <Redirect to={ {pathname: '/regionscreen/' + props.region._id}}/>
     }
 

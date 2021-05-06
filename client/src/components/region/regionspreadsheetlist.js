@@ -16,7 +16,7 @@ const RegionSpreadsheetList = (props) => {
         <>
         {
             props.subregions.map(subregion => (
-                <RegionSpreadsheetEntry key={subregion._id} subregion={subregion} handleSubregionDeletion={handleSubregionDeletion}/> 
+                <RegionSpreadsheetEntry key={subregion._id} subregion={subregion} handleSubregionDeletion={handleSubregionDeletion} tps={props.tps}/> 
             ))
         }
         </>
@@ -41,10 +41,12 @@ const RegionSpreadsheetEntry = (props) => {
     }
 
     if(subregionSelected){
+        props.tps.clearAllTransactions();
         return <Redirect to={ {pathname: '/regionscreen/' + props.subregion._id}}/>
     }
 
     if(landmarkSelected){
+        props.tps.clearAllTransactions();
         return <Redirect to={ {pathname: '/landmarkscreen/' + props.subregion._id}}/>
     }
 
