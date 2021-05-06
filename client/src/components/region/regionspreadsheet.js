@@ -8,12 +8,14 @@ import AddIcon from '@material-ui/icons/Add';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import DeleteSubregionModal from '../modals/DeleteSubregion'
-
+import {AddNewSubregion_Transaction} from '../../utils/jsTPS'
 const RegionSpreadsheet = (props) => {
     let subregions = []; 
     let regionID = props.region._id; //regionid
 
     const [regionToDelete, setRegionToDelete] = useState(null);
+    const [canUndo, setCanUndo] = useState(props.tps.hasTransactionToUndo());
+	const [canRedo, setCanRedo] = useState(props.tps.hasTransactionToRedo());
 
     const [AddNewSubregion] = useMutation(mutations.ADD_NEW_SUBREGION);
     const [DeleteSubregion] = useMutation(mutations.DELETE_SUBREGION);
@@ -25,14 +27,28 @@ const RegionSpreadsheet = (props) => {
         subregions = data.getAllSubregions; 
     }
 
+    const tpsUndo = async () => {
+		const ret = await props.tps.undoTransaction();
+		if(ret) {
+			setCanUndo(props.tps.hasTransactionToUndo());
+			setCanRedo(props.tps.hasTransactionToRedo());
+		}
+	}
+
+	const tpsRedo = async () => {
+		const ret = await props.tps.doTransaction();
+		if(ret) {
+			setCanUndo(props.tps.hasTransactionToUndo());
+			setCanRedo(props.tps.hasTransactionToRedo());
+		}
+	}
+
+
     const handleAddChildRegion = async () => {
         let _id = props.region._id;
-        const { loading, error, data } = await AddNewSubregion({ variables: {_id}  });
-        if (loading) {};
-        if (error) {console.log(error)}
-		if (data) {
-			refetch();	
-		};
+        let transaction = new AddNewSubregion_Transaction(_id, AddNewSubregion, DeleteSubregion, refetch);
+        props.tps.addTransaction(transaction);
+        tpsRedo();
 
     }
 
@@ -56,7 +72,7 @@ const RegionSpreadsheet = (props) => {
 
                 <div className="spreadsheet-info-header">
                     <div className="region-add-icon"><AddIcon onClick={handleAddChildRegion} fontSize="large"/></div>
-                    <div className="region-undo-redo-icons"><UndoIcon fontSize="large" /> <RedoIcon fontSize="large"/></div>
+                    <div className="region-undo-redo-icons"><UndoIcon onClick={tpsUndo} fontSize="large" /> <RedoIcon onClick={tpsRedo} fontSize="large"/></div>
                     <div className="region-name-text">Region Name: </div>
                     <div className="region-name"> {props.region.name} </div>    
                 </div>

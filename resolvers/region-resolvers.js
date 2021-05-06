@@ -105,10 +105,7 @@ module.exports = {
             
 			const create = await newRegion.save();
 
-			if(create) {
-				console.log(newRegion)
-				return true;
-			}
+			return create; 
 		},
 
 		deleteSubregion: async (_, args) => {

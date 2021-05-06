@@ -113,7 +113,7 @@ const Regionscreen = (props) => {
                         }
 
                         {
-                            showMain && (<RegionSpreadsheet tps={props.transactionStack} user={props.user} region={region}/>)
+                            showMain && (<RegionSpreadsheet tps={props.tps} user={props.user} region={region}/>)
                         }
 
                         
