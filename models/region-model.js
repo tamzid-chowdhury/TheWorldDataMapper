@@ -28,7 +28,15 @@ const regionSchema = new Schema(
         parentRegion: {
             type: ObjectId,
             ref: 'Region'
-        }
+		},
+		sortRule: {
+			type: String, 
+			required: true
+		},
+		sortDirection: {
+			type: Number, 
+			required: true
+		}
         
 	},
 	{ timestamps: true }

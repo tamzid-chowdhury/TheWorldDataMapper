@@ -10,6 +10,8 @@ const typeDefs = gql `
         landmarks: [String]
         owner: String
         parentRegion: String
+        sortRule: String!
+		sortDirection: Int!
     }
 
     extend type Query {
