@@ -14,7 +14,7 @@ const RegionNavigator = (props) => {
         <>
             {
                 props.ancestorRegions.map(region => (
-                    <RegionNavigationEntry region={region} tps={props.tps}/>
+                    <RegionNavigationEntry key={region._id} region={region} tps={props.tps}/>
                 ))
             }
         </>

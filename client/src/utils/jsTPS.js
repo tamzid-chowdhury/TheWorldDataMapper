@@ -44,12 +44,21 @@ export class DeleteSubregion_Transaction extends jsTPS_Transaction {
     async doTransaction() {
         const {data} = await this.deleteFunction({variables: {_id: this.regionID}})
         this.refetch();
-        console.log(data);
+        this.region = {
+            _id: data.deleteSubregion._id,
+            name: data.deleteSubregion.name,
+            capital: data.deleteSubregion.capital,
+            leader: data.deleteSubregion.leader,
+            landmarks: data.deleteSubregion.landmarks,
+            parentRegion: data.deleteSubregion.parentRegion
+        }
 		return data;
     }
     // Since delete/add are opposites, flip matching opcode
     async undoTransaction() {
-
+        const {data} = await this.addFunction({variables: {subregion: this.region}})
+        this.refetch();
+        return data; 
     }
 
 }

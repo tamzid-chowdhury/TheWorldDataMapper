@@ -117,6 +117,27 @@ module.exports = {
 			
 			return toDelete; 
 		},
+
+		addSubregion: async (_,args) => {
+			const {subregion} = args;
+			
+			const regionID = new ObjectId(subregion._id);
+			const parentRegion = new ObjectId(subregion.parentRegion);
+
+			const newRegion = new Region({
+				_id: regionID,
+				name: subregion.name,
+				capital: subregion.capital,
+				leader: subregion.leader,
+				flag: subregion.flag,
+				landmarks: subregion.landmarks,
+				parentRegion: parentRegion
+			});
+			
+			const create = await newRegion.save();
+
+			return create; 
+		}
 		
 	}
 

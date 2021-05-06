@@ -83,7 +83,7 @@ const Landmarkscreen = (props) => {
                         </ul>
 
                         <ul style={{paddingRight:'10%'}}>
-                            <RegionNavigator region={region} ancestorRegions={ancestorRegions} /> 
+                            <RegionNavigator region={region} ancestorRegions={ancestorRegions} tps={props.tps}/> 
                         </ul>
 
                         <ul>

@@ -18,7 +18,9 @@ const RegionSpreadsheet = (props) => {
 	const [canRedo, setCanRedo] = useState(props.tps.hasTransactionToRedo());
 
     const [AddNewSubregion] = useMutation(mutations.ADD_NEW_SUBREGION);
+    const [AddSubregion] = useMutation(mutations.ADD_SUBREGION)
     const [DeleteSubregion] = useMutation(mutations.DELETE_SUBREGION);
+
 
     const clickDisabled = () => { };
 
@@ -56,7 +58,7 @@ const RegionSpreadsheet = (props) => {
     }
 
     const handleDeleteChildRegion = async (_id) => {
-        let transaction = new DeleteSubregion_Transaction(_id, DeleteSubregion, AddNewSubregion, refetch);
+        let transaction = new DeleteSubregion_Transaction(_id, DeleteSubregion, AddSubregion, refetch);
         props.tps.addTransaction(transaction)
         tpsRedo();
     }

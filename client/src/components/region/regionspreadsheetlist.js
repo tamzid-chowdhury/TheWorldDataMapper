@@ -4,6 +4,7 @@ import * as mutations from '../../cache/mutations';
 import * as queries from '../../cache/queries';
 import { useMutation, useQuery, useApolloClient } from '@apollo/client';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {WInput} 	from 'wt-frontend';
 
 const RegionSpreadsheetList = (props) => {
 
@@ -26,6 +27,14 @@ const RegionSpreadsheetList = (props) => {
 const RegionSpreadsheetEntry = (props) => {
     const [subregionSelected, toggleSubregionSelected] = useState(false);
     const [landmarkSelected, toggleLandmarkSelected] = useState(false);
+
+    const [editingName, toggleNameEdit] = useState(false);
+    const [editingCapital, toggleCapitalEdit] = useState(false);
+    const [editingLeader, toggleLeaderEdit] = useState(false);
+
+    const setNameEdit = () => {
+        toggleNameEdit(!editingName)
+    }
 
     const handleNavigateToSubregion = async () => {
         toggleSubregionSelected(true);
@@ -57,11 +66,21 @@ const RegionSpreadsheetEntry = (props) => {
              <DeleteIcon onClick={handleSubregionDeletion}/>
             </div>
 
-            <div className="spreadsheet-table-entry-item">
-                <div className ="table-entry-name" onClick={handleNavigateToSubregion}>
-                    {props.subregion.name}
+            {
+                editingName ? 
+                <WInput
+                className='spreadsheet-table-entry-item-input' onBlur={setNameEdit}
+                autoFocus={true} defaultValue={props.subregion.name} type='text'
+                inputClass="table-input-class"
+                />
+                : 
+                <div className="spreadsheet-table-entry-item" onClick={setNameEdit}>
+                    <div className ="table-entry-name" onClick={handleNavigateToSubregion}>
+                            {props.subregion.name}
+                    </div>
                 </div>
-            </div>
+
+            }         
 
             <div className="spreadsheet-table-entry-item">
                 {props.subregion.capital}
@@ -71,7 +90,7 @@ const RegionSpreadsheetEntry = (props) => {
                 {props.subregion.leader}
             </div>
 
-            <div className="spreadsheet-table-entry-item">
+            <div className="spreadsheet-table-entry-item-flag">
                 {props.subregion.flag}
             </div>
 

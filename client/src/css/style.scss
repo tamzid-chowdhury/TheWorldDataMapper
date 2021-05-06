@@ -185,6 +185,27 @@ html, body {
     border-right: black solid 3px;
 }
 
+.spreadsheet-table-entry-item-input {
+    text-align: center;
+    border-right: black solid 3px;
+    width: 100%;
+}
+
+
+.spreadsheet-table-entry-item-flag {
+    text-align: center;
+    padding-top: 8px;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    border-right: black solid 3px;
+}
+
+
+.spreadsheet-table-entry-item:hover {
+    background-color: darkgrey;
+}
+
 
 .spreadsheet-table-entry-landmarks {
     text-align: center;

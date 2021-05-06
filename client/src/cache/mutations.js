@@ -79,8 +79,22 @@ export const DELETE_SUBREGION = gql`
 			name
 			capital
 			leader
+			flag
 			landmarks
-			owner
+			parentRegion
+		}
+	}
+`;
+
+export const ADD_SUBREGION = gql`
+	mutation AddSubregion($subregion: RegionInput!) {
+		addSubregion(subregion: $subregion){
+			_id
+			name
+			capital
+			leader
+			flag
+			landmarks
 			parentRegion
 		}
 	}
