@@ -23,7 +23,7 @@ module.exports = {
 		getAllSubregions: async (_,args) => {
 			const {_id} = args;
 			const parentRegion = new ObjectId(_id);
-			const regions = await Region.find({parentRegion:parentRegion}).sort({_id: 'descending'});
+			const regions = await Region.find({parentRegion:parentRegion}).sort({name: 'ascending'});
 			return regions; 
 		},
 

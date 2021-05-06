@@ -49,6 +49,7 @@ export class DeleteSubregion_Transaction extends jsTPS_Transaction {
             name: data.deleteSubregion.name,
             capital: data.deleteSubregion.capital,
             leader: data.deleteSubregion.leader,
+            flag: data.deleteSubregion.flag,
             landmarks: data.deleteSubregion.landmarks,
             parentRegion: data.deleteSubregion.parentRegion
         }

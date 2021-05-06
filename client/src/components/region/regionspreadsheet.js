@@ -10,6 +10,21 @@ import RedoIcon from '@material-ui/icons/Redo';
 import DeleteSubregionModal from '../modals/DeleteSubregion'
 import {AddNewSubregion_Transaction, DeleteSubregion_Transaction, EditSubregion_Transaction} from '../../utils/jsTPS'
 const RegionSpreadsheet = (props) => {
+    
+    const keyCombination = (e, callback) => {
+		if(e.key === 'z' && e.ctrlKey) {
+			if(props.tps.hasTransactionToUndo()) {
+				tpsUndo();
+			}
+		}
+		else if (e.key === 'y' && e.ctrlKey) { 
+			if(props.tps.hasTransactionToRedo()) {
+				tpsRedo();
+			}
+		}
+	}
+	document.onkeydown = keyCombination;
+
     let subregions = []; 
     let regionID = props.region._id; //regionid
 
