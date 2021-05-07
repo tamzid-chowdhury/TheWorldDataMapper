@@ -88,6 +88,27 @@ html, body {
     text-align: center;
 }
 
+.parent-modal-header{
+    color: white;
+    background-color: red;
+    font-size: 24px;
+    text-align: center;
+    width:345px;
+}
+
+.parent-modal-footer{
+    width: 350px;
+    height: auto;
+    border-top: 0px;
+    overflow-y: scroll;
+    
+}
+
+.parent-modal-button{
+    width: 300px;
+
+}
+
 .modal-main {
     background-color: black;
 }
@@ -243,6 +264,7 @@ html, body {
 
 .parent-region-navigator{
     color: skyblue;
+    display: contents;
 }
 
 .parent-region-navigator:hover{

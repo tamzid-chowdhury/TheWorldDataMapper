@@ -20,6 +20,7 @@ const typeDefs = gql `
         getAllSubregions(_id: String!, sortRule: String, sortDirection: Int): [Region]
         getAncestorRegions(_id: String!): [Region]
         getAllSiblings(_id: String!): [Region]
+        getAllParentSiblings(_id: String!): [Region]
     }
 
     extend type Mutation { 
@@ -32,6 +33,7 @@ const typeDefs = gql `
         editSubregion(regionID: String!, field: String!, newValue: String!):Boolean
         sortSubregion(regionID: String!, newName: String!): Region
         undoSortSubregion(regionID: String!, prevName: String!, prevDirection: Int!): Region
+        changeParentRegion(regionID: String!, newParentRegionID: String!): Boolean
     }
 
     input RegionInput {

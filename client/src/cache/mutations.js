@@ -146,3 +146,9 @@ export const UNDO_SORT_SUBREGION = gql`
 		}
 	}
 `;
+
+export const CHANGE_PARENT_REGION = gql`
+	mutation ChangeParentRegion($regionID: String!, $newParentRegionID: String!) {
+		changeParentRegion(regionID: $regionID, newParentRegionID: $newParentRegionID)
+	}
+`;

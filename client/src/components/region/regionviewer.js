@@ -12,6 +12,11 @@ import earth from '../../assets/earth.jpg';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import LandmarkList from './landmarklist'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import EditIcon from '@material-ui/icons/Edit';
+import ChangeParentModal from '../modals/ChangeParentModal'
+import {ChangeParentRegion_Transaction} from '../../utils/jsTPS'
 
 const RegionViewer = (props) => {
 
@@ -36,18 +41,32 @@ const RegionViewer = (props) => {
     let parentRegion = null; 
     let subregions = [];
     let siblingRegions = [];
+    let parentSiblingRegions = null;
     let numOfSubregions = 0; 
     let prevSiblingID = null; 
     let nextSiblingID = null; 
 
-    const [parentRegionSelected, toggleParentRegionSelected] = useState(false);
-    const [canUndo, setCanUndo] = useState(props.tps.hasTransactionToUndo());
-	const [canRedo, setCanRedo] = useState(props.tps.hasTransactionToRedo());
-    
-    const { loading, error, data, refetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
-    const {loading:loading1, error:error1, data:data1} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
+    const [showChangeParent, toggleShowChangeParent] 	= useState(false);
+    const [refreshSelected, toggleRefreshSelected] = useState(false);
 
-    const {data:data2} = useQuery(queries.GET_ALL_SIBLINGS, { variables: {id: props.region.parentRegion} });
+    const setShowChangeParent = () => {
+        toggleShowChangeParent(!showChangeParent);
+    };
+
+    const [parentRegionSelected, toggleParentRegionSelected] = useState(false);
+    const [prevSiblingSelected, togglePrevSiblingSelected] = useState(false);
+    const [nextSiblingSelected, toggleNextSiblingSelected] = useState(false);
+    const [canUndo, setCanUndo] = useState(props.tps.hasTransactionToUndo());
+    const [canRedo, setCanRedo] = useState(props.tps.hasTransactionToRedo());
+    
+    const [ChangeParentRegion] = useMutation(mutations.CHANGE_PARENT_REGION);
+    
+    const { loading, error, data, refetch: regionRefetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
+    const {loading:loading1, error:error1, data:data1, refetch: subregionRefetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
+
+    const {data:data2, refetch: parentRegionRefetch} = useQuery(queries.GET_ALL_SIBLINGS, { variables: {id: props.region.parentRegion} })
+
+    const {data:data3, refetch: parentSiblingRegionRefetch} = useQuery(queries.GET_ALL_PARENT_SIBLINGS, { variables: {id: props.region.parentRegion} });
 
     if(error) { console.log(error); }
 	if(loading) { return <div></div> }
@@ -76,12 +95,43 @@ const RegionViewer = (props) => {
 
     }
 
+    if(data3){
+        parentSiblingRegions = data3.getAllParentSiblings;
+    }
+
     const handleNavigateToParentRegion = () => {
         toggleParentRegionSelected(true);
     }
 
+    const handleNavigateToPrevSibling = () => {
+        togglePrevSiblingSelected(true);
+    }
+
+    const handleNavigateToNextSibling = () => {
+        toggleNextSiblingSelected(true);
+    }
+
+    const handleRefreshSelected = () => {
+        toggleRefreshSelected(true);
+    }
+
     if(parentRegionSelected){
+        props.tps.clearAllTransactions();
         return <Redirect to={ {pathname: '/regionscreen/' + props.region.parentRegion}}/>
+    }
+
+    if(prevSiblingSelected){
+        props.tps.clearAllTransactions();
+        return <Redirect to={ {pathname: '/landmarkscreen/' + prevSiblingID}}/>
+    }
+
+    if(nextSiblingSelected){
+        props.tps.clearAllTransactions();
+        return <Redirect to={ {pathname: '/landmarkscreen/' + nextSiblingID}}/>
+    }
+
+    if(refreshSelected){
+        return <Redirect to={ {pathname: '/landmarkscreen/' + props.region._id}}/>
     }
     
     const tpsUndo = async () => {
@@ -113,16 +163,37 @@ const RegionViewer = (props) => {
         onClick: !canRedo  ? clickDisabled : tpsRedo
     }
 
+    const changeParentRegion = (newParentRegion) => {
+        let regionID = props.region._id;
+        let newParentRegionID = newParentRegion._id;
+        let prevParentRegionID = parentRegion._id; 
+
+        let transaction = new ChangeParentRegion_Transaction(regionID, newParentRegionID, prevParentRegionID, ChangeParentRegion, handleRefreshSelected)
+        props.tps.addTransaction(transaction);
+        tpsRedo()     
+    }
+
+
     return (
     <>
     <div className="region-viewer-picture">
         <UndoIcon {...undoOptions} fontSize="large"/> 
         <RedoIcon {...redoOptions} fontSize="large"/> 
+
         {
                     flagSource === undefined ? <img src={earth} width="600" height="350"></img>: <img src={flagSource} width="600" height="350"></img> 
         }
     </div>
-    
+
+    <div className="sibling-arrows">
+        {
+            prevSiblingID && <ArrowBackIcon fontSize="large"className="left-arrow" onClick={handleNavigateToPrevSibling}/>
+        }
+        {
+            nextSiblingID && <ArrowForwardIcon fontSize="large" className="right-arrow" onClick={handleNavigateToNextSibling}/>
+        }
+    </div>
+
     <div className="region-viewer-info">
         <div className="region-viewer-info-entry">
             Region Name:&nbsp;&nbsp;&nbsp;{props.region.name}
@@ -130,6 +201,13 @@ const RegionViewer = (props) => {
         <div className="region-viewer-info-parentregion">
             <div>Parent Region:</div>
             <div className="parent-region-navigator" onClick={handleNavigateToParentRegion}>{parentRegion.name}</div>
+            {
+                parentSiblingRegions && parentSiblingRegions.length > 1 && <EditIcon className="change-parent" onClick={setShowChangeParent}/>
+            }
+            {
+                showChangeParent && <ChangeParentModal parentSiblingRegions={parentSiblingRegions} region={props.region} 
+                setShowChangeParent={setShowChangeParent} changeParentRegion={changeParentRegion}/>
+            }
         </div>
         <div className="region-viewer-info-entry">
             Region Capital:&nbsp;&nbsp;&nbsp;{props.region.capital}

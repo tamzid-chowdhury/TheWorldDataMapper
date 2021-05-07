@@ -12,7 +12,6 @@ import RegionSpreadsheet from './regionspreadsheet';
 import RegionNavigator from './regionnavigator.js';
 import { jsTPS } from '../../utils/jsTPS';
 
-
 const Regionscreen = (props) => {
     let _id = useParams();  //regionID
     let region = null; 

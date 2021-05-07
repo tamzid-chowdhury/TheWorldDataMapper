@@ -82,7 +82,7 @@ const Landmarkscreen = (props) => {
                             </WNavItem>
                         </ul>
 
-                        <ul style={{paddingRight:'10%'}}>
+                        <ul>
                             <RegionNavigator region={region} ancestorRegions={ancestorRegions} tps={props.tps}/> 
                         </ul>
 

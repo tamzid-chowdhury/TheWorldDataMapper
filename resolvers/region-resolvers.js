@@ -60,6 +60,29 @@ module.exports = {
 			return regions; 
 		},
 
+		getAllParentSiblings: async (_,args) => {
+			const {_id} = args;
+			const region = await Region.findById(_id);
+
+			const parentRegion = await Region.findById(region.parentRegion)
+
+			const direction = parentRegion.sortDirection == 1 ? "ascending": "descending";
+			const sortRule = parentRegion.sortRule
+
+			let regions = null; 
+
+			if (sortRule == "name") {
+				regions = await Region.find({parentRegion:parentRegion._id}).sort({name: direction});
+			}
+			else if(sortRule == "capital"){
+				regions = await Region.find({parentRegion:parentRegion._id}).sort({capital: direction});
+			}
+			else {
+				regions = await Region.find({parentRegion:parentRegion._id}).sort({leader: direction});
+			}
+			return regions; 
+		},
+
 
 		getAncestorRegions: async (_,args) => {
 			const {_id} = args;
@@ -232,7 +255,25 @@ module.exports = {
 			if(saved){
 				return region; 
 			}
-		}
+		},
+
+		changeParentRegion: async (_,args) => {
+			const {regionID, newParentRegionID} = args;
+
+			const _id = new ObjectId(regionID);
+
+			const region = await Region.findOne({_id: _id});
+
+			const updatedParentRegionID = new ObjectId(newParentRegionID)
+
+			region.parentRegion = updatedParentRegionID;
+
+			const saved = region.save();
+
+			if(saved){
+				return true; 
+			}
+		},
 		
 	}
 

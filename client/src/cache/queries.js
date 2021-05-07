@@ -68,6 +68,21 @@ export const GET_ALL_SIBLINGS = gql`
 	}
 `;
 
+export const GET_ALL_PARENT_SIBLINGS = gql`
+	query GetAllParentSiblings($id: String!) {
+		getAllParentSiblings(_id: $id) {
+			_id
+			name
+			capital
+			leader
+			flag
+			landmarks
+			sortRule
+			sortDirection
+		}
+	}
+`;
+
 export const GET_ANCESTOR_REGIONS = gql`
 	query GetAncestorRegions($id: String!){
 		getAncestorRegions(_id: $id) {

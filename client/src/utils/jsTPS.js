@@ -118,6 +118,36 @@ export class Sort_Transaction extends jsTPS_Transaction {
     }
 }
 
+export class ChangeParentRegion_Transaction extends jsTPS_Transaction {
+
+    constructor(regionID, newParentRegionID, prevParentRegionID, updateFunc, refetchSelected) {
+        super();
+        this.regionID = regionID;
+        this.newParentRegionID = newParentRegionID;
+        this.prevParentRegionID = prevParentRegionID;
+        this.updateFunction = updateFunc;
+        this.refetchSelected = refetchSelected;
+    }
+
+    async doTransaction() {
+        const {data} = await this.updateFunction({variables: {regionID: this.regionID, newParentRegionID: this.newParentRegionID}})
+        if(data){
+            this.refetchSelected()
+        }
+        return; 
+
+    }
+    
+    async undoTransaction() {
+        const {data} = await this.updateFunction({variables: {regionID: this.regionID, newParentRegionID: this.prevParentRegionID}})
+        if(data){
+            this.refetchSelected()
+        }
+        return;
+    }
+
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK
