@@ -19,6 +19,7 @@ const typeDefs = gql `
         getRegionById(_id: String!): Region
         getAllSubregions(_id: String!, sortRule: String, sortDirection: Int): [Region]
         getAncestorRegions(_id: String!): [Region]
+        getAllSiblings(_id: String!): [Region]
     }
 
     extend type Mutation { 

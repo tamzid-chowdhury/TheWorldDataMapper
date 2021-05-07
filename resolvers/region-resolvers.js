@@ -39,6 +39,28 @@ module.exports = {
 			return regions; 
 		},
 
+		getAllSiblings: async (_,args) => {
+			const {_id} = args;
+			const region = await Region.findById(_id);
+
+			const direction = region.sortDirection == 1 ? "ascending": "descending";
+			const sortRule = region.sortRule
+
+			let regions = null; 
+
+			if (sortRule == "name") {
+				regions = await Region.find({parentRegion:_id}).sort({name: direction});
+			}
+			else if(sortRule == "capital"){
+				regions = await Region.find({parentRegion:_id}).sort({capital: direction});
+			}
+			else {
+				regions = await Region.find({parentRegion:_id}).sort({leader: direction});
+			}
+			return regions; 
+		},
+
+
 		getAncestorRegions: async (_,args) => {
 			const {_id} = args;
 

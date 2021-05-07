@@ -4,7 +4,7 @@ import Mapscreen 		from './components/mapscreen/mapscreen';
 import { useQuery } 	from '@apollo/client';
 import * as queries 	from './cache/queries';
 import { jsTPS } 		from './utils/jsTPS';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, Router } from 'react-router-dom';
 import Regionscreen from './components/region/regionscreen';
 import Landmarkscreen from './components/region/landmarkscreen';
  
@@ -27,7 +27,7 @@ const App = (props) => {
 
 
 	return(
-		<BrowserRouter>				
+		<BrowserRouter forceRefresh={true}>				
 			<Switch>
 			{
 				user === null ? 
@@ -52,7 +52,6 @@ const App = (props) => {
 			
 
 			</Switch>	
-
 		</BrowserRouter>
 	);
 }

@@ -15,18 +15,37 @@ import LandmarkList from './landmarklist'
 
 const RegionViewer = (props) => {
 
+    const keyCombination = (e, callback) => {
+		if(e.key === 'z' && e.ctrlKey) {
+			if(props.tps.hasTransactionToUndo()) {
+				tpsUndo();
+			}
+		}
+		else if (e.key === 'y' && e.ctrlKey) { 
+			if(props.tps.hasTransactionToRedo()) {
+				tpsRedo();
+			}
+		}
+	}
+    document.onkeydown = keyCombination;
+
     let flagName = props.region.name + " Flag.png"
     let flagSource = props.images[flagName]
 
     
     let parentRegion = null; 
     let subregions = [];
+    let siblingRegions = [];
     let numOfSubregions = 0; 
 
     const [parentRegionSelected, toggleParentRegionSelected] = useState(false);
+    const [canUndo, setCanUndo] = useState(props.tps.hasTransactionToUndo());
+	const [canRedo, setCanRedo] = useState(props.tps.hasTransactionToRedo());
     
     const { loading, error, data, refetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
     const {loading:loading1, error:error1, data:data1} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
+
+    const {data:data2} = useQuery(queries.GET_ALL_SIBLINGS, { variables: {id: props.region.parentRegion} });
 
     if(error) { console.log(error); }
 	if(loading) { return <div></div> }
@@ -41,6 +60,13 @@ const RegionViewer = (props) => {
             numOfSubregions = subregions.length;
     }
 
+    if(data2){
+        siblingRegions = data2.getAllSiblings;
+        console.log(siblingRegions)
+        const index = siblingRegions.findIndex(region => region._id == props.region._id);
+        console.log(index)
+    }
+
     const handleNavigateToParentRegion = () => {
         toggleParentRegionSelected(true);
     }
@@ -49,12 +75,40 @@ const RegionViewer = (props) => {
         return <Redirect to={ {pathname: '/regionscreen/' + props.region.parentRegion}}/>
     }
     
+    const tpsUndo = async () => {
+        const ret = await props.tps.undoTransaction();
+		if(ret) {
+			setCanUndo(props.tps.hasTransactionToUndo());
+			setCanRedo(props.tps.hasTransactionToRedo());
+		}
+    }
+    
+
+	const tpsRedo = async () => {
+		const ret = await props.tps.doTransaction();
+		if(ret) {
+			setCanUndo(props.tps.hasTransactionToUndo());
+			setCanRedo(props.tps.hasTransactionToRedo());
+		}
+    }
+    
+    const clickDisabled = () => { };
+
+    const undoOptions = {
+        className: !canUndo ? ' undo-button-disabled region-viewer-undo' : 'undo-button region-viewer-undo',
+        onClick: !canUndo  ? clickDisabled : tpsUndo
+    }
+
+    const redoOptions = {
+        className: !canRedo ? ' undo-button-disabled region-viewer-redo' : 'undo-button region-viewer-redo',
+        onClick: !canRedo  ? clickDisabled : tpsRedo
+    }
 
     return (
     <>
     <div className="region-viewer-picture">
-        <UndoIcon className="region-viewer-undo" fontSize="large"/> 
-        <RedoIcon className="region-viewer-redo" fontSize="large"/> 
+        <UndoIcon {...undoOptions} fontSize="large"/> 
+        <RedoIcon {...redoOptions} fontSize="large"/> 
         {
                     flagSource === undefined ? <img src={earth} width="600" height="350"></img>: <img src={flagSource} width="600" height="350"></img> 
         }
