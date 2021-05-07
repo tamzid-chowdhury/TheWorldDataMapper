@@ -37,6 +37,8 @@ const RegionViewer = (props) => {
     let subregions = [];
     let siblingRegions = [];
     let numOfSubregions = 0; 
+    let prevSiblingID = null; 
+    let nextSiblingID = null; 
 
     const [parentRegionSelected, toggleParentRegionSelected] = useState(false);
     const [canUndo, setCanUndo] = useState(props.tps.hasTransactionToUndo());
@@ -62,9 +64,16 @@ const RegionViewer = (props) => {
 
     if(data2){
         siblingRegions = data2.getAllSiblings;
-        console.log(siblingRegions)
         const index = siblingRegions.findIndex(region => region._id == props.region._id);
-        console.log(index)
+        
+        if(index > 0){
+            prevSiblingID = siblingRegions[index-1]._id; 
+        }
+
+        if(index < siblingRegions.length - 1){
+            nextSiblingID = siblingRegions[index+1]._id;
+        }
+
     }
 
     const handleNavigateToParentRegion = () => {
