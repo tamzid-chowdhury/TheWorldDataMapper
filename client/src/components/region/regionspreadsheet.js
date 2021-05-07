@@ -14,7 +14,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import {AddNewSubregion_Transaction, DeleteSubregion_Transaction, EditSubregion_Transaction, Sort_Transaction} from '../../utils/jsTPS'
 const RegionSpreadsheet = (props) => {
 
-    
     const keyCombination = (e, callback) => {
 		if(e.key === 'z' && e.ctrlKey) {
 			if(props.tps.hasTransactionToUndo()) {
@@ -27,8 +26,8 @@ const RegionSpreadsheet = (props) => {
 			}
 		}
 	}
-	document.onkeydown = keyCombination;
-
+    document.onkeydown = keyCombination;
+    
     let subregions = []; 
     let regionID = props.region._id; //regionid
 
@@ -54,7 +53,7 @@ const RegionSpreadsheet = (props) => {
     }
 
     const tpsUndo = async () => {
-		const ret = await props.tps.undoTransaction();
+        const ret = await props.tps.undoTransaction();
 		if(ret) {
 			setCanUndo(props.tps.hasTransactionToUndo());
 			setCanRedo(props.tps.hasTransactionToRedo());
@@ -184,19 +183,19 @@ const RegionSpreadsheetHeader = (props) => {
                 Name
 
                 {
-                    nameSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
+                    !disabled && nameSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
                 }
             </div>
             <div {...capitalOptions} >
                 Capital
                 {
-                    capitalSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
+                    !disabled && capitalSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
                 }
             </div>
             <div {...leaderOptions} >
                 Leader
                 {
-                    leaderSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
+                    !disabled && leaderSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
                 }
             </div>
             <div className="spreadsheet-table-header-item">
