@@ -247,8 +247,8 @@
     font-weight: bolder;
     color: white; 
     margin-bottom: 40px;
-    display: grid;
-    grid-template-columns: 30% 60% 10%;
+    display: flex;
+    gap: 20px;
 }
 
 .undo-button-disabled{
@@ -293,8 +293,6 @@
 .change-parent{
     color: yellow;
     font-size: x-large;
-    position: absolute;
-    left: 350px;
 }
 
 .change-parent:hover{

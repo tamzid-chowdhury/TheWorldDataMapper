@@ -202,7 +202,7 @@ const RegionViewer = (props) => {
             <div>Parent Region:</div>
             <div className="parent-region-navigator" onClick={handleNavigateToParentRegion}>{parentRegion.name}</div>
             {
-                parentSiblingRegions && parentSiblingRegions.length > 1 && <EditIcon className="change-parent" onClick={setShowChangeParent}/>
+                parentSiblingRegions && parentSiblingRegions.length > 1 &&  <div> <EditIcon className="change-parent" onClick={setShowChangeParent}/> </div>
             }
             {
                 showChangeParent && <ChangeParentModal parentSiblingRegions={parentSiblingRegions} region={props.region} 
