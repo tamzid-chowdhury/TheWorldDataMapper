@@ -1,6 +1,5 @@
 import React from 'react';
 import redGlobe from '../../assets/redglobe.jpg';
-import worldMap from '../../assets/worldmapper.jpg';
 
 const HomescreenLogo = (props) => {
 	return(
