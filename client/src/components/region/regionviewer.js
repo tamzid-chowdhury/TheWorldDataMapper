@@ -89,9 +89,11 @@ const RegionViewer = (props) => {
             prevSiblingID = siblingRegions[index-1]._id; 
         }
 
+
         if(index < siblingRegions.length - 1){
             nextSiblingID = siblingRegions[index+1]._id;
         }
+
 
     }
 
@@ -221,8 +223,10 @@ const RegionViewer = (props) => {
     <WCard wLayout="content-footer" style={{ width: "600px", height: "700px" }} className="region-viewer-landmarks">
         <WCContent style={{ backgroundColor: "black", color:"white"}}>
             <div className="landmarks-list-title">
-                Region Landmarks:
-                <LandmarkList subregions={subregions} /> 
+                Region Landmarks: 
+            </div>
+            <div className="landmark-list">
+                <LandmarkList region={props.region}/>
             </div>
         </WCContent>
         <WCFooter style={{ backgroundColor: "lightgrey" }}>

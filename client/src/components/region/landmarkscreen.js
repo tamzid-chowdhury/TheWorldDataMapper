@@ -115,7 +115,7 @@ const Landmarkscreen = (props) => {
                         }
 
                         {
-                            showMain && (<RegionViewer tps={props.tps} user={props.user} region={region} images={props.images}/>)
+                            showMain && (<RegionViewer tps={props.tps} user={props.user} region={region} images={props.images} refetch={refetch}/>)
                         }
 
                         

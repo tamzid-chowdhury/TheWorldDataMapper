@@ -203,6 +203,35 @@
     top: -28px;
     font-size: 24px;
     font-weight: bolder;
+    height: auto; 
+}
+
+.landmark-list{
+    display:grid; 
+    grid-gap: 10px;
+    width: 85%;
+    position: absolute;
+    left: 7.5%;
+    top: 5%;
+}
+
+.landmark-entry{
+    background-color:rgb(77, 77, 77);
+    height: 30px;
+    text-align: center;
+    font-size: 26px;
+}
+
+.delete-landmark{
+    position: absolute;
+}
+
+.delete-landmark:hover{
+    color:red
+}
+
+.landmark-entry-text:hover{
+    color:darkgray
 }
 
 .region-viewer-picture{
