@@ -8,6 +8,9 @@ import AddIcon from '@material-ui/icons/Add';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import DeleteSubregionModal from '../modals/DeleteSubregion'
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+
 import {AddNewSubregion_Transaction, DeleteSubregion_Transaction, EditSubregion_Transaction, Sort_Transaction} from '../../utils/jsTPS'
 const RegionSpreadsheet = (props) => {
 
@@ -124,7 +127,7 @@ const RegionSpreadsheet = (props) => {
                     <div className="region-name"> {props.region.name} </div>    
                 </div>
 
-                <RegionSpreadsheetHeader subregions={subregions} sort={sort}/> 
+                <RegionSpreadsheetHeader subregions={subregions} sort={sort} region={props.region}/> 
 
                 <RegionSpreadsheetList region={props.region} subregions={subregions} handleDeleteChildRegion={handleRegionToDelete} 
                 tps={props.tps} editRegionField={editRegionField} images={props.images}/>
@@ -153,22 +156,48 @@ const RegionSpreadsheetHeader = (props) => {
         props.sort(newName);
     }
 
-    const sortOptions = {
-        className: disabled ? 'spreadsheet-table-header-item' : 'spreadsheet-table-header-item sort',
+    const nameSort = props.region.sortRule == 'name' ? 'currently-sorting':''
+    const capitalSort = props.region.sortRule == 'capital' ? 'currently-sorting':''
+    const leaderSort = props.region.sortRule == 'leader' ? 'currently-sorting':''
+
+    const sortDirection = props.region.sortDirection;
+ 
+
+    const nameOptions = {
+        className: disabled ? 'spreadsheet-table-header-item' : 'spreadsheet-table-header-item sort ' + nameSort,
         onClick: disabled  ? clickDisabled : handleSort
     }
     
+    const capitalOptions = {
+        className: disabled ? 'spreadsheet-table-header-item' : 'spreadsheet-table-header-item sort ' + capitalSort,
+        onClick: disabled  ? clickDisabled : handleSort
+    }
+
+    const leaderOptions = {
+        className: disabled ? 'spreadsheet-table-header-item' : 'spreadsheet-table-header-item sort ' + leaderSort,
+        onClick: disabled  ? clickDisabled : handleSort
+    }
 
     return (
         <div className="spreadsheet-table-header">
-            <div {...sortOptions} style={{paddingLeft:"30px"}}>
+            <div {...nameOptions} style={{paddingLeft:"30px"}}>
                 Name
+
+                {
+                    nameSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
+                }
             </div>
-            <div {...sortOptions} >
+            <div {...capitalOptions} >
                 Capital
+                {
+                    capitalSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
+                }
             </div>
-            <div {...sortOptions} >
+            <div {...leaderOptions} >
                 Leader
+                {
+                    leaderSort == "currently-sorting" && (sortDirection == 1 ? <KeyboardArrowUpIcon style={{ paddingTop: '10px'}}/>:<KeyboardArrowDownIcon style={{ paddingTop: '10px'}}/>)
+                }
             </div>
             <div className="spreadsheet-table-header-item">
                 Flag
