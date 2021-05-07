@@ -32,19 +32,23 @@ export const GET_REGION_BY_ID = gql`
 			landmarks
 			owner
 			parentRegion
+			sortRule
+			sortDirection
 		}
 	}
 `;
 
 export const GET_ALL_SUBREGIONS = gql`
-	query GetAllSubregions($id: String!) {
-		getAllSubregions(_id: $id) {
+	query GetAllSubregions($id: String!, $sortRule: String, $sortDirection: Int) {
+		getAllSubregions(_id: $id, sortRule: $sortRule, sortDirection: $sortDirection) {
 			_id
 			name
 			capital
 			leader
 			flag
 			landmarks
+			sortRule
+			sortDirection
 		}
 	}
 `;

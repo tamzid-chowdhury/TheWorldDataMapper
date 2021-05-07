@@ -10,12 +10,14 @@ const typeDefs = gql `
         landmarks: [String]
         owner: String
         parentRegion: String
+        sortRule: String
+        sortDirection: Int
     }
 
     extend type Query {
         getRootRegions: [Region]
         getRegionById(_id: String!): Region
-        getAllSubregions(_id: String!): [Region]
+        getAllSubregions(_id: String!, sortRule: String, sortDirection: Int): [Region]
         getAncestorRegions(_id: String!): [Region]
     }
 
@@ -27,6 +29,8 @@ const typeDefs = gql `
         deleteSubregion(_id: String!): Region
         addSubregion(subregion: RegionInput!): Region
         editSubregion(regionID: String!, field: String!, newValue: String!):Boolean
+        sortSubregion(regionID: String!, newName: String!): Region
+        undoSortSubregion(regionID: String!, prevName: String!, prevDirection: Int!): Region
     }
 
     input RegionInput {
@@ -38,6 +42,8 @@ const typeDefs = gql `
         landmarks: [String]
         owner: String
         parentRegion: String
+        sortRule: String
+        sortDirection: Int
 	}
 
 `;

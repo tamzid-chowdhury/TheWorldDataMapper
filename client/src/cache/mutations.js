@@ -68,6 +68,13 @@ export const ADD_NEW_SUBREGION = gql`
 		addNewSubregion(_id: $_id) {
 			_id
 			name
+			capital
+			leader
+			flag
+			landmarks
+			parentRegion
+			sortRule
+			sortDirection
 		}
 	}
 `;
@@ -96,6 +103,8 @@ export const ADD_SUBREGION = gql`
 			flag
 			landmarks
 			parentRegion
+			sortRule
+			sortDirection
 		}
 	}
 `;
@@ -103,5 +112,37 @@ export const ADD_SUBREGION = gql`
 export const EDIT_SUBREGION = gql`
 	mutation EditSubregion($regionID: String!, $field: String!, $newValue: String!) {
 		editSubregion(regionID: $regionID, field: $field, newValue: $newValue)
+	}
+`;
+
+export const SORT_SUBREGION = gql`
+	mutation SortSubregion($regionID: String!, $newName: String!) {
+		sortSubregion(regionID: $regionID, newName: $newName){
+			_id
+			name
+			capital
+			leader
+			flag
+			landmarks
+			parentRegion
+			sortRule
+			sortDirection
+		}
+	}
+`;
+
+export const UNDO_SORT_SUBREGION = gql`
+	mutation UndoSortSubregion($regionID: String!, $prevName: String!, $prevDirection: Int!) {
+		undoSortSubregion(regionID: $regionID, prevName: $prevName, prevDirection: $prevDirection){
+			_id
+			name
+			capital
+			leader
+			flag
+			landmarks
+			parentRegion
+			sortRule
+			sortDirection
+		}
 	}
 `;

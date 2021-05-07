@@ -26,7 +26,7 @@ const RegionViewer = (props) => {
     const [parentRegionSelected, toggleParentRegionSelected] = useState(false);
     
     const { loading, error, data, refetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
-    const {loading:loading1, error:error1, data:data1} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id} });
+    const {loading:loading1, error:error1, data:data1} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
 
     if(error) { console.log(error); }
 	if(loading) { return <div></div> }

@@ -8,8 +8,9 @@ import AddIcon from '@material-ui/icons/Add';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import DeleteSubregionModal from '../modals/DeleteSubregion'
-import {AddNewSubregion_Transaction, DeleteSubregion_Transaction, EditSubregion_Transaction} from '../../utils/jsTPS'
+import {AddNewSubregion_Transaction, DeleteSubregion_Transaction, EditSubregion_Transaction, Sort_Transaction} from '../../utils/jsTPS'
 const RegionSpreadsheet = (props) => {
+
     
     const keyCombination = (e, callback) => {
 		if(e.key === 'z' && e.ctrlKey) {
@@ -36,11 +37,13 @@ const RegionSpreadsheet = (props) => {
     const [AddSubregion] = useMutation(mutations.ADD_SUBREGION)
     const [DeleteSubregion] = useMutation(mutations.DELETE_SUBREGION);
     const [EditSubregion] = useMutation(mutations.EDIT_SUBREGION)
+    const [SortSubregion] = useMutation(mutations.SORT_SUBREGION)
+    const [UndoSortSubregion] = useMutation(mutations.UNDO_SORT_SUBREGION)
 
 
     const clickDisabled = () => { };
 
-    const { loading, error, data, refetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: regionID} });
+    const { loading, error, data, refetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: regionID, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
 	if(loading) {}
 	if(error) { console.log(error, 'error'); }
 	if(data) { 
@@ -89,6 +92,16 @@ const RegionSpreadsheet = (props) => {
         tpsRedo();
     }
 
+    const sort = (newName) => {
+        let regionID = props.region._id;
+        let prevName = props.region.sortRule; 
+        let prevDirection = props.region.sortDirection; 
+        let transaction = new Sort_Transaction(regionID, newName, prevName, prevDirection, SortSubregion, UndoSortSubregion)
+        props.tps.addTransaction(transaction);
+        tpsRedo()
+    }
+    
+
     const undoOptions = {
         className: !canUndo ? ' undo-button-disabled ' : 'undo-button',
         onClick: !canUndo  ? clickDisabled : tpsUndo
@@ -111,7 +124,7 @@ const RegionSpreadsheet = (props) => {
                     <div className="region-name"> {props.region.name} </div>    
                 </div>
 
-                <RegionSpreadsheetHeader/> 
+                <RegionSpreadsheetHeader subregions={subregions} sort={sort}/> 
 
                 <RegionSpreadsheetList region={props.region} subregions={subregions} handleDeleteChildRegion={handleRegionToDelete} 
                 tps={props.tps} editRegionField={editRegionField} images={props.images}/>
@@ -130,15 +143,31 @@ const RegionSpreadsheet = (props) => {
 };
 
 const RegionSpreadsheetHeader = (props) => {
+
+    const clickDisabled = () => { };
+    let disabled = props.subregions.length == 0 ? true : false; 
+
+    const handleSort = (e) => {
+        let newName = e.target.textContent
+        newName = newName.toLowerCase()
+        props.sort(newName);
+    }
+
+    const sortOptions = {
+        className: disabled ? 'spreadsheet-table-header-item' : 'spreadsheet-table-header-item sort',
+        onClick: disabled  ? clickDisabled : handleSort
+    }
+    
+
     return (
         <div className="spreadsheet-table-header">
-            <div className="spreadsheet-table-header-item">
+            <div {...sortOptions} style={{paddingLeft:"30px"}}>
                 Name
             </div>
-            <div className="spreadsheet-table-header-item">
+            <div {...sortOptions} >
                 Capital
             </div>
-            <div className="spreadsheet-table-header-item">
+            <div {...sortOptions} >
                 Leader
             </div>
             <div className="spreadsheet-table-header-item">

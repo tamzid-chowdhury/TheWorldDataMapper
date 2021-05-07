@@ -91,6 +91,33 @@ export class EditSubregion_Transaction extends jsTPS_Transaction {
 
 }
 
+export class Sort_Transaction extends jsTPS_Transaction {
+
+    constructor(regionID, newName, prevName, prevDirection, updateFunction, undoFunction) {
+        super();
+        this.regionID = regionID
+        this.newName = newName
+        this.prevName = prevName
+        this.prevDirection = prevDirection
+        this.updateFunction = updateFunction
+        this.undoFunction = undoFunction
+        
+    }
+
+    async doTransaction() {
+        const {data} = await this.updateFunction({variables: {regionID: this.regionID, newName: this.newName}})
+        console.log(data.sortSubregion.sortRule, data.sortSubregion.sortDirection)
+        return data; 
+
+    }
+    // Since delete/add are opposites, flip matching opcode
+    async undoTransaction() {
+        const {data} = await this.undoFunction({variables: {regionID: this.regionID, prevName: this.prevName, prevDirection: this.prevDirection}})
+        console.log(data.undoSortSubregion.sortRule, data.undoSortSubregion.sortDirection)
+        return data; 
+    }
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

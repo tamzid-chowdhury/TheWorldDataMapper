@@ -21,9 +21,21 @@ module.exports = {
 		},
 
 		getAllSubregions: async (_,args) => {
-			const {_id} = args;
+			const {_id, sortRule, sortDirection} = args;
+			const direction = sortDirection == 1 ? "ascending": "descending";
 			const parentRegion = new ObjectId(_id);
-			const regions = await Region.find({parentRegion:parentRegion}).sort({name: 'ascending'});
+
+			let regions = null; 
+
+			if (sortRule == "name") {
+				regions = await Region.find({parentRegion:parentRegion}).sort({name: direction});
+			}
+			else if(sortRule == "capital"){
+				regions = await Region.find({parentRegion:parentRegion}).sort({capital: direction});
+			}
+			else {
+				regions = await Region.find({parentRegion:parentRegion}).sort({leader: direction});
+			}
 			return regions; 
 		},
 
@@ -61,7 +73,9 @@ module.exports = {
 			const newRegion = new Region({
 				_id: new ObjectId(),
 				name: name,
-				owner: owner
+				owner: owner,
+				sortRule: "name",
+				sortDirection: 1
             });
             
 			const create = await newRegion.save();
@@ -95,12 +109,14 @@ module.exports = {
 			
 			const newRegion = new Region({
 				_id: new ObjectId(),
-				name: "Untited Region",
+				name: "None",
 				capital: "None",
 				leader: "None",
 				flag: "None",
 				landmarks: [],
-				parentRegion: parentRegion
+				parentRegion: parentRegion,
+				sortRule: "name",
+				sortDirection: 1
             });
             
 			const create = await newRegion.save();
@@ -131,7 +147,9 @@ module.exports = {
 				leader: subregion.leader,
 				flag: subregion.flag,
 				landmarks: subregion.landmarks,
-				parentRegion: parentRegion
+				parentRegion: parentRegion,
+				sortRule: subregion.sortRule,
+				sortDirection: subregion.sortDirection
 			});
 			
 			const create = await newRegion.save();
@@ -147,6 +165,50 @@ module.exports = {
 
 			if(updated){
 				return true; 
+			}
+		},
+
+		sortSubregion: async (_,args) => {
+			const {regionID, newName} = args;
+
+			let newSortName = newName;
+			let newSortDirection = 1; 
+			
+			const _id = new ObjectId(regionID);
+
+			const region = await Region.findOne({_id: _id});
+			const prevSortRule = region.sortRule;
+			const prevSortDirection = region.sortDirection;
+
+			if(newSortName === prevSortRule){
+				newSortDirection = prevSortDirection * -1;
+			}
+			
+			region.sortRule = newSortName; 
+			region.sortDirection = newSortDirection
+
+			const saved = region.save()
+
+			if(saved){
+				return region; 
+			}
+		},
+
+		undoSortSubregion: async (_,args) => {
+			const {regionID, prevName, prevDirection} = args;
+
+
+			const _id = new ObjectId(regionID);
+			const region = await Region.findOne({_id: _id});
+
+
+			region.sortRule = prevName; 
+			region.sortDirection = prevDirection
+
+			const saved = region.save()
+
+			if(saved){
+				return region; 
 			}
 		}
 		

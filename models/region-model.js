@@ -28,6 +28,12 @@ const regionSchema = new Schema(
         parentRegion: {
             type: ObjectId,
             ref: 'Region'
+		},
+		sortRule: {
+			type: String, 
+		},
+		sortDirection: {
+			type: Number
 		}
         
 	},

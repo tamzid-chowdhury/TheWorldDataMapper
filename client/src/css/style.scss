@@ -147,9 +147,10 @@ html, body {
     background: red;
     color: white;
     border-bottom: 5px white solid;
+    font-size: 20px;
 }
 
-.spreadsheet-table-header :hover{
+.sort:hover{
     background-color: lighten($color:red, $amount: 20)
 }
 

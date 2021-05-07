@@ -115,7 +115,7 @@ const Regionscreen = (props) => {
                         }
 
                         {
-                            showMain && (<RegionSpreadsheet tps={props.tps} user={props.user} region={region} images={props.images}/>)
+                            showMain && (<RegionSpreadsheet tps={props.tps} user={props.user} region={region} images={props.images} refetchRegion={refetch}/>)
                         }
 
                         
