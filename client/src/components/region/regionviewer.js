@@ -12,6 +12,7 @@ import earth from '../../assets/earth.jpg';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import LandmarkList from './landmarklist'
+import ChildLandmarkList from './childlandmarklist'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import EditIcon from '@material-ui/icons/Edit';
@@ -44,6 +45,7 @@ const RegionViewer = (props) => {
     let subregions = [];
     let siblingRegions = [];
     let parentSiblingRegions = null;
+    let childLandmarks = null;
     let numOfSubregions = 0; 
     let prevSiblingID = null; 
     let nextSiblingID = null; 
@@ -70,6 +72,8 @@ const RegionViewer = (props) => {
     const [AddLandmarkWithID] = useMutation(mutations.ADD_LANDMARK_WITH_ID);
     const [DeleteLandmark] = useMutation(mutations.DELETE_LANDMARK);
     const [EditLandmark] = useMutation(mutations.EDIT_LANDMARK);
+
+    
     
     const { loading, error, data, refetch: regionRefetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
     const {loading:loading1, error:error1, data:data1, refetch: subregionRefetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
@@ -77,6 +81,8 @@ const RegionViewer = (props) => {
     const {data:data2, refetch: parentRegionRefetch} = useQuery(queries.GET_ALL_SIBLINGS, { variables: {id: props.region.parentRegion} })
 
     const {data:data3, refetch: parentSiblingRegionRefetch} = useQuery(queries.GET_ALL_PARENT_SIBLINGS, { variables: {id: props.region.parentRegion} });
+
+    const {data:data4, loading:loading4, refetch: childLandmarksRefetch } = useQuery(queries.GET_CHILD_LANDMARKS, { variables: {id:props.region._id} });
 
     if(error) { console.log(error); }
 	if(loading) { return <div></div> }
@@ -109,6 +115,11 @@ const RegionViewer = (props) => {
 
     if(data3){
         parentSiblingRegions = data3.getAllParentSiblings;
+    }
+
+    if(loading4) { return <div></div> }
+    if(data4){
+        childLandmarks = data4.getChildLandmarks
     }
 
     const handleNavigateToParentRegion = () => {
@@ -269,6 +280,7 @@ const RegionViewer = (props) => {
             </div>
             <div className="landmark-list">
                 <LandmarkList region={props.region} handleDeleteLandmark={handleDeleteLandmark} handleEditLandmark={handleEditLandmark}/>
+                <ChildLandmarkList childLandmarks={childLandmarks}/> 
             </div>
         </WCContent>
         <WCFooter style={{ backgroundColor: "lightgrey" }}>

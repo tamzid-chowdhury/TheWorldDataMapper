@@ -107,3 +107,19 @@ export const GET_ANCESTOR_REGIONS = gql`
 		}
 	}
 `;
+
+export const GET_CHILD_LANDMARKS = gql`
+	query GetChildLandmarks($id: String!){
+		getChildLandmarks(_id: $id) {
+			_id
+			name
+			owner
+		}
+	}
+`;
+
+export const GET_REGION_NAME_BY_LANDMARK = gql`
+	query GetRegionNameByLandmark($owner: String!){
+		getRegionNameByLandmark(owner: $owner)
+	}
+`;

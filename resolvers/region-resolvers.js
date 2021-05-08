@@ -107,6 +107,31 @@ module.exports = {
 			regions = regions.reverse()
 			
 			return regions; 
+		},
+
+		getChildLandmarks: async (_,args) => {
+			const {_id} = args;
+
+			subregions = await Region.find({parentRegion:_id})
+
+
+			landmarks = []
+
+
+			subregions.map(subregion => {
+				subregion.landmarks.map(landmark => {
+					landmarks.push(landmark)
+				})
+			})
+			
+			return landmarks; 
+		},
+		getRegionNameByLandmark: async (_,args) => {
+			const {owner} = args;
+
+			region = await Region.findById(owner);
+
+			return region.name; 
 		}
     },
     

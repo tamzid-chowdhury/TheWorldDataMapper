@@ -27,6 +27,8 @@ const typeDefs = gql `
         getAncestorRegions(_id: String!): [Region]
         getAllSiblings(_id: String!): [Region]
         getAllParentSiblings(_id: String!): [Region]
+        getChildLandmarks(_id: String!): [Landmark]
+        getRegionNameByLandmark(owner: String!): String
     }
 
     extend type Mutation { 
