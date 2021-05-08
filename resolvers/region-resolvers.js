@@ -281,8 +281,10 @@ module.exports = {
 
 			const _id = new ObjectId(regionID);
 
+			const landmarkID = new ObjectId();
+
 			const landmarkToAdd = new Landmark({
-				_id: new ObjectId(),
+				_id: landmarkID,
 				name: newLandmark,
 				owner: _id
 			});
@@ -297,7 +299,26 @@ module.exports = {
 
 			const saved = region.save();
 			
-			return true; 
+			return landmarkID.toString(); 
+			
+		},
+
+		deleteLandmark: async (_,args) => {
+			const {regionID, landmarkID} = args;
+
+			const _id = new ObjectId(regionID);
+
+			const region = await Region.findOne({_id: _id});
+
+			let landmarks = region.landmarks
+
+			landmarks = landmarks.filter(landmark => landmark._id.toString() !== landmarkID);
+
+			region.landmarks = landmarks;
+
+			const saved = region.save();
+			
+			return saved; 
 			
 		},
 	}

@@ -40,7 +40,8 @@ const typeDefs = gql `
         sortSubregion(regionID: String!, newName: String!): Region
         undoSortSubregion(regionID: String!, prevName: String!, prevDirection: Int!): Region
         changeParentRegion(regionID: String!, newParentRegionID: String!): Boolean
-        addLandmark(regionID:String!, newLandmark:String!): Boolean
+        addLandmark(regionID:String!, newLandmark:String!): String
+        deleteLandmark(regionID:String!, landmarkID:String!): Region
     }
 
     input RegionInput {

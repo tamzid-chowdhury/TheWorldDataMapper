@@ -60,12 +60,14 @@ const RegionViewer = (props) => {
     const [parentRegionSelected, toggleParentRegionSelected] = useState(false);
     const [prevSiblingSelected, togglePrevSiblingSelected] = useState(false);
     const [nextSiblingSelected, toggleNextSiblingSelected] = useState(false);
+    
     const [canUndo, setCanUndo] = useState(props.tps.hasTransactionToUndo());
     const [canRedo, setCanRedo] = useState(props.tps.hasTransactionToRedo());
 
     
     const [ChangeParentRegion] = useMutation(mutations.CHANGE_PARENT_REGION);
     const [AddLandmark] = useMutation(mutations.ADD_LANDMARK);
+    const [DeleteLandmark] = useMutation(mutations.DELETE_LANDMARK);
     
     const { loading, error, data, refetch: regionRefetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
     const {loading:loading1, error:error1, data:data1, refetch: subregionRefetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
@@ -190,7 +192,7 @@ const RegionViewer = (props) => {
         let regionID = props.region._id; 
         let newLandmark = input; 
         
-        let transaction = new AddLandmark_Transaction(regionID, newLandmark, AddLandmark);
+        let transaction = new AddLandmark_Transaction(regionID, newLandmark, AddLandmark, DeleteLandmark, props.refetch);
         props.tps.addTransaction(transaction)
         tpsRedo();
     }
