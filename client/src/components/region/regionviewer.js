@@ -16,7 +16,9 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import EditIcon from '@material-ui/icons/Edit';
 import ChangeParentModal from '../modals/ChangeParentModal'
-import {ChangeParentRegion_Transaction} from '../../utils/jsTPS'
+import {ChangeParentRegion_Transaction, AddLandmark_Transaction} from '../../utils/jsTPS'
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import TextField from '@material-ui/core/TextField';
 
 const RegionViewer = (props) => {
 
@@ -53,13 +55,17 @@ const RegionViewer = (props) => {
         toggleShowChangeParent(!showChangeParent);
     };
 
+    const [input, setInput] = useState('');
+
     const [parentRegionSelected, toggleParentRegionSelected] = useState(false);
     const [prevSiblingSelected, togglePrevSiblingSelected] = useState(false);
     const [nextSiblingSelected, toggleNextSiblingSelected] = useState(false);
     const [canUndo, setCanUndo] = useState(props.tps.hasTransactionToUndo());
     const [canRedo, setCanRedo] = useState(props.tps.hasTransactionToRedo());
+
     
     const [ChangeParentRegion] = useMutation(mutations.CHANGE_PARENT_REGION);
+    const [AddLandmark] = useMutation(mutations.ADD_LANDMARK);
     
     const { loading, error, data, refetch: regionRefetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
     const {loading:loading1, error:error1, data:data1, refetch: subregionRefetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
@@ -175,6 +181,20 @@ const RegionViewer = (props) => {
         tpsRedo()     
     }
 
+    const updateInput = (e) => {
+        const updated = e.target.value;
+		setInput(updated);
+    }
+    
+    const handleAddLandmark = (e) => {
+        let regionID = props.region._id; 
+        let newLandmark = input; 
+        
+        let transaction = new AddLandmark_Transaction(regionID, newLandmark, AddLandmark);
+        props.tps.addTransaction(transaction)
+        tpsRedo();
+    }
+
 
     return (
     <>
@@ -230,7 +250,11 @@ const RegionViewer = (props) => {
             </div>
         </WCContent>
         <WCFooter style={{ backgroundColor: "lightgrey" }}>
-
+            <div className="add-landmark">
+                <AddBoxIcon fontSize="large" onClick={handleAddLandmark}/>
+            </div>
+                <TextField className="landmark-input" onChange={updateInput} 
+                onKeyDown={(e) => {if(e.keyCode === 13) {handleAddLandmark(e);e.target.value="";}}} onBlur={(e) => e.target.value=""}/>
         </WCFooter>
     </WCard>
     

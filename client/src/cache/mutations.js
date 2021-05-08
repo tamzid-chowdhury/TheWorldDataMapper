@@ -70,8 +70,6 @@ export const ADD_NEW_SUBREGION = gql`
 			name
 			capital
 			leader
-			flag
-			landmarks
 			parentRegion
 			sortRule
 			sortDirection
@@ -86,8 +84,6 @@ export const DELETE_SUBREGION = gql`
 			name
 			capital
 			leader
-			flag
-			landmarks
 			parentRegion
 		}
 	}
@@ -101,7 +97,6 @@ export const ADD_SUBREGION = gql`
 			capital
 			leader
 			flag
-			landmarks
 			parentRegion
 			sortRule
 			sortDirection
@@ -123,7 +118,6 @@ export const SORT_SUBREGION = gql`
 			capital
 			leader
 			flag
-			landmarks
 			parentRegion
 			sortRule
 			sortDirection
@@ -139,7 +133,6 @@ export const UNDO_SORT_SUBREGION = gql`
 			capital
 			leader
 			flag
-			landmarks
 			parentRegion
 			sortRule
 			sortDirection
@@ -150,5 +143,11 @@ export const UNDO_SORT_SUBREGION = gql`
 export const CHANGE_PARENT_REGION = gql`
 	mutation ChangeParentRegion($regionID: String!, $newParentRegionID: String!) {
 		changeParentRegion(regionID: $regionID, newParentRegionID: $newParentRegionID)
+	}
+`;
+
+export const ADD_LANDMARK = gql`
+	mutation AddLandmark($regionID: String!, $newLandmark: String!) {
+		addLandmark(regionID: $regionID, newLandmark: $newLandmark)
 	}
 `;

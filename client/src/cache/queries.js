@@ -29,7 +29,11 @@ export const GET_REGION_BY_ID = gql`
 			name
 			capital
 			leader
-			landmarks
+			landmarks{
+				_id
+				name
+				owner
+			}
 			owner
 			parentRegion
 			sortRule
@@ -46,7 +50,11 @@ export const GET_ALL_SUBREGIONS = gql`
 			capital
 			leader
 			flag
-			landmarks
+			landmarks{
+				_id
+				name
+				owner
+			}
 			sortRule
 			sortDirection
 		}
@@ -61,7 +69,11 @@ export const GET_ALL_SIBLINGS = gql`
 			capital
 			leader
 			flag
-			landmarks
+			landmarks{
+				_id
+				name
+				owner
+			}
 			sortRule
 			sortDirection
 		}
@@ -76,7 +88,11 @@ export const GET_ALL_PARENT_SIBLINGS = gql`
 			capital
 			leader
 			flag
-			landmarks
+			landmarks{
+				_id
+				name
+				owner
+			}
 			sortRule
 			sortDirection
 		}

@@ -171,7 +171,7 @@ const RegionSpreadsheetEntry = (props) => {
             </div>
 
             <div className="spreadsheet-table-entry-landmarks" onClick={handleNavigateToLandmarkscreen}>
-                {props.subregion.landmarks[0] ? props.subregion.landmarks[0] + ", ..." : "No Landmarks"}
+                {props.subregion.landmarks[0] ? props.subregion.landmarks[0].name + ", ..." : "No Landmarks"}
             </div>
 
         </div>

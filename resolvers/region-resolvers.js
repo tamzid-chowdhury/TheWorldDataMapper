@@ -1,5 +1,6 @@
 const ObjectId = require('mongoose').Types.ObjectId;
 const Region = require('../models/region-model')
+const Landmark = require('../models/landmark-model')
 
 module.exports = {
 	Query: {
@@ -275,6 +276,30 @@ module.exports = {
 			}
 		},
 		
+		addLandmark: async (_,args) => {
+			const {regionID, newLandmark} = args;
+
+			const _id = new ObjectId(regionID);
+
+			const landmarkToAdd = new Landmark({
+				_id: new ObjectId(),
+				name: newLandmark,
+				owner: _id
+			});
+
+			const region = await Region.findOne({_id: _id});
+
+			const landmarks = region.landmarks
+
+			landmarks.push(landmarkToAdd);
+
+			region.landmarks = landmarks;
+
+			const saved = region.save();
+			
+			return true; 
+			
+		},
 	}
 
 }

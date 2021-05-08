@@ -25,7 +25,7 @@ const LandmarkEntry = (props) => {
     return (
         <div className="landmark-entry">
             <div className="delete-landmark"><CloseIcon /></div>
-            <div className="landmark-entry-text">{props.landmark}</div>
+            <div className="landmark-entry-text">{props.landmark.name}</div>
         </div>
     )
 

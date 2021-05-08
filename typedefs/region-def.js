@@ -7,11 +7,17 @@ const typeDefs = gql `
         capital: String
         leader: String
         flag: String
-        landmarks: [String]
+        landmarks: [Landmark]
         owner: String
         parentRegion: String
         sortRule: String
         sortDirection: Int
+    }
+
+    type Landmark {
+        _id: String!
+        name: String!
+        owner: String!
     }
 
     extend type Query {
@@ -34,6 +40,7 @@ const typeDefs = gql `
         sortSubregion(regionID: String!, newName: String!): Region
         undoSortSubregion(regionID: String!, prevName: String!, prevDirection: Int!): Region
         changeParentRegion(regionID: String!, newParentRegionID: String!): Boolean
+        addLandmark(regionID:String!, newLandmark:String!): Boolean
     }
 
     input RegionInput {

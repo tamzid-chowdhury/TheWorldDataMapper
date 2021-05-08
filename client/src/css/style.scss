@@ -270,3 +270,11 @@ html, body {
 .parent-region-navigator:hover{
     color: darken($color:skyblue, $amount: 35)
 }
+
+.landmark-input{
+    width: 500px;
+    position: absolute;
+    left: 60px;
+    top: 7px;
+
+}

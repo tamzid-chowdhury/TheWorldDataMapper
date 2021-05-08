@@ -327,3 +327,14 @@
 .change-parent:hover{
     color: darken($color:yellow, $amount: 20)
 }
+
+.add-landmark{
+    position: absolute;
+    color: green;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.add-landmark:hover{
+    color: lighten($color:green, $amount: 20)
+}

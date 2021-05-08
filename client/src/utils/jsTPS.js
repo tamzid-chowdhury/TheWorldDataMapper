@@ -148,6 +148,35 @@ export class ChangeParentRegion_Transaction extends jsTPS_Transaction {
 
 }
 
+export class AddLandmark_Transaction extends jsTPS_Transaction {
+
+    constructor(regionID, newLandmark, addFunction) {
+        super();
+        this.regionID = regionID;
+        this.newLandmark = newLandmark; 
+        this.addFunction = addFunction;
+        this.deleteFunction = null; 
+    }
+
+    async doTransaction() {
+        const {data} = await this.addFunction({variables: {regionID: this.regionID, newLandmark: this.newLandmark}})
+        if(data){
+            console.log(data)
+        }
+        return; 
+
+    }
+    
+    async undoTransaction() {
+        const {data} = await this.updateFunction({variables: {regionID: this.regionID, newParentRegionID: this.prevParentRegionID}})
+        if(data){
+            this.refetchSelected()
+        }
+        return;
+    }
+
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK
