@@ -12,6 +12,18 @@ const cache = new InMemoryCache({
 		client and server
 	*/
 	dataIdFromObject: object => `${object.__typename}:${object._id}`,
+	typePolicies: {
+        Region: {
+            fields: {
+                landmarks: {
+                    merge(existing, incoming){
+                        return incoming
+                    }
+                },
+            },
+        },
+    },
+
 
 });
 

@@ -207,12 +207,12 @@
 }
 
 .landmark-list{
-    display:grid; 
-    grid-gap: 10px;
     width: 85%;
     position: absolute;
     left: 7.5%;
     top: 5%;
+    overflow-y: scroll;
+    height:85%;
 }
 
 .landmark-entry{
@@ -220,6 +220,7 @@
     height: 30px;
     text-align: center;
     font-size: 26px;
+    margin-bottom: 10px; 
 }
 
 .delete-landmark{
