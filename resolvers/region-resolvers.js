@@ -303,6 +303,33 @@ module.exports = {
 			
 		},
 
+		addLandmarkWithID: async (_,args) => {
+			const {regionID, landmarkID, landmarkName} = args;
+
+			const _id = new ObjectId(regionID);
+
+			const newlandmarkID = new ObjectId(landmarkID);
+
+			const landmarkToAdd = new Landmark({
+				_id: newlandmarkID,
+				name: landmarkName,
+				owner: _id
+			});
+
+			const region = await Region.findOne({_id: _id});
+
+			const landmarks = region.landmarks
+
+			landmarks.push(landmarkToAdd);
+
+			region.landmarks = landmarks;
+
+			const saved = region.save();
+			
+			return true; 
+			
+		},
+
 		deleteLandmark: async (_,args) => {
 			const {regionID, landmarkID} = args;
 

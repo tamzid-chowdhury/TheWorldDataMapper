@@ -180,6 +180,40 @@ export class AddLandmark_Transaction extends jsTPS_Transaction {
 
 }
 
+export class DeleteLandmark_Transaction extends jsTPS_Transaction {
+
+    constructor(regionID, landmarkID, landmark, deleteFunction, addFunction, refetch) {
+        super();
+        this.regionID = regionID;
+        this.landmarkID = landmarkID;
+        this.deleteFunction = deleteFunction;  
+        this.addFunction = addFunction;
+        this.refetch = refetch;
+        this.landmark = landmark;
+        this.landmarkName = landmark.name; 
+    }
+
+    async doTransaction() {
+        const {data} = await this.deleteFunction({variables: {regionID: this.regionID, landmarkID: this.landmarkID}})
+        if(data){
+            this.refetch();
+        }
+        return data;
+    }
+
+    async undoTransaction() {
+        const {data} = await this.addFunction({variables: {regionID: this.regionID, landmarkID: this.landmarkID, landmarkName: this.landmarkName}})
+        if(data){
+            this.newLandmarkID = data.addLandmark; 
+            this.refetch();
+        }
+        return data; 
+
+    }
+    
+
+}
+
 export class jsTPS {
     constructor() {
         // THE TRANSACTION STACK

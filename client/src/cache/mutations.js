@@ -152,6 +152,12 @@ export const ADD_LANDMARK = gql`
 	}
 `;
 
+export const ADD_LANDMARK_WITH_ID = gql`
+	mutation AddLandmarkWithID($regionID: String!, $landmarkID: String!, $landmarkName: String!) {
+		addLandmarkWithID(regionID: $regionID, landmarkID: $landmarkID, landmarkName: $landmarkName )
+	}
+`;
+
 export const DELETE_LANDMARK = gql`
 	mutation DeleteLandmark($regionID: String!, $landmarkID: String!) {
 		deleteLandmark(regionID: $regionID, landmarkID: $landmarkID){

@@ -41,6 +41,7 @@ const typeDefs = gql `
         undoSortSubregion(regionID: String!, prevName: String!, prevDirection: Int!): Region
         changeParentRegion(regionID: String!, newParentRegionID: String!): Boolean
         addLandmark(regionID:String!, newLandmark:String!): String
+        addLandmarkWithID(regionID:String!, landmarkID:String!, landmarkName:String!): Boolean
         deleteLandmark(regionID:String!, landmarkID:String!): Region
     }
 

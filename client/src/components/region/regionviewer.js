@@ -16,7 +16,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import EditIcon from '@material-ui/icons/Edit';
 import ChangeParentModal from '../modals/ChangeParentModal'
-import {ChangeParentRegion_Transaction, AddLandmark_Transaction} from '../../utils/jsTPS'
+import {ChangeParentRegion_Transaction, AddLandmark_Transaction, DeleteLandmark_Transaction} from '../../utils/jsTPS'
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import TextField from '@material-ui/core/TextField';
 
@@ -67,6 +67,7 @@ const RegionViewer = (props) => {
     
     const [ChangeParentRegion] = useMutation(mutations.CHANGE_PARENT_REGION);
     const [AddLandmark] = useMutation(mutations.ADD_LANDMARK);
+    const [AddLandmarkWithID] = useMutation(mutations.ADD_LANDMARK_WITH_ID);
     const [DeleteLandmark] = useMutation(mutations.DELETE_LANDMARK);
     
     const { loading, error, data, refetch: regionRefetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
@@ -197,6 +198,13 @@ const RegionViewer = (props) => {
         tpsRedo();
     }
 
+    const handleDeleteLandmark = (regionID, landmarkID, landmark) => {
+        let transaction = new DeleteLandmark_Transaction(regionID, landmarkID, landmark, DeleteLandmark, AddLandmarkWithID, props.refetch);
+        props.tps.addTransaction(transaction)
+        tpsRedo();
+
+    }
+
 
     return (
     <>
@@ -248,7 +256,7 @@ const RegionViewer = (props) => {
                 Region Landmarks: 
             </div>
             <div className="landmark-list">
-                <LandmarkList region={props.region}/>
+                <LandmarkList region={props.region} handleDeleteLandmark={handleDeleteLandmark}/>
             </div>
         </WCContent>
         <WCFooter style={{ backgroundColor: "lightgrey" }}>

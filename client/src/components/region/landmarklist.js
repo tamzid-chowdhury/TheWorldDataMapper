@@ -13,7 +13,7 @@ const LandmarkList = (props) => {
         <>
         {
             props.region.landmarks.map(landmark => (
-                <LandmarkEntry landmark={landmark} region={props.region}/>
+                <LandmarkEntry key={landmark._id} landmark={landmark} region={props.region} handleDeleteLandmark={props.handleDeleteLandmark}/>
             ))
         }
         </>
@@ -22,9 +22,13 @@ const LandmarkList = (props) => {
 
 const LandmarkEntry = (props) => {
 
+    const handleDeleteLandmark = () => {
+        props.handleDeleteLandmark(props.region._id, props.landmark._id, props.landmark)
+    }
+
     return (
         <div className="landmark-entry">
-            <div className="delete-landmark"><CloseIcon /></div>
+            <div className="delete-landmark"><CloseIcon  onClick={handleDeleteLandmark}/></div>
             <div className="landmark-entry-text">{props.landmark.name}</div>
         </div>
     )
