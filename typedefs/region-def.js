@@ -43,6 +43,7 @@ const typeDefs = gql `
         addLandmark(regionID:String!, newLandmark:String!): String
         addLandmarkWithID(regionID:String!, landmarkID:String!, landmarkName:String!): Boolean
         deleteLandmark(regionID:String!, landmarkID:String!): Region
+        editLandmark(regionID: String!, landmarkID: String!, newLandmarkName: String!): Boolean
     }
 
     input RegionInput {

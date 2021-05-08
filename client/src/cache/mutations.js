@@ -176,3 +176,9 @@ export const DELETE_LANDMARK = gql`
 		}
 	}
 `;
+
+export const EDIT_LANDMARK = gql`
+	mutation EditLandmark($regionID: String!, $landmarkID: String!, $newLandmarkName: String!) {
+		editLandmark(regionID: $regionID, landmarkID: $landmarkID, newLandmarkName: $newLandmarkName)
+	}
+`;

@@ -348,6 +348,36 @@ module.exports = {
 			return saved; 
 			
 		},
+
+		editLandmark: async (_,args) => {
+			const {regionID, landmarkID, newLandmarkName} = args;
+
+			const _id = new ObjectId(regionID);
+
+			const region = await Region.findOne({_id: _id});
+
+			let landmarks = region.landmarks
+
+
+			landmarks = landmarks.filter(landmark => landmark._id.toString() !== landmarkID);
+
+			const landmarkToAdd = new Landmark({
+				_id: new ObjectId(landmarkID),
+				name: newLandmarkName,
+				owner: regionID
+			});
+
+			landmarks.push(landmarkToAdd);
+
+			region.landmarks = landmarks;
+
+			const saved = region.save();
+
+			
+
+			return true; 
+			
+		},
 	}
 
 }

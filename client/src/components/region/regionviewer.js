@@ -16,7 +16,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import EditIcon from '@material-ui/icons/Edit';
 import ChangeParentModal from '../modals/ChangeParentModal'
-import {ChangeParentRegion_Transaction, AddLandmark_Transaction, DeleteLandmark_Transaction} from '../../utils/jsTPS'
+import {ChangeParentRegion_Transaction, AddLandmark_Transaction, DeleteLandmark_Transaction, EditLandmark_Transaction} from '../../utils/jsTPS'
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import TextField from '@material-ui/core/TextField';
 
@@ -69,6 +69,7 @@ const RegionViewer = (props) => {
     const [AddLandmark] = useMutation(mutations.ADD_LANDMARK);
     const [AddLandmarkWithID] = useMutation(mutations.ADD_LANDMARK_WITH_ID);
     const [DeleteLandmark] = useMutation(mutations.DELETE_LANDMARK);
+    const [EditLandmark] = useMutation(mutations.EDIT_LANDMARK);
     
     const { loading, error, data, refetch: regionRefetch } = useQuery(queries.GET_REGION_BY_ID, { variables: {id:props.region.parentRegion} });
     const {loading:loading1, error:error1, data:data1, refetch: subregionRefetch} = useQuery(queries.GET_ALL_SUBREGIONS, { variables: {id: props.region._id, sortRule:props.region.sortRule, sortDirection:props.region.sortDirection} });
@@ -190,6 +191,9 @@ const RegionViewer = (props) => {
     }
     
     const handleAddLandmark = (e) => {
+        if(input == ""){
+            return
+        }
         let regionID = props.region._id; 
         let newLandmark = input; 
         
@@ -203,6 +207,12 @@ const RegionViewer = (props) => {
         props.tps.addTransaction(transaction)
         tpsRedo();
 
+    }
+
+    const handleEditLandmark = (regionID, landmarkID, oldLandmarkName, newLandmarkName) => {
+        let transaction = new EditLandmark_Transaction(regionID, landmarkID, oldLandmarkName, newLandmarkName, EditLandmark, props.refetch)
+        props.tps.addTransaction(transaction)
+        tpsRedo();
     }
 
 
@@ -256,7 +266,7 @@ const RegionViewer = (props) => {
                 Region Landmarks: 
             </div>
             <div className="landmark-list">
-                <LandmarkList region={props.region} handleDeleteLandmark={handleDeleteLandmark}/>
+                <LandmarkList region={props.region} handleDeleteLandmark={handleDeleteLandmark} handleEditLandmark={handleEditLandmark}/>
             </div>
         </WCContent>
         <WCFooter style={{ backgroundColor: "lightgrey" }}>

@@ -338,3 +338,13 @@
 .add-landmark:hover{
     color: lighten($color:green, $amount: 20)
 }
+
+.landmark-entry-input{
+    width: 93%;
+    margin-left: 30px;
+    background-color:transparent;
+    color: white;
+    text-align: center;
+    font-size:20px;
+    font-family: 'Consolas';
+}
