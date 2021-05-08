@@ -308,10 +308,8 @@ module.exports = {
 
 			const _id = new ObjectId(regionID);
 
-			const newlandmarkID = new ObjectId(landmarkID);
-
 			const landmarkToAdd = new Landmark({
-				_id: newlandmarkID,
+				_id: new ObjectId(landmarkID),
 				name: landmarkName,
 				owner: _id
 			});

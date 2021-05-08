@@ -196,6 +196,8 @@ const RegionViewer = (props) => {
         }
         let regionID = props.region._id; 
         let newLandmark = input; 
+
+        setInput("");
         
         let transaction = new AddLandmark_Transaction(regionID, newLandmark, AddLandmark, DeleteLandmark, props.refetch);
         props.tps.addTransaction(transaction)
