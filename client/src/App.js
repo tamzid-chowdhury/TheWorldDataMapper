@@ -1,6 +1,6 @@
 import React 			from 'react';
 import Homescreen 		from './components/homescreen/homescreen';
-import Mapscreen 		from './components/mapscreen/mapscreen';
+import Mapscreen 		from './components/mapscreen/Mapscreen';
 import { useQuery } 	from '@apollo/client';
 import * as queries 	from './cache/queries';
 import { jsTPS } 		from './utils/jsTPS';
