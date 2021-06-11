@@ -16,7 +16,7 @@ The WorldDataMapper is a CRUD based Web Application for managing regional data t
 - Navigate to Region Viewer 
 - Create, Edit, and Delete Region Landmarks 
 - Change Parent Region
-- View Previous and Next Subling Regions
+- View Previous and Next Sibling Regions
 - Navigate back to Region Spreadsheet 
 - Navigate between Subregion Fields 
 
