@@ -39,8 +39,8 @@ The application was developed using the MERN Stack along with a few other techno
 
 Begin by cloning this repository. Move into the root directory. 
 ```sh
-gh repo clone tamzid-chowdhury/WorldDataMapper
-cd WorldDataMapper
+gh repo clone tamzid-chowdhury/TheWorldDataMapper
+cd TheWorldDataMapper
 ```
 Install dependencies in both the root directory and the client directory. Then in the root directory run the servers. 
 ```sh
@@ -64,7 +64,7 @@ npm start
 
 
 ### Region Spreadsheet Page
-![Imgur Image](https://i.imgur.com/iK97uuc.png)
+![Imgur Image](https://i.imgur.com/mRCRLaz.png)
 
 ### Region Viewer Page
 ![Imgur Image](https://i.imgur.com/4sEl1Rk.png)
