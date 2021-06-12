@@ -1,8 +1,8 @@
 # The World Data Mapper
 
-With the ongoing COVID-19 global pandemic, the ability to organize data hierarchically in a robust and efficient manner is crucial now more than ever. Simply google searching "New York Covid-19 Cases" will display a table of statistics for cases, deaths, and recoveries, for each county in New York. Moreover substituting "New York" in that search with any region will display a list of subregions with hierarchically organized COVID-19 data. 
+In todays fast-paced society the ability to organize data hierarchically in a robust and efficient manner is crucial. We can see this with the on going COVID-19 pandemic. If you Google search "New York Covid-19 Cases", you will be given a table displaying the number of cases, deaths, and recoveries in New York as well as the same data for each county in New York. We can substitute "New York" with any <b>region</b> and we will get data for that <b>region</b> and well as all its <b>subregions</b>.
 
-The WorldDataMapper is a CRUD based Web Application for managing regional data that is organized hierarchically. Users of this web application will be able to store, delete, and update regions by name, capital, leader, and landmarks. A region may contain multiple subregions that have their own data. Ultamately, what this allows us to do is create a root region (ex. The Earth) and organize our data by dividing our root regions into smaller subregions that flow logically (ex. The Earth -> Continents -> Countries -> Cities). 
+The World Data Mapper is a CRUD based Web Application for managing regional data that is organized hierarchically. Users of this web application will be able to store, delete, and update regions by name, capital, leader, and landmarks. A region may contain multiple subregions that have their own data. Ultamately, what this allows us to do is create a root map (ex. The Earth) and organize our data by dividing our map into subregions that flow logically (ex. The Earth -> Continents -> Countries -> Cities). 
 
 ## Features
 
@@ -23,23 +23,30 @@ The WorldDataMapper is a CRUD based Web Application for managing regional data t
 
 ## Tech
 
-The application was developed using the MERN Stack plus a couple other technologies: 
+The application was developed using the MERN Stack along with a few other technologies: 
 
-- [MongoDB Atlas] - cross-platform document-oriented database program to store data 
+- [MongoDB] - cross-platform document-oriented database program to store data 
 - [Express] - designed for building web applications and APIs
-- [Node.js] - open-source, cross-platform, back-end JavaScript runtime environment 
-- [React] - front end library for modern web apps
+- [React] - front end library for modern reactive web apps
+- [Node.js] - cross-platform back-end JavaScript runtime environment 
 - [GraphQL] - data query and manipulation language for API
 - [Apollo] - open source GraphQL Server
-- [Wolfie2D] - front-end templating library 
+- [Wolfie2D] - front-end templating library designed by students at Stony Brook University
 
 
 
 ## Installation
+
+Begin by cloning this repository. Move into the root directory. 
 ```sh
-run npm install on root directory
+gh repo clone tamzid-chowdhury/WorldDataMapper
+cd WorldDataMapper
+```
+Install dependencies in both the root directory and the client directory. Then in the root directory run the servers. 
+```sh
+npm install
 cd client
-run npm install on client directory
+npm install
 cd ..
 npm start
 ```
