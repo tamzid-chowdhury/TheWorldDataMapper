@@ -1,6 +1,6 @@
 # The World Data Mapper
 
-In todays fast-paced society the ability to organize data hierarchically in a robust and efficient manner is crucial. We can see this with the on going COVID-19 pandemic. If you Google search "New York Covid-19 Cases", you will be given a table displaying the number of cases, deaths, and recoveries in New York as well as the same data for each county in New York. We can substitute "New York" with any <b>region</b> and we will get data for that <b>region</b> and well as all its <b>subregions</b>.
+In todays fast-paced society the ability to organize data hierarchically in a robust and efficient manner is crucial. We can see this with the on going COVID-19 pandemic. If you Google search "New York Covid-19 Cases", you will be given a table displaying the number of cases, deaths, and recoveries in New York as well as the same data for each county in New York. We can substitute "New York" with any <b>region</b> and we will get data for that <b>region</b> as well as all its <b>subregions</b>.
 
 The World Data Mapper is a CRUD based Web Application for managing regional data that is organized hierarchically. Users of this web application will be able to store, delete, and update regions by name, capital, leader, and landmarks. A region may contain multiple subregions that have their own data. Ultamately, what this allows us to do is create a root map (ex. The Earth) and organize our data by dividing our map into subregions that flow logically (ex. The Earth -> Continents -> Countries -> Cities). 
 
