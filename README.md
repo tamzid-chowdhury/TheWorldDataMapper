@@ -64,7 +64,7 @@ npm start
 
 
 ### Region Spreadsheet Page
-![Imgur Image](https://imgur.com/uPbWuqq)
+![Imgur Image](https://i.imgur.com/UJXh1xV.png?2)
 
 ### Region Viewer Page
 ![Imgur Image](https://i.imgur.com/4sEl1Rk.png)
