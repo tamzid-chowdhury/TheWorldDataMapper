@@ -21,18 +21,6 @@ The World Data Mapper is a CRUD based Web Application for managing regional data
 - Navigate between Subregion Fields 
 
 
-## Tech
-
-The application was developed using the MERN Stack along with a few other technologies: 
-
-- [MongoDB] - cross-platform document-oriented database program to store data 
-- [Express] - designed for building web applications and APIs
-- [React] - front end library for modern reactive web apps
-- [Node.js] - cross-platform back-end JavaScript runtime environment 
-- [GraphQL] - data query and manipulation language for API
-- [Apollo] - open source GraphQL Server
-- [Wolfie2D] - front-end templating library designed by students at Stony Brook University
-
 
 
 ## Installation
